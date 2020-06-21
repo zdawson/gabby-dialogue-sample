@@ -7,4 +7,4 @@ Gabby aims to be a highly readable language with few distractions and minimal co
 
 gabby-dialog is the root repository for the project, containing everything you need to try the language and learn to use the dialog engine.
 
-gabby-dialog-engine is the repository for the dialog engine itself. If you're using gabby in a game, you probably want to clone this directly into a submodule in your project.
+[gabby-dialog-engine](https://github.com/zdawson/gabby-dialog-engine) is the repository for the dialog engine itself. If you're using gabby in a game, you probably want to clone this directly into a submodule in your project.
