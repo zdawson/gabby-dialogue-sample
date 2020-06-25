@@ -1,0 +1,22 @@
+gabby 0.1
+locale EN
+
+[Charles.Introduction]
+    - Good day! I'm Charles, the test character.
+
+    (Camilla) Ahem, THE test character? I'm here too!
+
+    (Charles) Ah, yes yes. Have you met Camilla?
+    > set(charles.introduced, true)
+    end
+
+[Charles.Greeting]
+    - Hello again!
+    + Let me know if I can be of service.
+    end
+
+[Camilla.Introduction]
+    - Hey, I'm Camilla!
+    - It's nice to meet you.
+    > set(camilla.introduced, true)
+    end

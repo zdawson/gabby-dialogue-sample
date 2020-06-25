@@ -1,0 +1,1 @@
+*.unity3D,*.exr,*.unitypackage,*.pdf,*.psd,*.ai,*.fla,*.gif,*.jpg,*.jpeg,*.tga,*.tif,*.tiff,*.bmp,*.png,*.ttf,*.TTF,*.otf,*.aif,*.ogg,*.wav,*.rns,*.mp3,*.flv,*.mov,*.wmv,*.mpg,*.mpeg,*.avi,*.mp4,*.FBX,*.fbx,*.blend,*.lxo,*.so,*.bundle,*.a,*.dll,*.aar,*.srcaar,*.bin,*.mdb,*.ipa,*.swf,*.jar,*.apk,*.exe,*.rar,*.zip,*.gz,*.7z filter=lfs diff=lfs merge=lfs -text

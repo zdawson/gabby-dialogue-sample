@@ -1,0 +1,3 @@
+[submodule "gabby-dialogue-engine"]
+	path = Packages/gabby-dialogue-engine
+	url = https://github.com/zdawson/gabby-dialogue-engine.git
