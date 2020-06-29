@@ -20,3 +20,22 @@ locale EN
     - It's nice to meet you.
     > set(camilla.introduced, true)
     end
+
+[Camilla.Question]
+    - Who's cooler, me or Charles?
+    : Camilla
+        (You) You're cooler.
+        (Camilla) Yay!
+        (Charles) Aww...
+    : Charles
+        (You) Charles is cooler.
+        (Camilla) Wh- what!?
+        (Charles) Yes!
+        (Camilla) You're kidding right!?
+        : Yes
+            (You) Yes, I'm kidding!
+            (Camilla) *phew*
+        : No
+            (You) No.
+            (Camilla) Grr...
+    end
