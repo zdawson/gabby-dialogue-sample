@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be95d6a9edeeb424e963798539903835, type: 3}
+  m_Name: Charles
+  m_EditorClassIdentifier: 
+  internalName: Charles
+  displayName: Charles
+  _portraits:
+  - name: default
+    portrait: {fileID: 21300000, guid: 7d7f67790b54b7042b139a5635b05267, type: 3}
+  - name: angry
+    portrait: {fileID: 21300000, guid: 939c9397739edff4ca12514a6b7dd8d3, type: 3}
+  - name: annoyed
+    portrait: {fileID: 21300000, guid: c796a51fa81d8094c8153c9e768ce12a, type: 3}
+  - name: bored
+    portrait: {fileID: 21300000, guid: 5a05317263504d64793d8e53d29b4b6a, type: 3}
+  - name: happy
+    portrait: {fileID: 21300000, guid: 7d7f67790b54b7042b139a5635b05267, type: 3}
+  - name: sad
+    portrait: {fileID: 21300000, guid: 54aef20a996aa014baac160919028cfc, type: 3}
+  - name: very happy
+    portrait: {fileID: 21300000, guid: 20ef481f05b1f764bbfab64f28250f13, type: 3}
+  - name: very sad
+    portrait: {fileID: 21300000, guid: bbc20a43a7ff3234d8f79b75ca9f7ccb, type: 3}
