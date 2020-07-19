@@ -2,22 +2,87 @@ gabby 0.1
 locale EN
 
 [Charles.Introduction]
-    - Good day! I'm Charles, the test character.
+    - Good day! I'm <b>Charles</b>, the test character.
 
-    (Camilla) Ahem, THE test character? I'm here too!
+    > portrait("Camilla", "angry") // TODO this would be nicer as custom sample-side text markup
+    (Camilla) <i>*Ahem*</i>, <b>-the-</b> test character? I'm here too!
 
+    > portrait("Charles", "very happy")
     (Charles) Ah, yes yes. Have you met Camilla?
+    - You can talk to me for explanations of Gabby's capabilities!
+    - Camilla will provide you with example dialogues.
     > set(charles.introduced, true)
     end
 
-[Charles.Greeting]
+[Charles.Main]
     - Hello again!
-    + Let me know if I can be of service.
+    - Is there something you'd like to ask about?
+    // >> Charles.MainLoop
+    end
+
+[Charles.MainLoop]
+    - Ask about: // TODO can this be removed and it still work?
+    : Dialogue Scripts
+        (You) Tell me about Gabby dialogue scripts.
+        (Charles) ...
+    : Dialogue Blocks
+        (You) Tell me about dialogue blocks.
+        (Charles) ...
+    : Writing Dialogue
+        (You) How do I write dialogue in a Gabby script?
+        (Charles) ...
+    : Choices
+        (You) How do I write branching dialogues, prompting the user to make a choice?
+        (Charles) ...
+    : Jumps and Sub-Dialogues
+        (You) What are jumps and sub-dialogues?
+        (Charles) ...
+    : Actions
+        (You) What are actions, and how can I use them?
+        (Charles) ...
+    : Text Styling
+        (You) How can I write with <color=#bada55ff><i><b><size=20>stylish</size></b></i></color> text?
+        (Charles) Gabby doesn't define any rules for text styling.
+        - The sample shows how you can use Unity's built in rich text markup.
+        + You can find more information on it in Unity's documentation.
+        - If you don't like Unity's text styling or it's not powerful enough, you will have to find or make your own markup parser.
+        - Maybe you want <b>*bold*</b> text with asterisks, or <i>_italics_</i> with underscores!
+        - In any case, this is considered functionality external to the Gabby language.
+    : Portraits
+        (You) How do I define character portraits and change between them?
+        (Charles) Gabby doesn't directly support portraits, but as you can see, it's entirely possible!
+        - How you choose to implement them is up to you.
+        - You may choose to implement an action, something like <i>> portrait("CharacterName", "PortraitName")</i>.
+        + Or maybe, you'd rather have it inline as special text markup.
+        + <i>(Charles) <happy> Maybe something like this. </i>
+        - You'd just have to process the text before displaying it.
+        - To set up the portraits themselves, I suggest looking at how they're implemented in the sample.
+        - Briefly, characters are defined through scriptable objects. This controls how everything is displayed, including their name and portraits.
+        - As the the dialogue engine runs, and characters change, new portrait sprites are retrieved using these objects.
+        - Look at the sample code for more detail!
+    : Tools and Testing
+        (You) What tools are available for working with Gabby scripts?
+        (Charles) ...
+    : No
+        (You) No thanks.
+        (Charles) Alright then! See you around.
+        end
+    // >> Charles.AskAgain
+    end
+
+[Charles.RestartMainLoop]
+    - Is there anything else you'd like to ask about?
+    // >> Charles.MainLoop
     end
 
 [Camilla.Introduction]
-    - Hey, I'm Camilla!
-    - It's nice to meet you.
+    - Hey, I'm <b>Camilla</b>!
+    > portrait("Camilla", "very happy")
+    + It's nice to meet you.
+    > portrait("Camilla", "happy")
+    - You can talk to me for examples of Gabby in action.
+    > portrait("Camilla", "bored")
+    - Or you can talk to Charles if you want to learn more about the language.
     > set(camilla.introduced, true)
     end
 

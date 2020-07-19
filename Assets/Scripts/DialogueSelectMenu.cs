@@ -61,6 +61,10 @@ namespace GabbyDialogueSample
                 firstCharacterButton.Select();
                 firstCharacterButton.OnSelect(null);
             }
+
+            // Handle dialogue events
+            SampleDialogueSystem.instance().OnDialogueStarted += (dialogue) => gameObject.SetActive(false);
+            SampleDialogueSystem.instance().OnDialogueEnded += (dialogue) => gameObject.SetActive(true);
         }
 
         private GameObject CreateCharacterButton(string name)
