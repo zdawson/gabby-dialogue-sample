@@ -21,27 +21,84 @@ locale EN
     end
 
 [Charles.MainLoop]
-    - Ask about: // TODO can this be removed and it still work?
+    - Is there something you'd like to ask about?
     : Dialogue Scripts
-        (You) Tell me about Gabby dialogue scripts.
-        (Charles) ...
+        (Player) Tell me about Gabby dialogue scripts.
+        (Charles) Gabby scripts define a set of dialogues.
+        + You can put as many dialogues in a single Gabby script as you want.
+        - These dialogues are then accessible by your game, and can be run individually depending on your game state.
+        - Gabby scripts don't have a main entry point. Each individual dialogue is its own potential entry point.
+        + Your game decides when to run them!
+        - For example, when the player talks to an NPC, you can look for an Introduction dialogue associated with that NPC by name.
+        - Or, when the player examines an object, you can look for a dialogue associated with that object.
+        - You can sort your dialogues into scripts by scene, character, or however you want!
     : Dialogue Blocks
-        (You) Tell me about dialogue blocks.
-        (Charles) ...
+        (Player) Tell me about dialogue blocks.
+        (Charles) Dialogue blocks come into play with certain language features, like options.
+        - Really all you need to know, is that a dialogue block is a set of lines that are grouped together.
+        - Simple dialogues have a single dialogue block that runs start to finish.
+        - When you add options, each option gets its own dialogue block.
+        - The dialogue engine will step into these dialogue blocks when a choice is made, then return to the outer block.
+        - Take a look at the sample script and see for yourself!
     : Writing Dialogue
-        (You) How do I write dialogue in a Gabby script?
-        (Charles) ...
+        (Player) How do I write dialogue in a Gabby script?
+        (Charles) Writing dialogue is simple!
+        - <b>(Charles) A line of dialogue looks like this.</b>
+        + The character who's speaking is denoted inside parentheses: (Character)
+        + Then the actual dialogue comes next. It can be anything!
+        - You don't need to surround your dialogue with quotation marks or anything.
+        - Of course, because of this, a line of dialogue must be written as a single line in your text editor.
+        + This is intentional! It keeps things simple and readable.
+        - When you want multiple lines, you're encouraged to do so like this, using the <b>+</b> symbol.
+        - <b>+ This is what that looks like in script.</b>
+        + Instead of the character name, you just put a + at the start of the line.
+        - Lastly, something similar can be done with the <b>-</b> symbol!
+        + Use this to write additional lines of dialogue from the same character.
+        - So instead of writing something like this:
+        + <b>(Charles) Blah.</b>
+        + <b>(Charles) Blah blah.</b>
+        - You can write this:
+        + <b>(Charles) Blah.</b>
+        + <b>- Blah blah.</b>
+        - This makes it a lot more clear who's talking at any given line, and you're less likely to make a mistake.
+        - You should use <b>-</b> as much as possible, only writing the full character name when changing speakers.
     : Choices
-        (You) How do I write branching dialogues, prompting the user to make a choice?
-        (Charles) ...
+        (Player) How do I write branching dialogues, prompting the player to make a choice?
+        (Charles) You use <b>options!</b>
+        - If you start a line with <b>:</b>, it becomes an option.
+        + <b>: Like this.</b>
+        - If you have multiple consecutive options within a dialogue block, they'll be grouped together and presented at the same time.
+        - The player then makes a selection, and the dialogue engine will execute the dialogue block nested within that option.
+        - Make sure to indent the dialogue block for each option!
+        + This is how the dialogue engine knows to associate it with that option.
+        - Take a look at the sample script to see it in action!
     : Jumps and Sub-Dialogues
-        (You) What are jumps and sub-dialogues?
-        (Charles) ...
+        (Player) What are jumps and sub-dialogues?
+        (Charles) <b>Jumps</b> are a way of ending the current dialogue and starting a new one.
+        - You denote a jump with <b>>> CharacterName.DialogueName</b>.
+        + This tells the dialogue engine which dialogue you want to jump to!
+        - <b>Sub-dialogues</b> are similar, but instead of ending the dialogue, it runs another dialogue and then returns to the currently running one.
+        - The distinction is that when you <b>jump</b> to a dialogue, when it ends, the whole dialogue ends.
+        + When you use a <b>sub-dialogue</b>, when the sub dialogue ends, the original dialogue continues.
+        - This will work whether you explicitly call <b>end</b> or the dialogue reaches its end naturally.
     : Actions
-        (You) What are actions, and how can I use them?
-        (Charles) ...
+        (Player) What are actions, and how can I use them?
+        (Charles) Actions are a way of triggering events from dialogue.
+        - They can be anything! You can use them to set flags to be used in dialogue blocks later, or you can use them to alter game state.
+        - They're denoted with a <b>></b> character, and look like a function call.
+        + > likeThis()
+        - You can also pass parameters into them! For example:
+        + > addGold(100)
+        + > takeDamage(5)
+        + > set(charles.introduced, true)
+        - With actions, you need to think about data types.
+        + You can use variables, strings, numbers, or booleans.
+        - Strings are surrounded with "double quotes".
+        - Actions are simple, but powerful!
+        - They're not as powerful as writing code, but at the same time, it keeps your dialogue scripts readable and straightforward!
+        - If you really need to run a snippet of code, write it in C# and invoke it from Gabby!
     : Text Styling
-        (You) How can I write with <color=#bada55ff><i><b><size=20>stylish</size></b></i></color> text?
+        (Player) How can I write with <color=#bada55ff><i><b><size=20>stylish</size></b></i></color> text?
         (Charles) Gabby doesn't define any rules for text styling.
         - The sample shows how you can use Unity's built in rich text markup.
         + You can find more information on it in Unity's documentation.
@@ -49,7 +106,7 @@ locale EN
         - Maybe you want <b>*bold*</b> text with asterisks, or <i>_italics_</i> with underscores!
         - In any case, this is considered functionality external to the Gabby language.
     : Portraits
-        (You) How do I define character portraits and change between them?
+        (Player) How do I define character portraits and change between them?
         (Charles) Gabby doesn't directly support portraits, but as you can see, it's entirely possible!
         - How you choose to implement them is up to you.
         - You may choose to implement an action, something like <i>> portrait("CharacterName", "PortraitName")</i>.
@@ -61,12 +118,22 @@ locale EN
         - As the the dialogue engine runs, and characters change, new portrait sprites are retrieved using these objects.
         - Look at the sample code for more detail!
     : Tools and Testing
-        (You) What tools are available for working with Gabby scripts?
+        (Player) What tools are available for working with Gabby scripts?
         (Charles) ...
+    : Localization
+        (Charles) Gabby was designed with localization in mind.
+        - Each dialogue script defines a locale. All dialogues in a script use this locale, you can't mix them!
+        - You can write replacement scripts in different languages, and choose them based on the player's locale.
+        - And since the flow of the conversation is driven by the Gabby scripts, not the game, you have far more flexibility during the localization process.
+        - You're not just replacing text, you can break things up into multiple lines, add or remove sections that might not translate well, or do whatever!
+        - Additionally, since Gabby scripts are straightforward text files, you don't have to worry about using spreadsheets for translation.
+        - You also don't have to give translators access to your game project to test or work with the dialogue scripts.
+        + All they need is a text editor!
     : No
-        (You) No thanks.
+        (Player) No thanks.
         (Charles) Alright then! See you around.
         end
+    (Charles) Well, that's all I have to say about that!
     // >> Charles.AskAgain
     end
 
@@ -89,18 +156,18 @@ locale EN
 [Camilla.Question]
     - Who's cooler, me or Charles?
     : Camilla
-        (You) You're cooler.
+        (Player) You're cooler.
         (Camilla) Yay!
         (Charles) Aww...
     : Charles
-        (You) Charles is cooler.
+        (Player) Charles is cooler.
         (Camilla) Wh- what!?
         (Charles) Yes!
         (Camilla) You're kidding right!?
         : Yes
-            (You) Yes, I'm kidding!
+            (Player) Yes, I'm kidding!
             (Camilla) *phew*
         : No
-            (You) No.
+            (Player) No.
             (Camilla) Grr...
     end

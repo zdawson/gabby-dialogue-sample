@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using GabbyDialogue;
 
@@ -12,6 +13,7 @@ namespace GabbyDialogueSample
         public event System.Action<bool> OnDialogueEnded;
 
         private DialogueUI dialogueUI;
+        private DialogueOptionsUI dialogueOptionsUI;
 
         private DialogueEngine dialogueEngine;
         private Dictionary<string, DialogueCharacter> characters = new Dictionary<string, DialogueCharacter>();
@@ -27,12 +29,17 @@ namespace GabbyDialogueSample
 
         private void Awake()
         {
+            // Initialize UI
             dialogueUI = (Instantiate(Resources.Load("Prefabs/DialogueUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueUI>();
             dialogueUI.gameObject.name = "_SampleDialogueUI";
             dialogueUI.gameObject.SetActive(false);
 
+            dialogueOptionsUI = (Instantiate(Resources.Load("Prefabs/DialogueOptionsUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueOptionsUI>();
+            dialogueOptionsUI.gameObject.name = "_SampleDialogueOptionsUI";
+            dialogueOptionsUI.gameObject.SetActive(false);
+
             // Handle UI events
-            dialogueUI.OnForward += () => dialogueEngine.NextLine();        
+            dialogueUI.OnForward += () => dialogueEngine.NextLine();
 
             // Load character definitions
             Object[] resources = Resources.LoadAll("Characters/");
@@ -45,6 +52,8 @@ namespace GabbyDialogueSample
                 }
             }
 
+            // Create the dialogue engine instance
+            // You can use multiple dialogue engines to run multiple concurrent dialogues, but this sample focuses on using one.
             dialogueEngine = new DialogueEngine(this);
         }
 
@@ -57,9 +66,17 @@ namespace GabbyDialogueSample
 
         public void OnDialogueLine(string characterName, string dialogueText)
         {
-            DialogueCharacter character = characters[characterName];
-            dialogueUI.SetCharacter(character.displayName);
-            dialogueUI.SetCharacterPortrait(character.Portraits["default"]);
+            dialogueUI.SetDialogueText(dialogueText);
+            if (characters.ContainsKey(characterName))
+            {
+                DialogueCharacter character = characters[characterName];
+                dialogueUI.SetCharacter(character.displayName);
+                dialogueUI.SetCharacterPortrait(character.Portraits["default"]);
+            }
+            else
+            {
+                dialogueUI.SetCharacter(characterName);
+            }
             dialogueUI.SetDialogueText(dialogueText);
         }
 
@@ -68,9 +85,25 @@ namespace GabbyDialogueSample
             dialogueUI.SetDialogueText(dialogueUI.GetDialogueText() + "\n" + additionalDialogueText);
         }
 
-        public void OnOptionLine(string[] optionsText)
+        public Task<int> OnOptionLine(string[] optionsText)
         {
-            throw new System.NotImplementedException();
+            string currentLine = "Placeholder Text";
+            string currentCharacter = "Charles";
+            DialogueCharacter character = characters[currentCharacter];
+
+            dialogueUI.gameObject.SetActive(false);
+            dialogueOptionsUI.gameObject.SetActive(true);
+
+            TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
+
+            dialogueOptionsUI.Show(character.displayName, currentLine, optionsText, (selection) => {
+                dialogueUI.gameObject.SetActive(true);
+                dialogueOptionsUI.Hide();
+                tcs.SetResult(selection);
+                dialogueEngine.NextLine();
+            });
+
+            return tcs.Task;
         }
 
         public void OnSpeakingCharacterChanged(string characterName)
