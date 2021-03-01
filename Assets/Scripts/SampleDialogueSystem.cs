@@ -40,6 +40,7 @@ namespace GabbyDialogueSample
 
             // Handle UI events
             dialogueUI.OnForward += () => dialogueEngine.NextLine();
+            dialogueUI.OnBack += () => dialogueEngine.PreviousLine();
 
             // Load character definitions
             Object[] resources = Resources.LoadAll("Characters/");

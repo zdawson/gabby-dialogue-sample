@@ -25,6 +25,8 @@ public class DialogueUI : MonoBehaviour
     private void Awake()
     {
         clickHandler.onClick.AddListener(() => OnForward());
+        backButton.onClick.AddListener(() => OnBack());
+        quitButton.onClick.AddListener(() => OnQuit());
     }
 
     public void SetCharacter(string name)
