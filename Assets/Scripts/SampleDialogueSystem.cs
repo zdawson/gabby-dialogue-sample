@@ -16,7 +16,11 @@ namespace GabbyDialogueSample
         private DialogueOptionsUI dialogueOptionsUI;
 
         private DialogueEngine dialogueEngine;
+        private List<GabbyDialogueAsset> dialogueAssets = new List<GabbyDialogueAsset>(); // TODO rename GabbyDialogueAsset. Maybe DialogueScript?
         private Dictionary<string, DialogueCharacter> characters = new Dictionary<string, DialogueCharacter>();
+        private string currentCharacter = "";
+        [HideInInspector]
+        public string currentPortrait = "default";
 
         public static SampleDialogueSystem instance()
         {
@@ -40,7 +44,6 @@ namespace GabbyDialogueSample
 
             // Handle UI events
             dialogueUI.OnForward += () => dialogueEngine.NextLine();
-            dialogueUI.OnBack += () => dialogueEngine.PreviousLine();
 
             // Load character definitions
             Object[] resources = Resources.LoadAll("Characters/");
@@ -55,24 +58,42 @@ namespace GabbyDialogueSample
 
             // Create the dialogue engine instance
             // You can use multiple dialogue engines to run multiple concurrent dialogues, but this sample focuses on using one.
-            dialogueEngine = new DialogueEngine(this);
+            dialogueEngine = new DialogueEngine(this, new SampleScriptingHandler());
         }
 
         public void PlayDialogue(Dialogue dialogue)
         {
+            currentCharacter = "";
+            currentPortrait = "default";
             dialogueEngine.StartDialogue(dialogue);
             dialogueUI.gameObject.SetActive(true);
             OnDialogueStarted?.Invoke(dialogue);
         }
 
-        public void OnDialogueLine(string characterName, string dialogueText)
+        public void OnDialogueLine(string characterName, string dialogueText, Dictionary<string, string> tags)
         {
+            if (currentCharacter != characterName)
+            {
+                currentCharacter = characterName;
+                currentPortrait = "default";
+            }
+            
+            string tagPortrait;
+            if (GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
+            {
+                currentPortrait = tagPortrait;
+            }
+
             dialogueUI.SetDialogueText(dialogueText);
             if (characters.ContainsKey(characterName))
             {
                 DialogueCharacter character = characters[characterName];
                 dialogueUI.SetCharacter(character.displayName);
-                dialogueUI.SetCharacterPortrait(character.Portraits["default"]);
+                if (!character.Portraits.ContainsKey(currentPortrait))
+                {
+                    currentPortrait = "default";
+                }
+                dialogueUI.SetCharacterPortrait(character.Portraits[currentPortrait]);
             }
             else
             {
@@ -81,9 +102,20 @@ namespace GabbyDialogueSample
             dialogueUI.SetDialogueText(dialogueText);
         }
 
-        public void OnContinuedDialogue(string additionalDialogueText)
+        public void OnContinuedDialogue(string additionalDialogueText, Dictionary<string, string> tags)
         {
+            string tagPortrait;
+            if (GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
+            {
+                currentPortrait = tagPortrait;
+            }
+            
+            DialogueCharacter character = characters[currentCharacter];
             dialogueUI.SetDialogueText(dialogueUI.GetDialogueText() + "\n" + additionalDialogueText);
+            if (character.Portraits.ContainsKey(currentPortrait))
+                {
+                    dialogueUI.SetCharacterPortrait(character.Portraits[currentPortrait]);
+                }
         }
 
         public Task<int> OnOptionLine(string[] optionsText)
@@ -107,30 +139,55 @@ namespace GabbyDialogueSample
             return tcs.Task;
         }
 
-        public void OnSpeakingCharacterChanged(string characterName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnAction(string actionName, string[] parameters)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void OnDialogueEnd()
         {
             dialogueUI.gameObject.SetActive(false);
             OnDialogueEnded?.Invoke(true);
         }
 
-        public void GetVariable(string[] variablePath)
+        public Dialogue GetDialogue(string characterName, string dialogueName)
         {
-            throw new System.NotImplementedException();
+            foreach (GabbyDialogueAsset asset in dialogueAssets)
+            {
+                foreach (Dialogue dialogue in asset.dialogues)
+                {
+                    if (dialogue.CharacterName == characterName && dialogue.DialogueName == dialogueName)
+                    {
+                        return dialogue;
+                    }
+                }
+            }
+            return null;
         }
 
-        public void SetVariable(string[] variablePath, dynamic value)
+        public void AddDialogueAsset(GabbyDialogueAsset asset)
         {
-            throw new System.NotImplementedException();
+            dialogueAssets.Add(asset);
+        }
+
+        /// <summary>
+        /// Gets the portrait for the given character from the provided tags. Looks for values tagged "portrait", or any tags from the character's defined portraits.
+        /// </summary>
+        private static bool GetPortraitFromTags(DialogueCharacter character, Dictionary<string, string> tags, out string outPortrait)
+        {
+            string portrait;
+            if (tags.TryGetValue("portrait", out portrait))
+            {
+                outPortrait = portrait;
+                return true;
+            }
+
+            foreach (string portraitName in character.Portraits.Keys)
+            {
+                if (tags.ContainsKey(portraitName))
+                {
+                    outPortrait = portraitName;
+                    return true;
+                }
+            }
+
+            outPortrait = "";
+            return false;
         }
     }
 }

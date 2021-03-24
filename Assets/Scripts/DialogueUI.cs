@@ -32,6 +32,10 @@ public class DialogueUI : MonoBehaviour
     public void SetCharacter(string name)
     {
         characterText.text = name;
+        if (name.Length == 0)
+        {
+            // TODO hide the character UI
+        }
     }
 
     public void SetCharacterPortrait(Sprite portrait)

@@ -1,14 +1,12 @@
-gabby 0.1
-locale EN
+gabby 0.2 // test
+language english //test
 
 [Charles.Introduction]
     - Good day! I'm <b>Charles</b>, the test character.
 
-    > portrait("Camilla", "angry") // TODO this would be nicer as custom sample-side text markup
-    (Camilla) <i>*Ahem*</i>, <b>-the-</b> test character? I'm here too!
+    (Camilla, angry) <i>*Ahem*</i>, <b>-the-</b> test character? I'm here too!
 
-    > portrait("Charles", "very happy")
-    (Charles) Ah, yes yes. Have you met Camilla?
+    (Charles, very happy) Ah, yes yes. Have you met Camilla?
     - You can talk to me for explanations of Gabby's capabilities!
     - Camilla will provide you with example dialogues.
     > set(charles.introduced, true)
@@ -17,11 +15,10 @@ locale EN
 [Charles.Main]
     - Hello again!
     - Is there something you'd like to ask about?
-    // >> Charles.MainLoop
+    >> Charles.MainLoop
     end
 
 [Charles.MainLoop]
-    - Is there something you'd like to ask about?
     : Dialogue Scripts
         (Player) Tell me about Gabby dialogue scripts.
         (Charles) Gabby scripts define a set of dialogues.
@@ -134,40 +131,45 @@ locale EN
         (Charles) Alright then! See you around.
         end
     (Charles) Well, that's all I have to say about that!
-    // >> Charles.AskAgain
+    >> Charles.RestartMainLoop
     end
 
 [Charles.RestartMainLoop]
     - Is there anything else you'd like to ask about?
-    // >> Charles.MainLoop
+    >> Charles.MainLoop
     end
 
 [Camilla.Introduction]
     - Hey, I'm <b>Camilla</b>!
-    > portrait("Camilla", "very happy")
+    <very happy>
     + It's nice to meet you.
-    > portrait("Camilla", "happy")
+    <happy>
     - You can talk to me for examples of Gabby in action.
-    > portrait("Camilla", "bored")
+    <bored>
     - Or you can talk to Charles if you want to learn more about the language.
     > set(camilla.introduced, true)
     end
 
 [Camilla.Question]
+    <portrait: annoyed>
     - Who's cooler, me or Charles?
+
     : Camilla
-        (Player) You're cooler.
-        (Camilla) Yay!
-        (Charles) Aww...
+        (Player)                You're cooler.
+        (Camilla, very happy)   Yay!
+        (Charles, very sad)     Aww...
+
     : Charles
-        (Player) Charles is cooler.
-        (Camilla) Wh- what!?
-        (Charles) Yes!
-        (Camilla) You're kidding right!?
+        (Player)                Charles is cooler.
+        (Camilla, angry)        Wh- what!?
+        (Charles, very happy)   Yes!
+        (Camilla, annoyed)      You're kidding right!?
+
         : Yes
-            (Player) Yes, I'm kidding!
-            (Camilla) *phew*
+            (Player)            Yes, I'm kidding!
+            (Camilla, sad)      *phew*
+
         : No
-            (Player) No.
-            (Camilla) Grr...
+            (Player)            No.
+            (Camilla, annoyed)  Grr...
     end

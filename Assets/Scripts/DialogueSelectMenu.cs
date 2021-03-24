@@ -27,6 +27,12 @@ namespace GabbyDialogueSample
 
         void Start()
         {
+            // Add dialogue assets to the dialogue system
+            foreach (GabbyDialogueAsset asset in gabbyFiles)
+            {
+                SampleDialogueSystem.instance().AddDialogueAsset(asset);
+            }
+
             // Initialize the list of characters and their dialogues
             UnityEngine.UI.Toggle firstCharacterButton = null;
             HashSet<string> loadedCharacters = new HashSet<string>();
