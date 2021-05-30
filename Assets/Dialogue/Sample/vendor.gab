@@ -1,0 +1,155 @@
+// This sample demonstrates a very basic dialogue based shop.
+gabby 0.2
+language english
+
+[Camilla.Vendor]
+    - ...and I found myself at this amazing, super old looking shop.
+    - It was like, totally full of antiques and artifacts.
+    <very happy>
+    - It was really cool!
+    <happy>
+    - I think I had, say, 250 coins...
+    - It wasn't much, but I could buy a few things with it!
+
+    * She starts to describe the whole story, transporting you into another world with her words.
+
+    (Camilla) Wow, this store is really amazing!
+    -         You've got so many cool looking artifacts.
+
+    (Vendor) I hope you can find something to your liking!
+
+    (Camilla) So, I looked around, checking out all his stuff.
+    -         Among everything, there were a few items that really stood out to me.
+    
+    > setGold(250)
+    >> Camilla.VendorMain
+
+[Camilla.VendorMain]
+    * What did Camilla buy?
+    : This really cool, fancy looking sword!
+        (Camilla, very happy) Ooh, I wanna buy that cool sword! How much is it?
+
+        (Vendor) This sword belonged to The Great King, Wuh... Wen...
+        (Camilla, bored) Ok, yeah, I forget his name. But he was like a king or something... Anyway.
+
+        (Vendor) This sword belonged to the king. It's a very rare artifact, and, like, incredibly well forged!
+        -        Anyway, yeah, I'm asking for 150 coins.
+
+        > set("camilla.vendor.item", "sword")
+        > set("camilla.vendor.cost", "150")
+        >> Camilla.VendorPurchase
+        // TODO this is a good place to use << when that gets added, with more dialogue following
+
+    : Like, a really old looking amulet, with big gems and stuff.
+        (Camilla, very happy) Oh! Look at this amulet!
+
+        (Vendor) Yes, beautiful isn't it?
+
+        (Camilla, happy) How much is it?
+
+        (Vendor) That amulet is enchanted!
+        -        It's said that whoever wears it will be blessed with good fortune.
+        -        So you'll surely make back the mere 100 coins I'm asking for it very quickly!
+
+        > set("camilla.vendor.item", "amulet")
+        > set("camilla.vendor.cost", "100")
+        >> Camilla.VendorPurchase
+            
+    : I think it was actually the Staff of Ra, no joke!
+        (Camilla, very happy) Hey, is that the Staff of Ra? 
+
+        (Vendor) The one and only!
+        -        This fine artifact will only run you 200 gold.
+
+        (Camilla, very happy) Wow!~ I WANT IT!
+
+        > set("camilla.vendor.item", "staff")
+        > set("camilla.vendor.cost", "200")
+        >> Camilla.VendorPurchase
+
+    : A bunch of old coins, kind of lame really.
+        (Camilla, bored) So like, old coins that were buried for a long time or something?
+
+        (Vendor) Ah, these are indeed coins from an ancient civilization!
+        -        They were found during an archaeological dig years ago.
+
+        (Camilla, bored) Having a hard time sellin' 'em?
+
+        (Vendor) Ah!~ Er..
+
+        (Camilla, bored) I'll offer 25 coins, if even...
+
+        (Vendor) Uh, sure! I suppose...
+
+        > set("camilla.vendor.item", "coins")
+        > set("camilla.vendor.cost", "25")
+        >> Camilla.VendorPurchase
+
+    : Something that looked kind of like an alien weapon!
+        (Camilla, very happy) Whoa!
+
+        (Vendor) Interested in the... uh, alien weapon, are you?
+
+        (Camilla, bored) Heh, I forget what he called it...
+        (Camilla, bored) Sorry...
+
+        (Vendor) Interested in this, are you?
+        -        Well, you have a good eye!
+        -        This is one of a kind, and not of this world!
+        -        I'll take no less than 300 coins for it!
+
+        (Camilla, angry) What?! But... I can't afford that!
+        -                Give me a deal!
+
+        (Vendor) I'm afraid I cannot.
+
+        (Camilla, sad) Lame...
+
+        (Camilla, angry) But seriously! It was so lame! He wouldn't budge on the price at all.
+        (Camilla, sad) I bet I could've blown up so many things with it... 
+        (Camilla, very happy) Anyway! Back to my story!
+
+        (Camilla, sad) What about...
+        >> Camilla.VendorMain
+
+    : Some old maps...
+        (Camilla, very happy) Are these ancient treasure maps?
+
+        (Vendor) They are indeed!
+        -        Who knows what incredible treasure can be found with these!
+        -        I'm asking 25 coins for all of them.
+
+        > set("camilla.vendor.item", "maps")
+        > set("camilla.vendor.cost", "25")
+        >> Camilla.VendorPurchase
+
+    : I forget, but there was something else!
+        (Vendor) Ah! So, you're interested in...
+        -        You're interested... in...
+        +        Uhh...
+
+        (Camilla, angry) Ugh! Why'd you pick that one!
+        +                I told you I forget!
+        -                It was like, lame or something anyway.
+
+        (Vendor) That's not for sale!
+        -        Choose something else.
+
+        >> Camilla.VendorMain
+
+
+[Camilla.VendorPurchase]
+    * Do you want to buy it?
+    : Yes!
+        if hasGold("camilla.vendor.cost")
+            (Camilla, very happy) I'll take it!
+            > removeGold("camilla.vendor.cost")
+            > giveItem("sword")
+            >> Camilla.VendorMain
+        else
+            (Vendor) I'm afraid that's not enough coins.
+            (Camilla, sad) Oh... You're right. Ok.
+    : No way!
+        (Camilla, bored) Nah.
+    + What about...
+    >> Camilla.VendorMain

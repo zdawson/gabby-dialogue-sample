@@ -1,0 +1,39 @@
+// This sample demonstrates localization with an imaginary language Camilla learned.
+// The game-side scripts for this sample allow changing the overall language, which isn't something a game would typically do.
+// However, it's useful for demonstrating localized text more naturally in the sample.
+gabby 0.2
+language english
+
+[Camilla.Country]
+    - ...and really, it was one of the most beautiful places I've ever seen!
+    - To think, if it weren't for that shipwreck I wouldn't have found it...
+    - Oh, and that swordfight with the pirates.
+    - But that's boring!
+
+    (Player) Wait, I want to hear about the-
+
+    (Camilla) Boring!
+    + What's interesting about the story is that while I was there, I found this beautiful city.
+    - It looked ancient! The roads were paved with large, smooth cobblestone, and the buildings were engraved with runes and inlaid with gold.
+    - And everyone spoke an ancient language. And they taught it to me!
+    - So, here begins your lesson in speaking <color=#fcd303>Gabarian</color>!
+
+    * This sample demonstrates basic localization.
+    * Use the buttons shown to switch between languages.
+
+    - So, Gabarian is pretty simple.
+    > setLanguage("gabarian")
+    >> Camilla.LocalizedDialogue
+
+[Camilla.LocalizedDialogue]
+    - I just said, "This is how you say hello!"
+    - Isn't that neat?
+    - It only took me a few weeks to become fluent!
+    >> Camilla.CountryEnd
+
+[Camilla.CountryEnd]
+    * She stops and thinks for a moment, looking conflicted.
+    - Well, you know...
+    - This is fun and all, but I guess it would be tiresome to try to teach you a whole language.
+    - So just remember this:
+    - If you want to say hello in Gabarian, just say <color=#fcd303>salwei</color>!

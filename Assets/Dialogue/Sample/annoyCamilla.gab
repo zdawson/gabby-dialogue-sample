@@ -1,0 +1,82 @@
+// This sample shows a situation where a dialogue response impacts a character's disposition towards the player.
+// A similar system could be used to unlock options through positive interactions, skill checks, etc.
+// TODO it would be useful to add gated options to this
+gabby 0.2
+language english
+
+[Camilla.CharlesComplaints]
+    <angry>
+    - ...and, like, he's always bugging me about my sample stories being too long winded, and not making any sense.
+    - And he accuses me of being poorly written, like, how is that even my fault!?
+    - Plus, like, I'm waaay cooler than he is.
+    <annoyed>
+    - Right? Like, aren't I way cooler?
+
+    : Yeah, you're cooler!
+        (Player)                You're cooler, Camilla!
+
+        (Camilla, very happy)   Thank you!
+
+        (Charles, sad)          Aww...
+        (Charles, happy)        Well, that's ok, Camilla's pretty cool!
+
+        (Camilla, annoyed)      Ugh, you're just trying to sound nice...
+
+        * You slowly back away from the conversation, deciding to quit while you're ahead.
+
+    : Charles is cooler.
+        (Player)                Charles is cooler.
+
+        (Camilla, angry)        Wh- what!?
+        -                       No way!~
+
+        (Charles, very happy)   Aha! Thank you!
+
+        (Camilla, annoyed)      You're kidding right!?
+        -                       You'd better be kidding!~
+
+        : I'm kidding!
+            (Player)            Yes, I'm kidding!
+
+            * Camilla looks relieved.
+
+            (Camilla, sad)      *Phew*.
+            (Camilla, annoyed)  But that's not very funny, you know!
+            <very sad>
+            +                   Teasing me like that...
+
+            * You slowly back away from the conversation before you make things worse.
+
+        : No, I like Charles.
+            > set(camilla.angry, true)
+            > set(camilla.angerLevel, 3)
+            (Player)            No, I'm not kidding. I like Charles.
+
+            (Camilla, very sad) You really think he's cooler though?
+            -                   I try so hard to be the cool one...
+
+            * You walk away as Camilla picks up the shattered fragments of her ego.
+
+// This is used by the game in place of the usual greeting when Camilla is angry with the player
+[Camilla.AngryGreeting]
+    if is(camilla.angerLevel, 3)
+        > set(camilla.angerLevel, 2)
+        (Camilla, angry) NO. Go away.
+        <very sad>
+        - You're such a jerk...
+    else if is(camilla.angerLevel, 2)
+        > set(camilla.angerLevel, 1)
+        (Camilla, annoyed) Just leave me be for a while.
+    else if is(camilla.angerLevel, 1)
+        > set(camilla.angerLevel, 0)
+        (Camilla, very sad) I don't need you to tell me I'm cooler. I know I'm cooler.
+    else
+        > set(camilla.angry, false)
+        (Camilla, angry) I'm still mad about what you said earlier...
+        <very sad>
+        - <i>*Sigh*</i>
+        - But, I mean, I was kind of being rude to Charles. He's cool too.
+        <sad>
+        - It's nice of you to defend him like that.
+        - So, I'll forgive you.
+        

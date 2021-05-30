@@ -79,7 +79,7 @@ namespace GabbyDialogueSample
             }
             
             string tagPortrait;
-            if (GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
+            if (characters.ContainsKey(currentCharacter) && GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
             {
                 currentPortrait = tagPortrait;
             }
@@ -105,17 +105,20 @@ namespace GabbyDialogueSample
         public void OnContinuedDialogue(string additionalDialogueText, Dictionary<string, string> tags)
         {
             string tagPortrait;
-            if (GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
+            if (characters.ContainsKey(currentCharacter) && GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
             {
                 currentPortrait = tagPortrait;
             }
             
-            DialogueCharacter character = characters[currentCharacter];
             dialogueUI.SetDialogueText(dialogueUI.GetDialogueText() + "\n" + additionalDialogueText);
-            if (character.Portraits.ContainsKey(currentPortrait))
+            if (characters.ContainsKey(currentCharacter))
+            {
+                DialogueCharacter character = characters[currentCharacter];
+                if (character.Portraits.ContainsKey(currentPortrait))
                 {
                     dialogueUI.SetCharacterPortrait(character.Portraits[currentPortrait]);
                 }
+            }
         }
 
         public Task<int> OnOptionLine(string[] optionsText)

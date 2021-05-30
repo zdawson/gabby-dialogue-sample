@@ -1,0 +1,25 @@
+// This sample demonstrates displaying images to the user with a custom action, and giving / removing items.
+gabby 0.2
+language english
+
+[Camilla.Sword]
+    > setBackground(forest) // This would be neat to add!
+    - ...so as I'm exploring this forest, I see something sticking out of the water.
+    - And my first thought is, "WHOA! IS THAT A SWORD?!"
+    - 'Cuz you know, like with that Arthur guy and the sword and stuff...
+    - So I go to check it out, and it actually was a sword!
+    - It was stuck in some mud!
+    - Anyway, check it out, I have it here!
+    > showImage(camilla.sword)
+    - Neat huh?
+    - And this is how it used to look...
+    > showImage(camilla.oldSwordPicture)
+    - Pretty bad huh? I cleaned it up good!
+    - Anyway, you can have this! I don't use swords like, ever.
+    > giveItem(sword)
+    - Although...
+    - Should you really be running around in here with a sword?
+    - They're kind of dangerous, and that one's really really sharp, 'cuz I'm really good at sharpening things...
+    - You know what, just give that back.
+    > removeItem(sword)
+    - Heh heh... Sorry to get your hopes up!

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+
 namespace GabbyDialogueSample
 {
     public class SampleScriptingHandler : AbstractScriptingHandler
@@ -15,6 +17,8 @@ namespace GabbyDialogueSample
             this.AddActionHandler(nameof(actionNumber), actionNumber);
             this.AddActionHandler(nameof(actionBool), actionBool);
             this.AddActionHandler(nameof(actionMultiple), actionMultiple);
+
+            this.AddConditionalHandler(nameof(showRandomly), showRandomly);
         }
 
         // TODO add an attribute like:
@@ -59,6 +63,16 @@ namespace GabbyDialogueSample
             {
                 Debug.Log(Convert.ToString(p.value));
             }
+        }
+
+        private bool showRandomly(List<ActionParameter> parameters)
+        {
+            if (parameters.Count != 1)
+            {
+                Debug.LogError("Invalid call to showRandomly: Must provide a single parameter for probability as a number from 0 to 1.");
+            }
+            float probability = Mathf.Clamp01(Convert.ToSingle(parameters[0].value));
+            return Random.value <= probability;
         }
     }
 }

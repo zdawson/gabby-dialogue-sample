@@ -1,0 +1,567 @@
+//
+// This file contains all the tutorial dialogue for learning to use the language.
+//
+gabby 0.2
+language english
+
+// FIXME syntax highlighting can't handle comments with . in them on dialogue definition lines
+// FIXME jumps can't handle comments 
+// TODO tagging implicit dialogue with <> shouldn't retain the tag past that line, it should be a temporary state
+//      Tagging explicit dialogue in () should continue to retain those tags for all implicit dialogue that follows
+
+[Gabby.TutorialIntroduction] // TODO it would be useful to have OnDialogue handlers, ex On(Gabby,TutorialIntroduction)
+    - Ok, so when it comes to Gabby, there's a lot to talk about!
+    + But you'll find that it's all pretty straightforward, I think!
+    - The tutorial is broken down into multiple interactive sections.
+    - I'll be getting help from our friend, Kay!
+    (Kay, happy) Hello! It's my pleasure.
+    (Gabby) We'll also show you Gabby snippets along the way, but your best bet is to open up the dialogue files yourself.
+    - Go find 'em! Get the syntax highlighting extension too if you haven't already!
+    * ...
+    - Ok, if you're ready to go, let's <b>jump</b> right in to the tutorial!
+    >> Gabby.TutorialMainEntry
+
+[Gabby.TutorialMainEntry]
+    - Tell me what you want to learn about!
+    : The Basics of a Gabby Script
+        (Player) Tell me about the basics of Gabby scripting. What goes into a Gabby script?
+        (Gabby)  The basics, huh? Ok!
+        >> Gabby.Basics
+    : The Details of the Gabby language
+        (Player) I want to know the details of using Gabby. What can I do with it?
+        (Gabby)  Alright, let's talk details!
+        >> Gabby.LanguageEntry
+    : Using Gabby in Unity
+        (Player) I want to make games in Unity. How can I use Gabby?
+        (Gabby)  Hey, me too! Let's talk Unity.
+        >> Gabby.Unity
+    : Is Gabby Really Game-Ready?
+        (Player) Is Gabby really ready to be used in production for real games?
+        (Gabby, upset)  H-HEY! Are you implying something bad?
+        (Gabby)         But, that's fair. Let's talk about what we thought about when writing Gabby, and you can decide for yourself.
+        -               And of course, if we missed something, let us know, because we really want Gabby to be something anyone can rely on.
+        >> Gabby.IndustryReady
+    : I'm done!
+    (Player) Alright, I think I'm done!
+    (Gabby)  Thanks for sticking around!
+    <shy>
+    -        I know I tend to talk too much.
+    -        I'll send you back to the main menu!
+
+[Gabby.Basics]
+    : What is a Gabby script?
+        (Player) What is a Gabby script, exactly?
+        (Gabby) It's pretty much just a text file that you write your dialogue in!
+        - In it, you'll write little dialogue sections with a character and a name.
+        > show(dialogueScriptIntro)
+        <happy>
+        - We call these dialogues. This dialogue is Gabby.Basics, because I'm Gabby, and we're discussing the basics!       
+        - So, your dialogue script will have as many dialogues as you want.
+        - You can use multiple scripts, and organize things however you want.
+        - You don't have to think about order, or following a certain organization.
+        + Do what you think works best for you.
+
+    : What is a "dialogue" in Gabby?
+        (Player) So, what is a "dialogue" in Gabby?
+        (Gabby) Want to know more about dialogues, huh?
+        -       Well, of course you do! That's where everything happens!
+        -       So, you already know that Gabby scripts are made up of dialogues.
+        -       I mean, if you're doing this in order anyway. And you're paying attention.
+        +       You're paying attention, right?
+        (Kay)   Gabby! Focus!
+        (Gabby) Aah, sorry!
+        -       A dialogue is like a little conversation. Well, more literally, it's a bunch of text to display, actions to run, and so on.
+        (Kay)   Everything in a dialogue runs sequentially.
+        -       This starts when a game triggers a specific dialogue. 
+        (Gabby) Yeah! So, depending on your game and dialogue style, you'll break your script down and just focus on writing.
+        -       So like, an open world game will have a lot of individual dialogues broken up by conversation topic.
+        -       [Guard.Greeting], [Blacksmith.Shop], [Blacksmith.Sell], that sort of thing.
+        -       In a visual novel, it's a bit different. It's more like a long chain of dialogues.
+        (Kay)   On the game's side of things, we can see all the dialogues in these scripts by name.
+        -       So like, say the player walks up to a guard and starts talking to 'em...
+        +       The game will want to say, "play the dialogue for a guard greeting you".
+        -       You'll probably write this in [Guard.Greeting] like Gabby said, so, the game runs [Guard.Greeting], and that whole dialogue happens.
+        -       When it ends, your game gets an event and just continues as normal.
+        -       And like Gabby said, in a visual novel, it's not quite as free form.
+        -       There you'll probably have one main dialogue, which jumps to other dialogues as the player makes choices.
+        -       You'll get an idea of the best way to do this later.
+        (Gabby) Things don't have to be tied to "characters" exactly, either, but that has it's own section.
+        -       It's up next, too, if you wanna talk about it!
+
+    : What is a "character"?
+        (Player) What's a "character"?
+        (Gabby)  Yay! I like this one!
+        -        So like, you're probably thinking, "it's obvious what a character is!"
+        -        And you're right!
+        (Kay)    Gabby...
+        (Gabby)  I'm not done! There's a few things worth noting though when working with Gabby.
+        (Kay)    The main thing is, to Gabby, a character is just a way of identifying who - or what - is speaking.
+        -        So, in the Gabby script, I'm a character named Kay, and that's it.
+        (Gabby)  Hey, I was answering this one! So like, yeah, that's true.
+        -        But! Your game will have a lot more to its characters, like maybe the name you show the player is different than the name in Gabby.
+        -        Maybe you have a lot of guards, but some special guards, and you want to share dialogue between them!
+        -        You can do [GenericGuard.Greeting], and [GuardCaptain.GetQuest], or something!
+        (Kay)    Yeah, then your game can get the generic greetings when you talk to the captain. And it'll insert the appropriate display name.
+        (Gabby)  The main point is it's really flexible, so don't box yourself in.
+        (Gabby)  You can get abstract with it too!
+        -        If I wanted to make a game where the player can inspect objects and interact with a lot of things, I'd treat those things as characters.
+        -        So like, think about a garbage can, or a cupboard.
+        -        The player can look at them, but that's pretty much it, so I'll have dialogues like [Interact.Garbage], [Interact.Cupboard].
+        +        Or maybe, [Garbage.Interact], and [Cupboard.Interact]!
+        -        And like, for a really interactive object, I could do...
+        +        [Phone.Interact], [Phone.CallMom], [Phone.SpecialEventDay7], that sort of thing!
+        -        Just saying, don't get too locked into the idea of a "character" meaning a living NPC. It can even be "Narrator", or something.
+        (Kay)    Or, "Gabby's Weird Brain".
+        (Gabby)  HEY!!
+        (Player) Ok, I think I get it... Let's talk about something else.
+    : Enough about the basics!
+        (Player) I think I've learned enough about the basics now!
+        (Gabby)  That's great!
+        +        Let's talk about something else!
+        >> Gabby.TutorialMainEntry
+    >> Gabby.Basics
+
+[Gabby.LanguageEntry]
+    (Kay) We'll keep this one to-the-point. Pick a section!
+    >> Gabby.LanguageLoop
+
+[Gabby.LanguageLoop]
+    : Metadata and Comments: Information About Your Script
+        (Player) Tell me about metadata.
+
+        (Kay) Not much to say about this one.
+        > show("dialogueMetadataExample")
+        -     At the top of your file, put the gabby version and the language the script is written for.
+        -     The version is there to help your dialogue engine know what features are supported. 
+        -     As Gabby updates, this will become important.
+        -     The language is there for localization.
+        -     Put anything you want there, there's no restriction on format. Your game will be what reads it.
+        -     Everything in a script has to be the same language - break other languages into their own files.
+
+        (Player) Ok. And what are comments?
+
+        (Kay) They're just a way to write a note to yourself or other contributors in the project!
+        -     You write them with two forward slashes, "\/\/", and then your comment.
+        -     Could be something like: "\/\/ This is shown if you forgot to pick up the key at the start of the game".
+
+        (Gabby) Or, "\/\/ TODO: come back and finish this". I use this a lot, because I like to write what interests me the most and come back to boring stuff.
+        -       The comment lets me find it again!
+
+        (Kay) Well, that's that! What's next?
+
+    : Dialogue Lines: Using "(Character)" and "-" to Write Lines of Dialogue
+        (Player) Tell me about dialogue lines, and how to write them.
+
+        (Kay) It's designed to be as simple as possible. And of course, easy to read.
+        -     There's a few ways to do it depending on what exactly you want.
+        -     We'll put the fancy ones into their own sections.
+        -     Ok, getting to the point! Write dialogue like this:
+        > show("dialogueLineExample1")
+        +     The character name in parentheses, and the text to display following it.
+        -     Kinda looks like a script, right? That's the goal anyway.
+        -     You're not gonna want to write the character name over and over, though.
+        -     So, after your character is written once, just use a dash -, like this:
+        > show("dialogueLineExample2")
+        -     This looks better, but there's also a really good reason to do it.
+        -     A lot of games have bugs where the wrong character speaks, because of a copy / paste error that's hard to spot.
+        -     The dash makes it obvious that a change in character didn't happen, so this type of error should just go away if you get used to using it.
+        -     So to recap, you write dialogue with the character name in parentheses, "(Character) ...", or let them monologue a while with dash "- ...".
+        -     Nice and simple, right?
+
+    : Continued Dialogue: Using "+" to Extend a Line
+        (Player) What does it mean when I start a line with "+"?
+
+        (Kay) This one's really quick.
+        > show("dialogueContinueExample")
+        -     When you start a line with "+", it will extend displayed dialogue when the player advances.
+        +     Like this.
+        -     So, it doesn't clear the text basically, that's all there is to it.
+        +     You can do it a bunch, too.
+        +     There's not really a limit, but maybe you'll have to scroll eventually.
+        -     Hope you find it useful!
+
+    : Narrated Dialogue: Using "*" to Describe a Scene
+        (Player) How can I write narration, like for examining an object?
+
+        (Kay) This is another quick one!
+        > show("dialogueNarrationExample1")
+        -     See? Easy. Just start your line with "*".
+        -     When you start a line with "*", it means it's not spoken by a character. It's narrated.
+        > show("dialogueNarrationExample2")
+        *     Kay looks at the new example, reading through it in her head.
+        +     She looks really closely, making sure she didn't miss something.
+        -     Oh! Did you catch that? We just used "+" to extend a narrated line of dialogue.
+        -     And on top of that, we're back to using "-" to write my lines of dialogue.
+        +     The point is, "*" lines don't change the current speaker.
+        -     That's what makes "*" so useful. We could've just gone with "(Narrator) ...", and sometimes maybe we still want to, but in this case it's way easier to use "*".
+
+        (Gabby) And I like easy!
+
+        (Kay)   Me too. Anyway, there you have it: narrated dialogue!
+
+    : Choices: Using ":" To Make Branching Dialogue
+        (Player) How do I write branching dialogues with player choices?
+
+        (Kay) You use <b>Options!</b>
+        > show("dialogueOptionsExample1")
+        - When you start a line with ":", it becomes an option.
+        - This is something the player gets to make a selection from. You're asking the player to make a choice.
+        - Usually you have multiple choices presented at a time, so you'll have multiple consecutive option lines.
+        + They'll get grouped together and shown in one menu.
+
+        - So, the player then makes a selection, then the dialogue engine continues on.
+
+        (Gabby) But it just continues like normal, nothing actually branched!
+
+        (Kay) Yup. You've gotta put lines in your options if you want them to matter. Check this out.
+        > show("dialogueOptionsExample2")
+        - This is a proper options block, like you'll probably be writing for your game.
+        - The indentation is incredibly important here, it's how the language knows those lines are inside the option, not after it.
+        - Indent your option's contents past the ":", and you're all set. It's more readable too.
+        - And of course, you can nest them, as you see here.
+        + So after the first selection is made, the player gets another choice to make depending on that first choice.
+        > show("dialogueOptionsExample3")
+        - Look at this example.
+        + This shows two separate options close together. If it weren't for that line of dialogue between them, they'd be one big option.
+        > show("dialogueOptionsExample4")
+        - One last example...
+        - This is using jumps, which we haven't gone over yet.
+        - I just didn't want you to think things would have to get cluttered.
+        - By the way, we call the lines inside options "dialogue blocks".
+        - Anyway, you'll find that options are pretty simple, I think.
+        (Jay) Test 
+        - Test this is clear
+
+    : Jumps: Using ">>" to Link Dialogue
+        (Player) What are jumps?
+        (Narrator) What are jumps?
+
+        (Kay) You can probably guess!
+        +     ...we're not gonna let them guess?
+        -     Ok, well, they jump you over to another dialogue.
+        -     Think of it like ending the current dialogue and starting a new one.
+        > show("dialogueJumpExample")
+        -     They look like this.
+        -     This maps to a dialogue, in this case [Example.Bored], just like when you're writing the dialogue definition.
+        -     The dialogue you're jumping to can be in the same script or a different one. Just has to be loaded!
+
+        (Gabby) The only thing to keep in mind is that when you jump, you're leaving your current dialogue.
+        -       When the dialogue you jump to ends, the whole dialogue ends.
+        +       It doesn't come back to continue the dialogue you jumped out of.
+        -       You can always jump back to it, though!
+
+        (Kay) So now you know how to use jumps!
+
+    : Actions: Using ">" to Trigger Game Events
+        (Player) What are actions?
+
+        (Kay) Actions trigger events in your game.
+        -     If you program, it's a bit like a function call. But it's simplified, and a bit more restricted.
+
+        (Gabby) And if you don't program, don't worry about it, it's pretty simple!
+        > show("dialogueActionExample1")
+        -       You'll have events like this, which you trigger with actions.
+
+        (Kay) Yup. It's all meaningless to Gabby, though. Gabby the language, I mean.
+        -     Your action name is whatever you want it to be, it can have spaces in it if you want, it's just a label.
+        -     Your parameters are whatever you want as well, hopefully they're what the game expects though.
+        -     If not, it's out of our hands, you'll get an error you need to handle.
+
+        (Gabby) Don't make it sound so serious!
+        > show("dialogueActionExample2")
+        -       Anyway, it's simple, just look at these other examples to get an idea of how you might wanna use them.
+        
+        (Kay) It's simple, but powerful!
+        -     Sure, it's not as powerful as programming, but that's kind of a good thing.
+        -     We don't want to mix code and dialogue. Gabby doesn't want to be a programmer, just a writer.
+
+        (Gabby) Yeah, it's way more fun!
+
+        (Kay) So, keep your code in your game, and run it from Gabby.
+        -     If you're clever you can come up with all sorts of simple and reusable actions to write.
+        -     And if you absolutely need to run some super specific code for a dialogue, just make a super specific action.
+        -     But anyway, that's it for actions!
+
+    : Conditionals: "if", "else if", and "else"
+        (Player) What if I want code to run based on some game state?
+
+        (Kay) Well, one option is to run dialogues by name from different states in your game. The other is conditionals.
+        -     It's best to think of a conditional as an action that tells the dialogue engine <b>true</b> or <b>false</b>.
+        -     <b>True</b> means run the dialogue block inside, <b>false</b> means skip it.
+        > show("dialogueConditionalExample1")
+        -     It looks like this.
+        -     It's a bit like programming again, but it's as simple as "if this conditional is true, run the block".
+        -     Try to write conditionals in a way that's natural to you. I like to think of the question it asks.
+        -     Was this character introduced? Is this character a friend? Does the player have this much gold? That sort of thing.
+        > show("dialogueConditionalExample2")
+        +     And they'd look something like that.
+        -     Next we'll look at a more complex branching situation...
+        > show("dialogueConditionalExample3")
+        -     Here, you see the usage of "if", "else if", and "else", all together.
+        -     It's obvious if you're a programmer, but if not, hopefully it's still straightforward.
+        -     Else if will check another condition, but only if the original condition wasn't met.
+        -     And you can have many else ifs if you want to, there's no limit.
+        -     Else is run if none of the conditions were met.
+        
+        (Gabby) When I first saw this, I was worried I'd basically be learning programming. But with the conditions that Kay writes, it's not at all like that!
+        -       It's really easy for me to add simple checks, like "can the player afford this", or "did the player find that key at the start of the game".
+        -       All the work is on Kay's side, really. It lets me focus on writing.
+
+        (Kay) Hope that was clear!
+
+    : Tags: Using Line Tags and Inline Tags to Add Flair to a Line
+        (Player) Tags... Adding flair to lines? What's that mean?
+
+        (Kay) It's a way of adding data to a line for your game to use.
+        -     Gabby insisted we write that more "spicy".
+
+        (Gabby) Well, it worked didn't it? Data sounds so boring! 
+        -       But tags are awesome! You'll want to use them all the time.
+
+        (Kay) Ok, wanna take this one Gabby?
+
+        (Gabby) Yes! Ok ok, so, tags...
+        > show("dialogueTagsExample1")
+        +       Let's grab an example.
+        -       This is using what we're calling line tags.
+        -       It affects the line that comes after it. 
+        -       So basically, you just write your tags inside those arrows-
+
+        (Kay) Angle brackets.
+
+        (Gabby) Yeah whatever, angle brackets! Write your tags there, and separate with commas...
+        -       Whatever, that's boring, use tags like this!
+        > show("dialogueTagsExample2")
+        -       See? More interesting when you add meaning to them!
+        -       We've made up some tags here that define the traits of the character who's speaking.
+        -       So here, we've got "happy", and "wobble".
+        -       So in our game, we know that these tags mean "show the happy portrait" and "make the text wobble".
+        -       I guess maybe Charles has been drinking?
+        -       Kay, show them another one!
+
+        > show("dialogueTagsExample2")
+        (Kay) Alright, take a look at this.
+        -     Gabby wanted to make a game where you could talk to dozens of nameless NPCs, and they'd just give random greetings and such.
+        -     We wanted to be able to grab dialogues based on some of the game state, and also have some rare ones.
+        -     We decided to use tags for those dialogues to accomplish this. So, we made up "probability", "timeOfDay", and "location".
+        -     Our game uses probability to help randomly choose dialogues. High probability means it's more likely, and vice versa.
+        -     timeOfDay lets us select greetings for morning, afternoon, evening, and night.
+        -     And lastly, location lets us have a bit more control, so if you talk to someone in a bar, or a shop, they can say something in-context.
+
+        (Gabby) "Ayy, gimme another round!" or, "Why is everything here so pricey...?".
+
+        (Kay) Exactly. Pretty neat idea right? Well, I think so anyway.
+        -     Now, remember, none of this is free, you have to write it in your game. The tags just enable you to do it!
+        -     Also, I forgot to implement it for dialogues, so I'll have to do that and then come back update this sample. Oops.
+
+        (Gabby) So those are tags, the last detail to talk about is inline tags.
+        -       They're exactly the same, it's just a different way to write it for dialogue.
+        > show("dialogueTagsExample3")
+        -       Like that!
+        -       The inline tags are written after a character name. This is only for character dialogue, nothing else.
+        -       It's just to make things read a little more nicely. Kay wasn't gonna add it, but I complained a lot and I got my way!
+
+        (Kay) Yup...
+
+        (Gabby) Anyway, have fun using tags! Add personality to your dialogue with 'em!
+    : Back
+        (Player) That's all I wanted to know.
+        (Kay) Alright, feel free to ask again if you have more questions, K?
+        >> Gabby.TutorialMainEntry
+    >> Gabby.LanguageLoop
+
+[Gabby.Unity]
+    : Styling Text
+        (Player) How does text styling work?
+
+        (Gabby) So, you wanna write something <color=#bada55ff><i><b><size=20>stylish?</size></b></i></color> // chartreuse
+        -       Well, this is purely a Unity thing, but you can use markup in your text to do it.
+        (Narrator) I walk to the door.
+        (Kay)   Yeah, look up "Unity rich text", or "Unity text markup".
+        -       You can also make up your own, it just means you'll have to parse your text in your game before displaying it.
+        (Gabby) Oh, and you can also use tags if you don't need to style only part of a line.
+        -       Like, make a tag called "yelling", if you want a special style for that.
+        (Kay)   Yeah, or even try one called "style" if you want to write out something more custom in your tags.
+        +       Like, <b>"<style:"color:blue,size:20,animationSpeed:10">"</b>, I dunno, you figure out what works for you.
+        -       You get a lot for free with Unity though, so the path of least resistance is to just use it.
+        +       And check the asset store too, there's probably some good ones.
+
+        : Wait, so that's it?
+            (Kay) Well, yeah. Styling is a very in depth thing, and everyone has different preferences for markup.
+            -     But, at the same time, it <i>is</i> a part of your dialogue data, so it should be written in your Gabby scripts.
+            -     It's kind of two separate concepts though. Gabby dialogue references styles, and your game or Unity defines those styles.
+            -     We focus on the "when to apply a style", and while it's more work for you to bring the "how to apply a style", that's really just how it needs to be.
+            -     Trust me though, it's pretty ok.
+            (Gabby) But anyway...
+        : Got it!
+        (Gabby) Go on and write some stylish text!
+
+    : Changing portraits
+        (Player) How do I use portraits?
+
+        (Gabby) So, the method we like is to use tags for it.
+        -       You just put a tag with the portrait name that you want.
+
+        (Kay) More technically, our implementation of the dialogue handler knows what to do with those tags, and it knows to associate them with the current character.
+        -     We have scriptable objects for our characters, and we let you add whatever portraits you want to them.
+        -     The names you associate with the portrait have to match the tags you use, at least in our implementation.
+        +     This makes it easy to support new portraits.
+        -     You can use our sample code for reference if you want. 
+        -     And of course, on the purely game side of things, we have a UI element that we set a sprite on to change the displayed portrait.
+
+        (Gabby) So basically, use tags and look at the samples!
+
+    : Is the Gabby Unity plugin efficient?
+        (Player) Is Gabby efficient? String parsing is slow!
+
+        (Gabby)  Of course! In fact, Gabby is the fastest-est ever dia-
+
+        (Kay)    Shush, I'll answer this one!
+        -        Performance is a really important consideration, especially when you expect your game to have <i>looots</i> of dialogue.
+        -        So, there's basically three "pillars" to consider. Speed, memory efficiency, and file size.
+        -        To start with, let's talk about the importer and the parser.
+        -        The Unity plugin uses a scriptable importer, so the Gabby file is parsed at import time.
+        -        It's saved as a binary file after import, so when you ship your game, you're just shipping this binary.
+        -        So, as far as <b>speed</b> goes, this helps a lot. Your string parsing is pretty much all done upfront, and your game isn't going to be bogged down by it.
+        -        There <i>is</i> some runtime string parsing, still, though. And stuff like string compares to look up dialogues.
+        -        These operations happen when you advance dialogue, not per-frame. They should be incredibly small compared to your frame time.
+        -        Stuff like actions and conditionals have more parsing for parameters and finding the event to invoke. It's not going to be enough to cause an issue.
+        -        Hopefully that's enough to reassure you about <b>speed</b>!
+        -        Next is memory.
+
+        (Gabby)  Aaaah, this is so booooring!
+        : But I want to know!
+            (Player) But I want to know! Performance is really important for my game.
+            (Kay)    Absolutely!
+        : Yeah, let's talk about something else.
+            (Player) Yeah... Let's change the subject.
+            (Kay)    Alright, no problem!
+            >> Gabby.Unity
+
+        (Kay)    Ok, so, memory and file size.
+        -        First, in terms of additional memory overhead from the dialogue engine, there's not really much.
+        -        The size in memory is very close to the size of the script file on disk, maybe a kilobyte or two more. 
+        -        Let's imagine you have a <i>gigantic</i> game with tons of dialogue, and you want to release on mobile or web and have a tiny footprint.
+        -        Some of the largest ever games have like, 150,000 lines of dialogue. That's a ton.
+        -        Even that uses less than 5MB.
+        -        If you're just making a game, you probably don't have to worry at all. Just keep your dialogue in memory and don't worry about it.
+        -        But, if you're still concerned, then there's a few things you can do.
+        -        Split your dialogue into files by level, or game stage, or character, or whatever. Think about when they should be loaded.
+        -        Then, only load the ones you're using right now.
+        -        You can stream the assets in and out with addressables, or do whatever you want.
+        -        This is no different than optimizing with any other asset.
+        +        Except, it's pretty much always a micro-optimization, so don't worry so much.
+        (Gabby)  Just make your game!
+        (Kay)    Yep. Oh, and Unity compresses asset bundles, so on disk your dialogue is even smaller.
+        (Gabby)  Enough about that, I wanna talk about something else!
+    : Back
+        >> Gabby.TutorialMainEntry
+    >> Gabby.Unity
+
+[Gabby.IndustryReady]
+    : What tools and workflows does Gabby provide?
+        (Player) What tools and workflows does Gabby provide?
+
+        (Kay)   For now, we wrote a vscode plugin. It adds syntax highlighting to make it easier to write Gabby scripts.
+        (Gabby) It's really good!
+        -       You should also get a spellchecker for it, there's a few available!
+        (Kay)   We've thought about the main workflow we want to offer quite a lot when making Gabby.
+        -       Ultimately, it comes down to centering everything around the dialogue, and the writer of that dialogue.
+        -       We want the hardest part of writing dialogue to be the creative process behind putting words down.
+        -       In other words, the language stays out of your way.
+        -       We looked a lot at what's available already, too, and there's a lot of different approaches to solving dialogue.
+        -       Many people like to use a visual tool, like a flow chart, where each node is a dialogue line and they connect to other nodes.
+        -       This wasn't the workflow we wanted.
+        (Gabby) Yeah. For me, I want to write text in a text editor. I'm a writer, and I want to write, that's it.
+        -       I don't usually use vscode, but it's familiar enough that it works fine.
+        -       I do miss being able to set fonts and text sizes and see them in the editor, though.
+        (Kay)   We sometimes like to think of Gabby as a data format. Sort of like JSON.
+        -       It's just a nicely defined way to write dialogue.
+        -       To that end, there could be any number of tools to do it, all standalone, maybe some even sold as a product.
+        -       If you want a flowchart, you could make a tool that works with these scripts behind the scenes, but presents a flowchart instead of text.
+        -       Maybe someday we'll have time to make one ourselves!
+
+    : Can Gabby be localized?
+        (Player) Can dialogue written in Gabby be localized?
+        (Kay)   Localization was a huge consideration when making Gabby.
+        -       In the end, we took a different approach than the usual to support it.
+        -       Most dialogue systems support localization by exporting strings into tables, and then swapping them at runtime with some line ID.
+        -       We really don't like that. It's just awkward, and limiting.
+        +       Of course, you can still work with Gabby that way if you want, it'll be a bit of effort but you could export all the lines and associate them with text replacement.
+        -       But anyway, in Gabby, localization is done at the script level, scoped to an entire file.
+        -       The idea is that scripts will come in multiple languages, and within those languages, scripts have the flexibility to adjust flow somewhat when they need to.
+        -       This flexibility can be really useful!
+        -       Sometimes, you have a joke or something in your source language that doesn't translate well.
+        -       Or, a line gets really long, or you need to add supporting lines to it for some reason.
+        -       By making the localization script-driven, you can change up the flow per-language without it breaking anything in your game.
+        +       The game won't even know.
+        -       It's a really simple, straightforward approach to localizing your dialogue and your game.
+        -       Of course, the devil's in the details, and the truth is we don't know if a typical localization company is going to be happy to work in Gabby script files.
+        -       There's also the problem of localizers potentially breaking things, but this sort of thing should be caught in your tooling... somehow.
+        -       Anyway, I know this isn't a perfect answer, but hopefully it gives enough information that you can make an informed choice.
+        -       If this method of localization won't work for you, we believe it would be really easy to add support for another approach without having to fundamentally change your scripts.
+
+    : If I work in Gabby, will my work get "locked in" to it? What if it doesn't work out?
+        (Player) If I work in Gabby, will my work get "locked in" to it? What if it doesn't work out?
+
+        (Kay)   This was a concern I had when I was looking at dialogue systems that come with their own editor.
+        -       They often use their own format that's not readable, and maybe not even exportable from.
+        -       I was worried about having all our dialogue in this format, and not being able to switch it over to another system if I needed to.
+        -       With Gabby, well, this really shouldn't be a problem. Yes, you're writing in Gabby, but the vast majority of what you're writing is just your dialogue.
+        -       The format is highly readable, and if needed, you could write a tool to easily strip out all the Gabby specific stuff.
+        -       Your work is all safe in a plain text file that you can open and read in any text editor.
+
+        -       That was another concern I had with dialogue systems that use their own editors and formats, actually.
+        -       In Unity, you can sometimes change serialized variable names or delete them, and suddenly you wipe out all the data you associated with it.
+        -       This could be devastating if your work's not backed up. We never want that to happen in Gabby.
+        +       And with everything coming from external text files, it won't. 
+
+        -       Lastly, you might be concerned about getting locked into Unity.
+        -       Well, don't be! Your dialogue file is written in Gabby, and it's not engine specific.
+        -       You can take it with you to any other engine you go to, or write your own.
+        -       The only thing is making a parser to work with it.
+        -       Maybe you use Unity styling, and yeah, your action and conditional handlers are written specific to Unity, but that's a separate concern from your dialogue.
+        -       The triggers are all portable, and if you're jumping ship from Unity partway into a project, you're already committing to rewriting your game scripts.
+
+        -       Anyway, hopefully that eases any concerns about getting "stuck" with Gabby.
+
+    : What if our writers can't program?
+        (Player) What if our writers can't program?
+
+        (Kay)    Well, that's our main use case!
+        -        Gabby shouldn't feel like you're programming, it should feel like writing.
+        -        Some features look code-like, but it's really quite different and approachable... We think.
+
+        (Gabby)  Yeah, it's really easy!
+        -        The goal is to make writing game dialogue accessible for the average person.
+        -        If you want to write dialogue, or you want to write a visual novel even, what should be stopping you?
+        -        Just write! That's the creative part, and the hard part. You shouldn't have to be a programmer to do it!
+        -        It's like, imagine if you wanted to learn to draw, and first you had to write a program that let you draw?
+        -        That would kill your creativity.
+
+        (Kay)    Yup. Anyway, if you're not a programmer and you're worried about learning Gabby, we encourage you to give it a try!
+        +        You're exactly the kind of person we want using Gabby!
+
+    : What about voice lines, or subtitles?
+        (Player) What about voice lines, or subtitles?
+
+        (Kay) So, for this, you probably want to use tags or actions.
+        -     The simplest is tags. Tag each line that has a recorded voice line with the name of that file, like "<audio: voice1>".
+        -     Or with actions, do something like "> playSound(voice1)".
+        -     Maybe you could also do it in your dialogue handler code, handling each line and finding the associated voice line in your own way.
+        -     Or maybe you tag your entire dialogue, and your game knows to progress audio lines in sync with text lines.
+        -     Anyway, I think the tools are all there, just figure out what workflow works best for you!
+
+    : What about modding?
+        (Player) What about modding?
+
+        (Kay)   Easy peasy!
+        -       Think about it. Compared to JSON, or some binary data, Gabby is way easier.
+        -       Or if you had something like lists of strings. There's no flow to it! Modders could replace lines, but not create new scenarios. Not really.
+        -       With Gabby, depending on your game, you can pretty much just drop in scripts or add to existing ones.
+        -       If you wanna make it even better, use tags to situationally select dialogues in a generic way.
+
+    : Back
+        >> Gabby.TutorialMainEntry
+    >> Gabby.IndustryReady
+        

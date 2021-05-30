@@ -1,0 +1,31 @@
+gabby 0.2
+language english
+
+// Jumps
+
+[Example.Jumps]
+    (Camille) Are you bored? Should I keep talking?
+    : I'm bored!
+        >> Example.Bored // Jump to the Bored dialogue
+    : No, it's fine!
+    (Camille) Oh, ok, good!
+
+[Example.Bored]
+    (Camille) You ARE bored?!
+
+// Actions
+
+[Example.Actions1]
+    (Charles) It's nice to meet you!
+    > set("charles.introduced", true)
+
+[Example.Actions2]
+    (Charles) Here, take these coins.
+    > addGold(player, 50)
+    (Charles) Oh, and you might want to take this!
+    > addItem(player, sword)
+    > playSound("getSword.mp3")
+
+// Conditionals
+
+[Example.Conditional1]

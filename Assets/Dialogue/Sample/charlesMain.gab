@@ -1,0 +1,57 @@
+// This is the main file for Charles's dialogue.
+gabby 0.2
+language english
+
+[Charles.Introduction]
+    - Good day! I'm <b>Charles</b>, the test character.
+
+    (Camilla, angry) <b>*Ahem*</b>, <i>-the-</i> test character?! There's two of us, I exist too Charles!~
+
+    (Charles, very happy) Ah, yes yes, have you met my friend Camilla?
+    (Charles, bored)      <size=12>She's a little short tempered.</size>
+    (Charles, happy)      In this sample, you can walk around and explore.
+    -                     Most objects are interactive, and of course you can talk to Camilla and me!
+    (Charles, happy)      I'll provide more information about the sample if you talk to me again, and Camilla will demonstrate various examples!
+
+    > set(charles.introduced, true)
+
+[Charles.Greeting1]
+    <very happy>
+    - Hello again!
+
+[Charles.Greeting2]
+    (Charles, very happy) Hello again!
+    (Charles, happy)      Are you enjoying exploring the sample?
+    : Yes
+        (Charles, very happy) Excellent!
+    : Not really...
+        (Charles, very sad)   Ah, I'm sorry to hear that!
+
+[Charles.CamillaSamples]
+    - So, you want to know what to talk to Camilla about, hmm?
+    - Her dungeon story demonstrates an example of random conditionals.
+    + You know, branching dialogue with `if`, and a function called `showRandomly` that you can grab in the sample code for your games! 
+    - ...
+
+    - I recommend starting with the dungeon sample.
+    - Examine the gabby script file, and get a feel for how the language works.
+    - Sure, it has some complexity from the branching and randomness, but it also has a nice amount of prose with different portraits.
+    - It can give you a feel for how a large chunk of game dialogue might look.
+
+    - Another sample script to check out is the cooking one.
+    - It's nice, because it has a handful of player choices, and they actually allow for a change in the story.
+    - A lot of games do this sort of thing, so you can see how our sample chose to implement it.
+
+    - The lamp quest is another fun one. 
+    - It depends on a lot of Unity-side scripts to function, but it shows how you can drive a quest flow from Gabby.
+
+    - Don't talk to her about me, though.
+    - That sample shows how dialogue choices could affect a character's disposition towards you, changing future dialogues.
+    - But she gets mad easily, so-
+    (Camilla, very angry) Charles! Shut it!
+    (Charles, very happy) Sorry!
+    + To be fair, I had that one coming...
+
+
+    
+    // TODO

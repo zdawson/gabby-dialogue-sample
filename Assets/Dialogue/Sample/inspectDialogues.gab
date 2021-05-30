@@ -1,0 +1,55 @@
+// This contains all the standard inspect dialogue shown when interacting with an object.
+gabby 0.2
+language english
+
+[Inspect.Refrigerator]
+    * The fridge looks really shiny!
+    * Inside, there's a lot of fresh ingredients and containers of leftover food.
+
+[Inspect.Stove]
+    * The stove looks like it's been cleaned recently.
+    * There are grease stains on the floor in front of it though... Seems like something big spilled!
+
+[Inspect.Cabinet1]
+    * It's filled with kitchen gadgets.
+    * Is that a strawberry huller? Huh.
+
+[Inspect.Cabinet2]
+    * Looks like a bunch of cutlery in this drawer.
+    * Pretty new looking, too!
+
+[Inspect.Cabinet3]
+    * There are pots and pans of all shapes and sizes in here.
+
+[Inspect.Cabinet4]
+    * Hmm... Is it rude of me to be snooping?
+
+[Inspect.Backdoor]
+    * This goes to their backyard.
+    * I feel like going out there would just make extra work for someone, so I'd better not.
+
+[Inspect.Stairs]
+    * These are the stairs to go down to the basement.
+    * I think it would be best if I stayed up here!
+
+[Inspect.Bookshelf1]
+    * Wow, they have a lot of books and games.
+
+[Inspect.Bookshelf2]
+    * "To Kill a Manticore".
+
+[Inspect.Bookshelf3]
+    * "The Great Gabby".
+
+[Inspect.Bookshelf5]
+    * "Nineteen Eighty Four 2: Big Brother and You".
+
+[Inspect.Couch]
+    * Looks pretty comfy.
+
+[Inspect.Painting]
+    * It looks like a family portrait.
+    * I guess those kids are Charles and Camilla?
+
+[Inspect.Lamp]
+    * Looks like a pretty reliable lamp!

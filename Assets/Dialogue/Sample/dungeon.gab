@@ -1,0 +1,187 @@
+// This sample shows randomly branching dialogue as Camilla talks about a dungeon adventure she and her friends once had.
+gabby 0.2
+language english
+
+[Camilla.Dungeon]
+    if showRandomly(0.33)
+        - ...right, so we were in this crazy dungeon.
+        <annoyed>
+        - We're talking super big, super high level sort of place.
+    else if showRandomly(0.33)
+        - ...um, so it was this really scary dungeon.
+        <bored>
+        - You know, really dark, creepy sounds, that sort of thing.
+        <sad>
+        - I mean, I wasn't scared, but Charles... You know how he is!
+        <very happy>
+        + Anyway...
+    else
+        - ...so yeah, it was a pretty cool dungeon.
+        - Really big rooms, lots of engravings in the walls...
+        <very happy>
+        + Like, the sort of place you expect from an ancient, advanced civilization.
+
+    <happy>
+    - There was me, Charles, and this other person, a rogueish type of character!
+    - So we're walking down this long hall, lighting torches as we go.
+    + It was like, really really dark, you know?
+    <very happy>
+    - Anyway, we're walking, and trying to find treasure or something...
+    <happy>
+    - Suddenly...
+
+    if showRandomly(0.3)
+        <angry>
+        - <size=30>We came across a <i>giant</i> slime.</size>
+        <happy>
+        - We had to fight it!
+        - But there's no way a dumb slime can hurt us, right?
+        - We had a mage, a warrior, and a rogue!
+        - Even if our warrior was just Charles...
+
+        (Charles, annoyed) Hey, I heard that!
+        (Camilla, annoyed) Yeah, whatever!
+
+        <happy>
+        - Anyway!
+        + Looks like it was us versus this big ol' slime.
+        - So we all roll initiative...
+
+        (Player) Roll? This was in a tabletop game?
+        (Camilla, angry) Shush!
+
+        <happy>
+        - We all roll initiative. Rogue goes first, because rogue. Then it's me, then the slime, then Charles last as always!
+        - So the rogue takes a swing, and does some damage I think.
+        - Then it's my turn, and I...
+        // These options each present different failure chances, with the same success dialogue
+        : Cast a high level ice spell at it!
+            - I cast a high level ice spell at it!
+            if showRandomly(0.3)
+                // Failure
+                <sad>
+                - It was too high level for me, apparently, and I didn't roll high enough...
+                <happy>
+                - But we kept fighting, and somehow beat it!
+                - And then we found cool treasure!
+                - Cool story, huh?
+                end
+        : Shoot an endless inferno from my hands at it!
+            - I shoot an endless inferno from my hands at it!
+            if showRandomly(0.1)
+                // Failure
+                <sad>
+                - But even though I thought it was a sure thing, I rolled real bad...
+                <happy>
+                - But it was ok, after that we kept fighting and we beat it!
+                - And then we found cool treasure!
+                - Cool story, huh?
+                end
+        : Just like, smack it over and over with my staff!
+            - I just like, smack it over and over with my staff!
+            if showRandomly(0.7)
+                // Failure
+                <very sad>
+                - It didn't work...
+                - I guess I should've seen that coming?
+                <happy>
+                - We still managed to beat it though!
+                - And then we found cool treasure!
+                - Cool story, huh?
+                end
+        // Success
+        <very happy>
+        - I did SO MUCH damage to it, you have no idea!
+        + It died right away!
+        <happy>
+        - Then we kept exploring, and found a bunch of treasure!
+        - Cool story, huh?
+        end
+
+    else if showRandomly(0.3)
+        <angry>
+        - <color=red>We were surrounded by flames!</color>
+        <annoyed>
+        - <i>Someone</i> stepped on a trap. Wanna guess who?
+        <happy>
+        - It was Charles.
+        <bored>
+        - It's always Charles.
+
+        (Charles, annoyed) Hey, I can hear you!
+        (Camilla, annoyed) Yeah, whatever!
+
+        <happy>
+        - Ok, so yeah. Flames and stuff, bad situation.
+        - We all had to roll evasion!
+
+        (Player) Roll? This was in a tabletop game?
+        (Camilla, angry) Shush!
+
+        <happy>
+        - Yeah, so we're about to roll evasion right?
+        - But the rogue we were with was real good, they had an idea to leap out and deactivate the trap before it could harm us!
+        - They had to roll a perfect 20 though!
+        if showRandomly(0.5) // Don't worry, it's not actually a 1 in 20 chance to succeed!
+            // Success
+            <very happy>
+            - And they did it!
+            <happy>
+            - We all continued on, unscathed. It was a cool dungeon!
+            <very happy>
+            - I think I made a few hundred gold!
+            <happy>
+            - Cool story, huh?
+            end
+        else
+            // Failure
+            <very sad>
+            - But unfortunately, they failed their roll.
+            <happy>
+            - We rolled damage, and thankfully we all survived!
+            - We were injured though, so we decided to head home right away.
+            <sad>
+            - I still wonder about what kind of treasure was in there...
+            <happy>
+            - But uh, still a cool story, huh?
+            end
+    else
+        <angry>
+        - We fell down an endless pit!
+        <happy>
+        - Isn't that crazy?
+        - We were falling for so long, it was like that story with the wizard and the Balrog.
+        <bored>
+        - Except like, there was no Balrog, it was just us three.
+        <happy>
+        - As we fell, the three of us were able to group close together, and spread out our arms and legs to slow ourselves down.
+        <very happy>
+        - Then I cast a really cool spell on the three of us to slow our fall!
+        <happy>
+        - It's a tough spell though, I had to roll pretty well.
+
+        (Player) Roll? This was in a tabletop game?
+        (Camilla, angry) Shush!
+
+        <happy>
+        - So yeah, I had to roll a 12 or higher. And a lot was at stake!
+        if showRandomly(0.6)
+            // Failure
+            <very sad>
+            - But I rolled really poorly!
+            - It looked really hopeless. We still couldn't see the bottom, but there had to be one, right?
+            <happy>
+            - Turns out, no!
+            - The pit was actually like, a portal or something, we were falling through one in the floor and out another in the ceiling!
+            - So I kept trying my spell over and over, and eventually it worked and we escaped!
+        else
+            // Success
+            <very happy>
+            - In the end, I <i>juuuust</i> made it!
+            - After I cast it, we realized it wasn't a pit after all, it was a pair of portals that we were trapped in!
+            + You know, like one in the floor, one in the ceiling!
+            <happy>
+            - We were able to escape it thanks to my spell!
+
+        - Cool story, huh?
+        end

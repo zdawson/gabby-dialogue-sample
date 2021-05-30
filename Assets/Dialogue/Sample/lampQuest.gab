@@ -1,0 +1,77 @@
+// This sample demonstrates a simple quest, unlocking new dialogue options as the player progresses and triggering events.
+gabby 0.2
+language english
+
+[Camilla.Lamp]
+    * Camilla has been talking for ages.
+    * You suddenly realise you have no idea what she's talking about...
+    <bored>
+    - So I figured, yeah, why not.
+    - I'll just pick one and go with it, I mean, worst case scenario I return it to the store, right?
+    <happy>
+    - So I just bought it!
+    - It seems to work just fine and I like the look of it.
+    > setLampLit(false)
+    <annoyed>
+    - What the-
+    <angry>
+    - Did the lightbulb just burn out!?
+    <happy>
+    - Ok, no problem, no need to get upset over it Camilla...
+    <sad>
+    - I mean, you DID just buy it, but...
+    <happy>
+    - No! It's fine!
+    - Hey, could you find a lightbulb please? To fix the lamp?
+    (Player) I'm on it!
+    > setQuestStage(lampQuest, findLightBulb)
+
+// This is shown in place of a normal greeting when the lamp quest is active.
+[Camilla.GreetingLampFindLightbulb]
+    - You're still looking for a lightbulb, right?
+    - They should be in a drawer or something.
+
+[LightbulbQuest.FoundLightbulb]
+    * Aha!
+    * After rummaging around a bit, you find a suitable lightbulb for the lamp.
+    (Player) I should take this to Camilla...
+    > setQuestStage(lamp, foundLightBulb)
+
+[Camilla.FoundLightbulb]
+    <very happy>
+    - You found one!
+    - Perfect!
+    <sad>
+    - Um, hey, could you uh...
+    - Could you change it too?
+    <happy>
+    - To be honest, I had a bad experience once!
+    : Yeah, no problem.
+    : Alright, fine...
+    (Camilla, very happy) You're the best!
+    > setQuestStage(lamp, replaceLightBulb)
+
+[Camilla.GreetingLampReplaceLightbulb]
+    - Go ahead, change the lightbulb!
+    - We can chat later!
+    
+[LightbulbQuest.ReplaceLightBulb]
+    * You unscrew the old light bulb.
+    * Yep, that's burnt out alright...
+    * Tossing the old bulb into the trash, you screw in the new one.
+    * With the flick of the switch, the lamp comes on.
+    + It's nice and bright!
+    (Player) I should talk to Camilla again.
+    > setQuestStage(lampQuest, returnToCamilla)
+
+[Camilla.CompleteLampQuest]
+    <very happy>
+    - Yay, it's working again!
+    <happy>
+    - Thanks for taking care of that.
+    - What good's a burnt out lamp, anyway?
+    - So, where was I... I was at the store, picking a lamp...
+    * You get the feeling she'll be talking for a while yet...
+    > setQuestStage(lampQuest, complete)
+
+// TODO a bunch of alternate inspection text for this quest

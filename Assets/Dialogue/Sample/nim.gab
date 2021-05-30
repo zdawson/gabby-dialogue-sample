@@ -1,0 +1,126 @@
+// This sample demonstrates a simple dialogue based game.
+gabby 0.2
+language english
+
+[Camilla.NimGame]
+    * Camilla has been recounting a tale of a time she was walking the streets of a faraway city late at night.
+    * The roads were wet, reflecting the dozens of neon signs that adorned every building.
+    * She was so distracted by the sights, that soon she was lost, and found herself surrounded by a dangerous gang.
+
+    (Player) Whoa, a gang? How'd you get out of it?
+    
+    (Camilla, sad) Well, ok, _gang_ is a strong word... 
+    <happy>
+    - I guess it was more like a group of kids. Also, when I said night, it was more like <i>late evening...</i>
+
+    : Right...
+    : That's not even remotely similar!
+
+    <very happy>
+    - Anyway!
+
+    (Camilla, happy) These kiddos challenged me to a battle.
+    (Player) ...
+    (Camilla, happy) Like, you know, a duel.
+    (Player) ...
+    (Camilla, bored) They asked if I wanted to play a game.
+    (Player) Got it.
+    (Camilla, very happy) It's called Nim!
+    >> Nim.Rules
+
+[Nim.Rules]
+    (Camilla, happy) The rules of Nim are simple.
+    - I've got a bunch of stones, yeah?
+    - 21 stones, exactly.
+    - They're all just thrown in a pile, like so.
+    > show(camilla.game.setup)
+    - We're going to take turns removing stones from the pile.
+    + You can remove 1, 2, or 3 stones at a time.
+    + Whoever removes the last stone loses.
+    - So, your goal is to try to make me take the last stone!
+    - I won't make it easy though.
+    - Alright. It's all set up and you know the rules, so let's play!
+    >> Nim.Start
+
+[Nim.Start]
+    
+
+[Camilla.Turn1]
+    * Camilla takes $n stones from the pile.
+
+[Camilla.Turn2]
+    (Camilla, very happy) I'm gonna take $n this time!
+
+[Camilla.Turn3]
+    (Camilla, annoyed) Hmm... I'll take $n!
+    
+[Nim.PlayerMove1]
+    * It's your turn. How many stones will you take?
+    : 1
+        (Player) I'm taking one stone.
+    : 2
+        (Player) I'm taking two stones.
+    : 3
+        (Player) I'm taking three stones.
+
+[Nim.PlayerMove2]
+    * It's your turn.
+    : 1
+        (Player) I'll take one.
+    : 2
+        (Player) I'll take two.
+    : 3
+        (Player) I'll take three.
+
+[Nim.PlayerMove2]
+    * How many stones do you remove?
+    : 1
+        * You remove one stone from the pile.
+    : 2
+        * You remove two stones from the pile.
+    : 3
+        * You remove three stones from the pile.
+
+[Nim.PlayerWin]
+    (Camilla, sad) Wait...
+    - I got stuck with the last stone?
+    * She takes the last stone, making you the victor.
+    (Camilla, annoyed) You got lucky! I'll win next time!
+    (Camilla, happy) But, congrats!
+    >> Nim.PlayAgain
+
+[Nim.PlayerLose]
+    (Camilla, very happy) Looks like there's only one stone left!
+    - Go on, take it!
+    : Take the last stone.
+    (Camilla, very happy) Yaa! I win! 
+    (Camilla, happy) Good game!
+    >> Nim.PlayAgain
+
+[Nim.PlayAgain]
+    (Camilla) Wanna play again?
+    : Yes
+        (Player) Yeah, let's play again!
+        (Camilla, very happy) Great! Do you need to hear the rules again?
+        : Yes
+            >> Nim.Rules
+        : No
+            >> Nim.Start
+    : No
+        (Player) No, I think I'm done for now.
+        (Camilla) Oh, ok! Well, cya later then!
+
+
+// public int getCompDrawStones() {
+// 		for (int i = 0; i * 4 < 35; i++) {
+// 			if (stoneNum - 3 == 1 + (4 * i)) {
+// 				return 3;
+// 			}
+// 		}
+// 		for (int i = 0; i * 4 < 35; i++) {
+// 			if (stoneNum - 2 == 1 + (4 * i)) {
+// 				return 2;
+// 			}
+// 		}
+// 		return 1;
+// 	}

@@ -1,0 +1,128 @@
+// This is the main file for Camilla's dialogue.
+// It acts as the main entry point for all of her dialogues, linking to many of the other dialogue files in this sample.
+gabby 0.2
+language english
+
+[Camilla.Introduction]
+    - Hey, I'm <b>Camilla</b>!
+    <very happy>
+    + It's nice to meet you.
+    <happy>
+    - Talk to me again for examples of Gabby in action!
+    <bored>
+    - Or you can talk to Charles if you want to learn more about the sample.
+    > set(camilla.introduced, true)
+
+[Camilla.Greeting1]
+    <very happy>
+    - Oh hey!
+    >> Camilla.MainDialogue
+
+[Camilla.Greeting2]
+    - 'sup?
+    >> Camilla.MainDialogue
+
+[Camilla.Greeting3]
+    <very happy>
+    - Heya, Player!
+    >> Camilla.MainDialogue
+
+[Camilla.Greeting4]
+    <very sad>
+    - Hey.
+    <sad>
+    - Hey, actually, can I ask you something?
+    - Do you think Charles and I will ever be in a real game?
+    <very sad>
+    + Just being a sample character kind of sucks...
+    : You definitely will!
+        (Player)            Yeah, you definitely will be!
+
+        (Camilla, bored)    Yeah... I don't know about that, Player...
+        (Camilla, happy)    I hope so though!
+    : Probably not...
+        (Player)            Uh... Probably not...
+
+        (Camilla, very sad) Yeah, I don't think so either...
+        (Camilla, angry)    It's like we're just throwaway characters! It's not fair!
+        end
+    (Camilla, happy) Well, anyway...
+    >> Camilla.MainDialogue
+
+// This is the primary dialogue block, linking to all the other sample dialogues
+// This dialogue also demonstrates a method of marking dialogues as "seen", implemented by this sample.
+[Camilla.MainDialogue]
+    - I've always got something to talk about.
+    - Wanna hear a story, or ask me something, or just chat?
+    <very happy>
+    - I'm up for anything!
+    : Let's chat!
+        (Player) Ok, let's chat!
+        * Camilla looks happy to have someone to talk to.
+        + Before long, she's chatting away about...
+        // TODO revisit this once option tags are supported
+        // <seenTag:"Camilla.MainDialogue.dungeon">
+        : One of her many dungeon delving stories.
+            // Don't set this one seen, since it's random
+            >> Camilla.Dungeon
+        : A far away country that you're not really sure actually exists.
+            > setChatSeen("Camilla.MainDialogue.country")
+            >> Camilla.Country
+        : A "kinda cool" sword she found in the forest.
+            > setChatSeen("Camilla.MainDialogue.sword")
+            >> Camilla.Sword
+        : How annoying Charles is.
+            > setChatSeen("Camilla.MainDialogue.charlesComplaints")
+            >> Camilla.CharlesComplaints
+        : A strange recipe she learned during her travels.
+            > setChatSeen("Camilla.MainDialogue.recipe")
+            >> Camilla.Recipe
+        : A fun game "some kid" taught her.
+            > setChatSeen("Camilla.MainDialogue.game")
+            >> Camilla.NimGame
+        : Literally just that lamp in the corner.
+            > setChatSeen("Camilla.MainDialogue.lamp")
+            >> Camilla.Lamp
+        : This one time she came across a shady street vendor.
+            > setChatSeen("Camilla.MainDialogue.vendor")
+            >> Camilla.Vendor
+        : Honestly, you're not even sure.
+            > setChatSeen("Camilla.MainDialogue.unknown")
+            // Just choose one randomly
+            // TODO Need a better way to choose a random block uniformly
+            if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.dungeon")
+                >> Camilla.Dungeon
+            else if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.country")
+                >> Camilla.Country
+            else if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.sword")
+                >> Camilla.Sword
+            else if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.charlesComplaints")
+                >> Camilla.CharlesComplaints
+            else if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.recipe")
+                >> Camilla.Recipe
+            else if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.game")
+                >> Camilla.NimGame
+            else if showRandomly(0.125)
+                > setChatSeen("Camilla.MainDialogue.lamp")
+                >> Camilla.Lamp
+            else
+                > setChatSeen("Camilla.MainDialogue.vendor")
+                >> Camilla.Vendor
+    : I've gotta go...
+        (Player) Actually, I've gotta go...
+
+        (Camilla, bored) Oh, ok!
+        <happy>
+        - No problem.
+        - I mean, it's kinda weird though, right? Because you're the one who walked over here and started talking to me.
+        <sad>
+        - Don't you think that's kinda ru-
+        * <i>You slowly back away, sensing that this will go on for a while.</i>
+        <angry>
+        - Oh fine, go already!
