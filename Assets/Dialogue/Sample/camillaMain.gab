@@ -71,9 +71,6 @@ language english
         : A "kinda cool" sword she found in the forest.
             > setChatSeen("Camilla.MainDialogue.sword")
             >> Camilla.Sword
-        : How annoying Charles is.
-            > setChatSeen("Camilla.MainDialogue.charlesComplaints")
-            >> Camilla.CharlesComplaints
         : A strange recipe she learned during her travels.
             > setChatSeen("Camilla.MainDialogue.recipe")
             >> Camilla.Recipe
@@ -86,6 +83,9 @@ language english
         : This one time she came across a shady street vendor.
             > setChatSeen("Camilla.MainDialogue.vendor")
             >> Camilla.Vendor
+        : How annoying Charles is.
+            > setChatSeen("Camilla.MainDialogue.charlesComplaints")
+            >> Camilla.CharlesComplaints
         : Honestly, you're not even sure.
             > setChatSeen("Camilla.MainDialogue.unknown")
             // Just choose one randomly
