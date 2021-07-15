@@ -6,11 +6,12 @@ public class DialogueUI : MonoBehaviour
     public event Action OnForward;
     public event Action OnBack;
     public event Action OnQuit;
-    
+
+        
     [SerializeField]
-    private UnityEngine.UI.Text dialogueText = null;
+    private TMPro.TMP_Text dialogueText = null;
     [SerializeField]
-    private UnityEngine.UI.Text characterText = null;
+    private TMPro.TMP_Text characterText = null;
     [SerializeField]
     private UnityEngine.UI.Image characterPortrait = null;
     [SerializeField]

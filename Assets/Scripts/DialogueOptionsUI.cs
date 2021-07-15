@@ -8,8 +8,6 @@ public class DialogueOptionsUI : MonoBehaviour
     [SerializeField]
     private GameObject optionsContainer;
     [SerializeField]
-    private UnityEngine.UI.Text lastLineText;
-    [SerializeField]
     private UnityEngine.UI.Button optionButtonPlaceholder;
 
     private List<GameObject> optionButtons = new List<GameObject>();
@@ -20,9 +18,8 @@ public class DialogueOptionsUI : MonoBehaviour
         optionButtonPlaceholder.gameObject.SetActive(false);
     }
 
-    public void Show(string lastLineCharacter, string lastLineText, string[] options, Action<int> resultCB)
+    public void Show(string[] options, Action<int> resultCB)
     {
-        this.lastLineText.text = $"{lastLineCharacter}: {lastLineText}";
         for (int i = 0; i < options.Length; ++i)
         {
             GameObject buttonGO = CreateOptionButton(options[i]);

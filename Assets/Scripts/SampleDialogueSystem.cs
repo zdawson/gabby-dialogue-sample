@@ -132,7 +132,7 @@ namespace GabbyDialogueSample
 
             TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
 
-            dialogueOptionsUI.Show(character.displayName, currentLine, optionsText, (selection) => {
+            dialogueOptionsUI.Show(optionsText, (selection) => {
                 dialogueUI.gameObject.SetActive(true);
                 dialogueOptionsUI.Hide();
                 tcs.SetResult(selection);

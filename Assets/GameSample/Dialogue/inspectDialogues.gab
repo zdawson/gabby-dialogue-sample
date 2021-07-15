@@ -24,9 +24,13 @@ language english
 [Inspect.Cabinet4]
     * Hmm... Is it rude of me to be snooping?
 
-[Inspect.Backdoor]
+[Inspect.BackDoor]
     * This goes to their backyard.
-    * I feel like going out there would just make extra work for someone, so I'd better not.
+    * I feel as if going outside would just make extra work for someone, so I'd better not.
+
+[Inspect.FrontDoor]
+    * I could leave if I wanted.
+    * Maybe later...
 
 [Inspect.Stairs]
     * These are the stairs to go down to the basement.
