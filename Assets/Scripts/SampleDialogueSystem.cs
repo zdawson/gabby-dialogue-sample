@@ -9,8 +9,9 @@ namespace GabbyDialogueSample
     {
         private static SampleDialogueSystem _instance = null;
 
-        public event System.Action<Dialogue> OnDialogueStarted;
-        public event System.Action<bool> OnDialogueEnded;
+        public event System.Action<Dialogue> DialogueStarted;
+        public event System.Action<bool> DialogueEnded;
+        public event System.Action<LineType> DialogueLineShown;
 
         private DialogueUI dialogueUI;
         private DialogueOptionsUI dialogueOptionsUI;
@@ -22,6 +23,13 @@ namespace GabbyDialogueSample
         [HideInInspector]
         public string currentPortrait = "default";
 
+        private bool _allowSkippingLine = true; // This allows scripts to block skipping the current line, for example for a typewriter text animation effect. The first click skips the animation, then the second skips the line.
+        public bool AllowSkippingLine
+        {
+            get => _allowSkippingLine;
+            set => _allowSkippingLine = value;
+        }
+
         public static SampleDialogueSystem instance()
         {
             if (!_instance)
@@ -31,7 +39,7 @@ namespace GabbyDialogueSample
             return _instance;
         }
 
-        private void Awake()
+        private void Start()
         {
             // Initialize UI
             dialogueUI = (Instantiate(Resources.Load("Prefabs/DialogueUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueUI>();
@@ -67,7 +75,7 @@ namespace GabbyDialogueSample
             currentPortrait = "default";
             dialogueEngine.StartDialogue(dialogue);
             dialogueUI.gameObject.SetActive(true);
-            OnDialogueStarted?.Invoke(dialogue);
+            DialogueStarted?.Invoke(dialogue);
         }
 
         public void OnDialogueLine(string characterName, string dialogueText, Dictionary<string, string> tags)
@@ -100,6 +108,7 @@ namespace GabbyDialogueSample
                 dialogueUI.SetCharacter(characterName);
             }
             dialogueUI.SetDialogueText(dialogueText);
+            DialogueLineShown?.Invoke(LineType.DIALOGUE);
         }
 
         public void OnContinuedDialogue(string additionalDialogueText, Dictionary<string, string> tags)
@@ -119,11 +128,11 @@ namespace GabbyDialogueSample
                     dialogueUI.SetCharacterPortrait(character.Portraits[currentPortrait]);
                 }
             }
+            DialogueLineShown?.Invoke(LineType.CONTINUED_DIALOGUE);
         }
 
         public Task<int> OnOptionLine(string[] optionsText)
         {
-            string currentLine = "Placeholder Text";
             string currentCharacter = "Charles";
             DialogueCharacter character = characters[currentCharacter];
 
@@ -145,7 +154,7 @@ namespace GabbyDialogueSample
         public void OnDialogueEnd()
         {
             dialogueUI.gameObject.SetActive(false);
-            OnDialogueEnded?.Invoke(true);
+            DialogueEnded?.Invoke(true);
         }
 
         public Dialogue GetDialogue(string characterName, string dialogueName)

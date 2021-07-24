@@ -16,18 +16,18 @@ MonoBehaviour:
   displayName: Camilla
   _portraits:
   - name: default
-    portrait: {fileID: 21300000, guid: db9689014bb000c4abf09c6e81a2939f, type: 3}
+    portrait: {fileID: 21300000, guid: df0a72e98edbeb540aa1cbee2e576f68, type: 3}
   - name: angry
-    portrait: {fileID: 21300000, guid: 46aa018119f4e8d4a84605a3684aa08d, type: 3}
+    portrait: {fileID: 21300000, guid: 96b7a93b1928ecb46b180b296fb1fbaf, type: 3}
   - name: annoyed
-    portrait: {fileID: 21300000, guid: 388807512bb88f3409c3c00f7178b411, type: 3}
+    portrait: {fileID: 21300000, guid: 6a2937885d7fcd144ab6bf7717bce6c1, type: 3}
   - name: bored
-    portrait: {fileID: 21300000, guid: afeb1fc7142f05641880b166f56bcbaf, type: 3}
+    portrait: {fileID: 21300000, guid: 6a2937885d7fcd144ab6bf7717bce6c1, type: 3}
   - name: happy
-    portrait: {fileID: 21300000, guid: db9689014bb000c4abf09c6e81a2939f, type: 3}
+    portrait: {fileID: 21300000, guid: df0a72e98edbeb540aa1cbee2e576f68, type: 3}
   - name: sad
-    portrait: {fileID: 21300000, guid: dca7efe1b832dcd468ffba5fc67aadca, type: 3}
+    portrait: {fileID: 21300000, guid: 056bf09559a544d4385dd4eac1352041, type: 3}
   - name: very happy
-    portrait: {fileID: 21300000, guid: 6584caf6a5218d64e810854f3dc80a23, type: 3}
+    portrait: {fileID: 21300000, guid: ebbee2e103259534482520a826e87e2f, type: 3}
   - name: very sad
-    portrait: {fileID: 21300000, guid: aa8cb0912a2e28e4ba906f146b26feb5, type: 3}
+    portrait: {fileID: 21300000, guid: 770814b71ba9de84e852e2f3287de04e, type: 3}

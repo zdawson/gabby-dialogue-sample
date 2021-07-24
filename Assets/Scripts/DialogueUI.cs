@@ -30,6 +30,16 @@ public class DialogueUI : MonoBehaviour
         quitButton.onClick.AddListener(() => OnQuit());
     }
 
+    private void Update()
+    {
+        // Handle input
+        if (GabbyDialogueSample.SampleDialogueSystem.instance().AllowSkippingLine
+        && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)))
+        {
+            OnForward();
+        }
+    }
+
     public void SetCharacter(string name)
     {
         characterText.text = name;
