@@ -30,7 +30,7 @@ namespace GabbyDialogueSample
 
         private void OnEnable()
         {
-            SampleDialogueSystem.instance().AllowSkippingLine = false;
+            SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
         }
 
         private void Update()
@@ -61,7 +61,7 @@ namespace GabbyDialogueSample
 
         private void AllowSkip()
         {
-            SampleDialogueSystem.instance().AllowSkippingLine = true;
+            SampleDialogueSystem.instance().AllowAdvancingDialogue = true;
         }
     }
 }

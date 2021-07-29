@@ -4,14 +4,14 @@ language english
 // Jumps
 
 [Example.Jumps]
-    (Camille) Are you bored? Should I keep talking?
+    (Camilla) Are you bored? Should I keep talking?
     : I'm bored!
         >> Example.Bored // Jump to the Bored dialogue
     : No, it's fine!
-    (Camille) Oh, ok, good!
+    (Camilla) Oh, ok, good!
 
 [Example.Bored]
-    (Camille) You ARE bored?!
+    (Camilla) You ARE bored?!
 
 // Actions
 

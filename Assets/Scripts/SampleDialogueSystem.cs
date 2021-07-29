@@ -22,12 +22,25 @@ namespace GabbyDialogueSample
         private string currentCharacter = "";
         [HideInInspector]
         public string currentPortrait = "default";
-
-        private bool _allowSkippingLine = true; // This allows scripts to block skipping the current line, for example for a typewriter text animation effect. The first click skips the animation, then the second skips the line.
-        public bool AllowSkippingLine
+               
+        /// <summary>
+        /// Allows advancing to the next line of dialogue when true.
+        /// 
+        /// Set to false to block the user from moving on to the next line of dialogue.
+        /// You may want to do this if another action should happen first, for example skipping the animation of a typewriter effect,
+        /// where the first click skips the animation, then the second advances to the next line.
+        /// </summary>
+        /// <value></value>
+        public bool AllowAdvancingDialogue
         {
-            get => _allowSkippingLine;
-            set => _allowSkippingLine = value;
+            get => _allowAdvancingDialogue;
+            set => _allowAdvancingDialogue = value;
+        }
+        private bool _allowAdvancingDialogue = true;
+
+        public void NextLine()
+        {
+            dialogueEngine.NextLine();
         }
 
         public static SampleDialogueSystem instance()
@@ -80,6 +93,9 @@ namespace GabbyDialogueSample
 
         public void OnDialogueLine(string characterName, string dialogueText, Dictionary<string, string> tags)
         {
+            // Re-show the dialogue box if hidden
+            dialogueUI.gameObject.SetActive(true);
+
             if (currentCharacter != characterName)
             {
                 currentCharacter = characterName;
@@ -136,13 +152,11 @@ namespace GabbyDialogueSample
             string currentCharacter = "Charles";
             DialogueCharacter character = characters[currentCharacter];
 
-            dialogueUI.gameObject.SetActive(false);
             dialogueOptionsUI.gameObject.SetActive(true);
 
             TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
 
             dialogueOptionsUI.Show(optionsText, (selection) => {
-                dialogueUI.gameObject.SetActive(true);
                 dialogueOptionsUI.Hide();
                 tcs.SetResult(selection);
                 dialogueEngine.NextLine();
@@ -200,6 +214,12 @@ namespace GabbyDialogueSample
 
             outPortrait = "";
             return false;
+        }
+
+        public void SetDialogueUIVisible(bool visible)
+        {
+            // TODO do this better, support options
+            dialogueUI.gameObject.SetActive(visible);
         }
     }
 }

@@ -2,16 +2,21 @@
 gabby 0.2
 language english
 
+[Charles.Main]
+    if isNot(charles.introduced, true)
+        >> Charles.Introduction
+    >> Charles.Greeting
+
 [Charles.Introduction]
     - Good day! I'm <b>Charles</b>, the test character.
 
-    (Camilla, angry) <b>*Ahem*</b>, <i>-the-</i> test character?! There's two of us, I exist too Charles!~
+    (Camilla, angry) <b>*Ahem*</b>, <i>the</i> test character?! There's two of us, I exist too Charles!~
 
     (Charles, very happy) Ah, yes yes, have you met my friend Camilla?
-    (Charles, bored)      <size=12>She's a little short tempered.</size>
+    (Charles, bored)      <size=20>She's a little short tempered.</size>
     (Charles, happy)      In this sample, you can walk around and explore.
     -                     Most objects are interactive, and of course you can talk to Camilla and me!
-    (Charles, happy)      I'll provide more information about the sample if you talk to me again, and Camilla will demonstrate various examples!
+    (Charles, happy)      I can provide you with more information about the sample, and Camilla will demonstrate various examples!
 
     > set(charles.introduced, true)
 
@@ -134,7 +139,7 @@ language english
         - That sample shows how dialogue choices could affect a character's disposition towards you, altering future conversations.
         <sad>
         - But she gets mad easily, so-
-        (Camilla, very angry) Charles! Shut it!
+        (Camilla, angry) Charles! Shut it!
         (Charles, very happy) Sorry!
         <happy>
         + To be fair, I had that one coming...

@@ -5,20 +5,15 @@ using UnityEngine;
 
 namespace GabbyDialogueSample.GameSample
 {
-    public class Camilla : MonoBehaviour, Interactable
+    public class Charles : MonoBehaviour, Interactable
     {
         public void OnInteract()
         {
-            NPCWander wanderComponent = GetComponent<NPCWander>();
-            wanderComponent.enabled = false;
-
-            Dialogue dialogue = SampleDialogueSystem.instance().GetDialogue("Camilla", "Main");
+            Dialogue dialogue = SampleDialogueSystem.instance().GetDialogue("Charles", "Main");
             if (dialogue != null)
             {
                 SampleDialogueSystem.instance().PlayDialogue(dialogue);
             }
-
-            // TODO get when dialogue ends to re-enable wander
         }
     }
 }

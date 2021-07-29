@@ -11,15 +11,16 @@ language english
     - I think I had, say, 250 coins...
     - It wasn't much, but I could buy a few things with it!
 
-    * She starts to describe the whole story, transporting you into another world with her words.
+    - So, I looked around, checking out all his stuff.
+    - Among everything, there were a few items that really stood out to me.
 
+    * She starts to recount her story, her words transporting you into another world.
+    > fadeOut()
+    
     (Camilla) Wow, this store is really amazing!
     -         You've got so many cool looking artifacts.
 
-    (Vendor) I hope you can find something to your liking!
-
-    (Camilla) So, I looked around, checking out all his stuff.
-    -         Among everything, there were a few items that really stood out to me.
+    (Vendor) I hope you can find something to your liking!  
     
     > setGold(250)
     >> Camilla.VendorMain
@@ -30,7 +31,8 @@ language english
         (Camilla, very happy) Ooh, I wanna buy that cool sword! How much is it?
 
         (Vendor) This sword belonged to The Great King, Wuh... Wen...
-        (Camilla, bored) Ok, yeah, I forget his name. But he was like a king or something... Anyway.
+        
+        (Camilla, annoyed) Ok, yeah, I forget his name. But he was like a king or something... Anyway.
 
         (Vendor) This sword belonged to the king. It's a very rare artifact, and, like, incredibly well forged!
         -        Anyway, yeah, I'm asking for 150 coins.
@@ -68,7 +70,7 @@ language english
         >> Camilla.VendorPurchase
 
     : A bunch of old coins, kind of lame really.
-        (Camilla, bored) So like, old coins that were buried for a long time or something?
+        (Camilla, bored) So like, are these just some old coins that were buried for a long time or something?
 
         (Vendor) Ah, these are indeed coins from an ancient civilization!
         -        They were found during an archaeological dig years ago.
@@ -77,9 +79,12 @@ language english
 
         (Vendor) Ah!~ Er..
 
-        (Camilla, bored) I'll offer 25 coins, if even...
+        (Camilla, bored) I'll offer 25 coins...
+        <annoyed>
+        +                And that's being generous!
 
-        (Vendor) Uh, sure! I suppose...
+        (Vendor) Uh, sure!
+        +        I suppose...
 
         > set("camilla.vendor.item", "coins")
         > set("camilla.vendor.cost", "25")
@@ -90,23 +95,24 @@ language english
 
         (Vendor) Interested in the... uh, alien weapon, are you?
 
-        (Camilla, bored) Heh, I forget what he called it...
-        (Camilla, bored) Sorry...
+        (Camilla, sad) Heh, I forget what he actually called it at the time...
+        (Camilla, sad) Sorry...
 
-        (Vendor) Interested in this, are you?
+        (Vendor) Interested in this thing, are you?
         -        Well, you have a good eye!
-        -        This is one of a kind, and not of this world!
+        -        This item is one of a kind.
+        +        In fact, it's not of this world!
         -        I'll take no less than 300 coins for it!
 
-        (Camilla, angry) What?! But... I can't afford that!
-        -                Give me a deal!
+        (Camilla, annoyed) What?! But... I can't afford that!
+        (Camilla, angry)   Give me a deal!
 
         (Vendor) I'm afraid I cannot.
 
         (Camilla, sad) Lame...
 
-        (Camilla, angry) But seriously! It was so lame! He wouldn't budge on the price at all.
-        (Camilla, sad) I bet I could've blown up so many things with it... 
+        (Camilla, angry)      But seriously! It was so lame! He wouldn't budge on the price at all.
+        (Camilla, sad)        I bet I could've blown up so many things with it... 
         (Camilla, very happy) Anyway! Back to my story!
 
         (Camilla, sad) What about...
@@ -136,6 +142,18 @@ language english
         -        Choose something else.
 
         >> Camilla.VendorMain
+    : Nothing, I'm done!
+        (Vendor) Alright, well, see ya!
+
+        (Camilla, annoyed) Wait, no, he was more polite...
+
+        (Vendor) Ah! Well, thank you, and do come again!
+
+        (Camilla, very happy) I will, thanks a bunch!
+        > fadeIn()
+        <happy>
+        -                     And then I just went home.
+        +                     Pretty cool story, huh?
 
 
 [Camilla.VendorPurchase]
@@ -148,8 +166,11 @@ language english
             >> Camilla.VendorMain
         else
             (Vendor) I'm afraid that's not enough coins.
+
             (Camilla, sad) Oh... You're right. Ok.
+
     : No way!
         (Camilla, bored) Nah.
+
     + What about...
     >> Camilla.VendorMain

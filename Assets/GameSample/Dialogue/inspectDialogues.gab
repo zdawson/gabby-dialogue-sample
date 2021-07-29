@@ -36,14 +36,37 @@ language english
     * These are the stairs to go down to the basement.
     * I think it would be best if I stayed up here!
 
+[Inspect.Bookshelf]
+    if isEqual(bookshelf.bookIndex, 1)
+        > set(bookshelf.bookIndex, 2)
+        >> Inspect.Bookshelf2
+    else if isEqual(bookshelf.bookIndex, 2)
+        > set(bookshelf.bookIndex, 3)
+        >> Inspect.Bookshelf3
+    else if isEqual(bookshelf.bookIndex, 3)
+        > set(bookshelf.bookIndex, 4)
+        >> Inspect.Bookshelf4
+    else if isEqual(bookshelf.bookIndex, 4)
+        > set(bookshelf.bookIndex, 5)
+        >> Inspect.Bookshelf5
+    else if isEqual(bookshelf.bookIndex, 5)
+        > set(bookshelf.bookIndex, 6)
+        >> Inspect.Bookshelf6
+    else if isEqual(bookshelf.bookIndex, 6)
+        > set(bookshelf.bookIndex, 7)
+        >> Inspect.BookshelfEnd
+    else
+        > set(bookshelf.bookIndex, 1)
+        >> Inspect.Bookshelf1
+
 [Inspect.Bookshelf1]
     * Wow, they have a lot of books and games.
 
 [Inspect.Bookshelf2]
-    * "To Kill a Manticore".
+    * "The Great Gabby".
 
 [Inspect.Bookshelf3]
-    * "The Great Gabby".
+    * "To Kill a Manticore".
 
 [Inspect.Bookshelf4]
     * "Ion Gabby".
@@ -54,6 +77,9 @@ language english
 [Inspect.Bookshelf6]
     * "Gabby Invicta".
 
+[Inspect.BookshelfEnd]
+    * There must be about a hundred others on the shelves!
+
 [Inspect.Couch]
     * Looks pretty comfy.
 
@@ -63,3 +89,7 @@ language english
 
 [Inspect.Lamp]
     * Looks like a pretty reliable lamp!
+
+[Inspect.Window]
+    * This window lets in a lot of light.
+    * There's an ice cream truck across the street!

@@ -6,12 +6,13 @@ language english
 
 [Camilla.Country]
     - ...and really, it was one of the most beautiful places I've ever seen!
-    - To think, if it weren't for that shipwreck I wouldn't have found it...
-    - Oh, and that swordfight with the pirates.
-    - But that's boring!
+    - To think, if it weren't for that shipwreck I wouldn't have ever found it...
+    - Oh, and also that swordfight with the pirates.
+    - But that stuff's boring!
 
-    (Player) Wait, I want to hear about the-
+    (Player) Wait, I want to hear about the pi-
 
+    <very happy>
     (Camilla) Boring!
     + What's interesting about the story is that while I was there, I found this beautiful city.
     - It looked ancient! The roads were paved with large, smooth cobblestone, and the buildings were engraved with runes and inlaid with gold.

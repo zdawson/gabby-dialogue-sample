@@ -3,31 +3,61 @@
 gabby 0.2
 language english
 
+[Camilla.TestFades] // TODO remove
+    - Testing fades
+    > fadeOut()
+    * ...
+    > fadeIn()
+    - Fade out then in immediate
+    > fadeOut()
+    > fadeIn()
+    - Testing combined
+    > fadeOutAndIn()
+    - Done
+
+[Camilla.Main]
+    if isNot(camilla.introduced, true)
+        >> Camilla.Introduction
+    else if showRandomly(0.02) // Rare greeting, 1 in 50
+        >> Camilla.Greeting4
+    else
+        if showRandomly(0.3333)
+            >> Camilla.Greeting1
+        else if showRandomly(0.3333)
+            >> Camilla.Greeting2
+        else
+            >> Camilla.Greeting3
+
 [Camilla.Introduction]
     - Hey, I'm <b>Camilla</b>!
     <very happy>
     + It's nice to meet you.
     <happy>
     - Talk to me again for examples of Gabby in action!
-    <bored>
+    <annoyed>
     - Or you can talk to Charles if you want to learn more about the sample.
     > set(camilla.introduced, true)
 
 [Camilla.Greeting1]
     <very happy>
     - Oh hey!
-    >> Camilla.MainDialogue
+    >> Camilla.SelectSample
 
 [Camilla.Greeting2]
-    - 'sup?
-    >> Camilla.MainDialogue
+    - 'Sup?
+    >> Camilla.SelectSample
 
 [Camilla.Greeting3]
     <very happy>
     - Heya, Player!
-    >> Camilla.MainDialogue
+    >> Camilla.SelectSample
 
 [Camilla.Greeting4]
+    // This is a one off thing, so just use Greeting1 if we've shown it before
+    if isEqual(camilla.hasShownRareGreeting, true)
+        >> Camilla.Greeting1
+    > set(camilla.hasShownRareGreeting, true)
+
     <very sad>
     - Hey.
     <sad>
@@ -38,91 +68,109 @@ language english
     : You definitely will!
         (Player)            Yeah, you definitely will be!
 
-        (Camilla, bored)    Yeah... I don't know about that, Player...
+        (Camilla, sad)      Yeah... I don't know about that, Player...
         (Camilla, happy)    I hope so though!
     : Probably not...
         (Player)            Uh... Probably not...
 
         (Camilla, very sad) Yeah, I don't think so either...
         (Camilla, angry)    It's like we're just throwaway characters! It's not fair!
+        * She sighs in frustration, turning her back to you.
+        + You decide to give her some time to herself.
+        > fadeOutAndIn()
         end
-    (Camilla, happy) Well, anyway...
-    >> Camilla.MainDialogue
+    (Camilla, happy) Well, anyway... You came here to talk, right?
+    >> Camilla.SelectSample
 
 // This is the primary dialogue block, linking to all the other sample dialogues
 // This dialogue also demonstrates a method of marking dialogues as "seen", implemented by this sample.
-[Camilla.MainDialogue]
-    - I've always got something to talk about.
-    - Wanna hear a story, or ask me something, or just chat?
+[Camilla.SelectSample]
+    - Wanna hear a story, or ask me something? Or just chat?
     <very happy>
-    - I'm up for anything!
+    + I'm up for anything!
     : Let's chat!
         (Player) Ok, let's chat!
+        > fadeOut()
         * Camilla looks happy to have someone to talk to.
         + Before long, she's chatting away about...
         // TODO revisit this once option tags are supported
-        // <seenTag:"Camilla.MainDialogue.dungeon">
+        // <seenTag:"Camilla.SelectSample.dungeon">
         : One of her many dungeon delving stories.
-            // Don't set this one seen, since it's random
+            // Don't set this one as seen, since it's random
+            > fadeIn()
             >> Camilla.Dungeon
         : A far away country that you're not really sure actually exists.
-            > setChatSeen("Camilla.MainDialogue.country")
+            > setChatSeen("Camilla.SelectSample.country")
+            > fadeIn()
             >> Camilla.Country
         : A "kinda cool" sword she found in the forest.
-            > setChatSeen("Camilla.MainDialogue.sword")
+            > setChatSeen("Camilla.SelectSample.sword")
+            > fadeIn()
             >> Camilla.Sword
         : A strange recipe she learned during her travels.
-            > setChatSeen("Camilla.MainDialogue.recipe")
-            >> Camilla.Recipe
+            > setChatSeen("Camilla.SelectSample.cooking")
+            > fadeIn()
+            >> Camilla.Cooking
         : A fun game "some kid" taught her.
-            > setChatSeen("Camilla.MainDialogue.game")
+            > setChatSeen("Camilla.SelectSample.game")
+            > fadeIn()
             >> Camilla.NimGame
         : Literally just that lamp in the corner.
-            > setChatSeen("Camilla.MainDialogue.lamp")
+            > setChatSeen("Camilla.SelectSample.lamp")
+            > fadeIn()
             >> Camilla.Lamp
-        : This one time she came across a shady street vendor.
-            > setChatSeen("Camilla.MainDialogue.vendor")
+        : This one time she came across a "kinda shady" street vendor.
+            > setChatSeen("Camilla.SelectSample.vendor")
+            > fadeIn()
             >> Camilla.Vendor
         : How annoying Charles is.
-            > setChatSeen("Camilla.MainDialogue.charlesComplaints")
+            > setChatSeen("Camilla.SelectSample.charlesComplaints")
+            > fadeIn()
             >> Camilla.CharlesComplaints
         : Honestly, you're not even sure.
-            > setChatSeen("Camilla.MainDialogue.unknown")
             // Just choose one randomly
             // TODO Need a better way to choose a random block uniformly
             if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.dungeon")
+                > setChatSeen("Camilla.SelectSample.dungeon")
+                > fadeIn()
                 >> Camilla.Dungeon
             else if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.country")
+                > setChatSeen("Camilla.SelectSample.country")
+                > fadeIn()
                 >> Camilla.Country
             else if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.sword")
+                > setChatSeen("Camilla.SelectSample.sword")
+                > fadeIn()
                 >> Camilla.Sword
             else if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.charlesComplaints")
+                > setChatSeen("Camilla.SelectSample.charlesComplaints")
+                > fadeIn()
                 >> Camilla.CharlesComplaints
             else if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.recipe")
-                >> Camilla.Recipe
+                > setChatSeen("Camilla.SelectSample.cooking")
+                > fadeIn()
+                >> Camilla.Cooking
             else if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.game")
+                > setChatSeen("Camilla.SelectSample.game")
+                > fadeIn()
                 >> Camilla.NimGame
             else if showRandomly(0.125)
-                > setChatSeen("Camilla.MainDialogue.lamp")
+                > setChatSeen("Camilla.SelectSample.lamp")
+                > fadeIn()
                 >> Camilla.Lamp
             else
-                > setChatSeen("Camilla.MainDialogue.vendor")
+                > setChatSeen("Camilla.SelectSample.vendor")
+                > fadeIn()
                 >> Camilla.Vendor
     : I've gotta go...
         (Player) Actually, I've gotta go...
 
-        (Camilla, bored) Oh, ok!
+        (Camilla, sad) Oh, ok...
         <happy>
         - No problem.
-        - I mean, it's kinda weird though, right? Because you're the one who walked over here and started talking to me.
-        <sad>
-        - Don't you think that's kinda ru-
-        * <i>You slowly back away, sensing that this will go on for a while.</i>
+        - I mean, that's kinda weird though, right? Because you're the one who walked over here and started talking to me.
+        <annoyed>
+        - Don't you think that's kinda rude?
+        * You slowly back away, sensing that this will go on for a while.
         <angry>
-        - Oh fine, go already!
+        - Oh, fine! Go already!~

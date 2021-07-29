@@ -9,7 +9,7 @@ language english
         - We're talking super big, super high level sort of place.
     else if showRandomly(0.33)
         - ...um, so it was this really scary dungeon.
-        <bored>
+        <annoyed>
         - You know, really dark, creepy sounds, that sort of thing.
         <sad>
         - I mean, I wasn't scared, but Charles... You know how he is!
@@ -105,7 +105,7 @@ language english
         - <i>Someone</i> stepped on a trap. Wanna guess who?
         <happy>
         - It was Charles.
-        <bored>
+        <annoyed>
         - It's always Charles.
 
         (Charles, annoyed) Hey, I can hear you!
@@ -151,7 +151,7 @@ language english
         <happy>
         - Isn't that crazy?
         - We were falling for so long, it was like that story with the wizard and the Balrog.
-        <bored>
+        <sad>
         - Except like, there was no Balrog, it was just us three.
         <happy>
         - As we fell, the three of us were able to group close together, and spread out our arms and legs to slow ourselves down.

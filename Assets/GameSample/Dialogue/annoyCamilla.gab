@@ -59,15 +59,15 @@ language english
 
 // This is used by the game in place of the usual greeting when Camilla is angry with the player
 [Camilla.AngryGreeting]
-    if is(camilla.angerLevel, 3)
+    if isEqual(camilla.angerLevel, 3)
         > set(camilla.angerLevel, 2)
         (Camilla, angry) NO. Go away.
         <very sad>
         - You're such a jerk...
-    else if is(camilla.angerLevel, 2)
+    else if isEqual(camilla.angerLevel, 2)
         > set(camilla.angerLevel, 1)
         (Camilla, annoyed) Just leave me be for a while.
-    else if is(camilla.angerLevel, 1)
+    else if isEqual(camilla.angerLevel, 1)
         > set(camilla.angerLevel, 0)
         (Camilla, very sad) I don't need you to tell me I'm cooler. I know I'm cooler.
     else

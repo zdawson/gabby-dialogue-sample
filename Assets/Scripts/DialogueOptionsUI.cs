@@ -31,6 +31,7 @@ public class DialogueOptionsUI : MonoBehaviour
                 resultCB(buttonIndex);
             });
         }
+        optionsContainer.GetComponentInParent<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition = 1.0f;
     }
 
     public void Hide()
@@ -45,8 +46,8 @@ public class DialogueOptionsUI : MonoBehaviour
     private GameObject CreateOptionButton(string text)
     {
         GameObject buttonGO = Instantiate(optionButtonPlaceholder.gameObject);
-        buttonGO.GetComponentInChildren<UnityEngine.UI.Text>().text = text;
-        buttonGO.transform.SetParent(optionsContainer.transform);
+        buttonGO.GetComponentInChildren<TMPro.TMP_Text>().text = text;
+        buttonGO.transform.SetParent(optionsContainer.transform, false);
         buttonGO.SetActive(true);
         return buttonGO;
     }

@@ -7,13 +7,20 @@ public class DialogueUI : MonoBehaviour
     public event Action OnBack;
     public event Action OnQuit;
 
-        
+    [SerializeField]
+    private GameObject dialoguePanel = null;    
     [SerializeField]
     private TMPro.TMP_Text dialogueText = null;
     [SerializeField]
     private TMPro.TMP_Text characterText = null;
     [SerializeField]
     private UnityEngine.UI.Image characterPortrait = null;
+
+    [SerializeField]
+    private GameObject narrationPanel = null;    
+    [SerializeField]
+    private TMPro.TMP_Text narrationText = null;
+
     [SerializeField]
     private UnityEngine.UI.Button clickHandler = null;
     [SerializeField]
@@ -33,7 +40,7 @@ public class DialogueUI : MonoBehaviour
     private void Update()
     {
         // Handle input
-        if (GabbyDialogueSample.SampleDialogueSystem.instance().AllowSkippingLine
+        if (GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue
         && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)))
         {
             OnForward();
@@ -45,7 +52,13 @@ public class DialogueUI : MonoBehaviour
         characterText.text = name;
         if (name.Length == 0)
         {
-            // TODO hide the character UI
+            dialoguePanel.SetActive(false);
+            narrationPanel.SetActive(true);
+        }
+        else
+        {
+            dialoguePanel.SetActive(true);
+            narrationPanel.SetActive(false);
         }
     }
 
@@ -62,6 +75,7 @@ public class DialogueUI : MonoBehaviour
     public void SetDialogueText(string dialogue)
     {
         dialogueText.text = dialogue;
+        narrationText.text = dialogue;
     }
 
     public void SetControlsVisible(bool visible)
