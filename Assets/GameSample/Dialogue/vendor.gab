@@ -22,7 +22,8 @@ language english
 
     (Vendor) I hope you can find something to your liking!  
     
-    > setGold(250)
+    > set("camilla.vendor.gold", 250)
+    > showGold()
     >> Camilla.VendorMain
 
 [Camilla.VendorMain]
@@ -35,10 +36,10 @@ language english
         (Camilla, annoyed) Ok, yeah, I forget his name. But he was like a king or something... Anyway.
 
         (Vendor) This sword belonged to the king. It's a very rare artifact, and, like, incredibly well forged!
-        -        Anyway, yeah, I'm asking for 150 coins.
+        -        Anyway, yeah, I'm asking for 75 coins.
 
-        > set("camilla.vendor.item", "sword")
-        > set("camilla.vendor.cost", "150")
+        > set("camilla.vendor.item", "Fancy Looking Sword")
+        > set("camilla.vendor.cost", 75)
         >> Camilla.VendorPurchase
         // TODO this is a good place to use << when that gets added, with more dialogue following
 
@@ -53,20 +54,25 @@ language english
         -        It's said that whoever wears it will be blessed with good fortune.
         -        So you'll surely make back the mere 100 coins I'm asking for it very quickly!
 
-        > set("camilla.vendor.item", "amulet")
-        > set("camilla.vendor.cost", "100")
+        > set("camilla.vendor.item", "Really Old Looking Amulet")
+        > set("camilla.vendor.cost", 100)
         >> Camilla.VendorPurchase
             
     : I think it was actually the Staff of Ra, no joke!
         (Camilla, very happy) Hey, is that the Staff of Ra? 
 
         (Vendor) The one and only!
-        -        This fine artifact will only run you 200 gold.
+        -        This fine artifact will only run you 250 gold.
+
+        (Camilla, annoyed) Is it real?
+
+        (Vendor) Like I said, it's the one and only!
 
         (Camilla, very happy) Wow!~ I WANT IT!
+        (Camilla, sad) But it'll cost me all my gold...
 
-        > set("camilla.vendor.item", "staff")
-        > set("camilla.vendor.cost", "200")
+        > set("camilla.vendor.item", "The Staff of Ra?")
+        > set("camilla.vendor.cost", 250)
         >> Camilla.VendorPurchase
 
     : A bunch of old coins, kind of lame really.
@@ -81,13 +87,13 @@ language english
 
         (Camilla, bored) I'll offer 25 coins...
         <annoyed>
-        +                And that's being generous!
+        +                And that's me being generous!
 
         (Vendor) Uh, sure!
         +        I suppose...
 
-        > set("camilla.vendor.item", "coins")
-        > set("camilla.vendor.cost", "25")
+        > set("camilla.vendor.item", "Dirty Old Coins...")
+        > set("camilla.vendor.cost", 25)
         >> Camilla.VendorPurchase
 
     : Something that looked kind of like an alien weapon!
@@ -101,7 +107,7 @@ language english
         (Vendor) Interested in this thing, are you?
         -        Well, you have a good eye!
         -        This item is one of a kind.
-        +        In fact, it's not of this world!
+        +        In fact, it's not even of this world!
         -        I'll take no less than 300 coins for it!
 
         (Camilla, annoyed) What?! But... I can't afford that!
@@ -123,10 +129,10 @@ language english
 
         (Vendor) They are indeed!
         -        Who knows what incredible treasure can be found with these!
-        -        I'm asking 25 coins for all of them.
+        -        I'm asking 50 coins for all of them.
 
-        > set("camilla.vendor.item", "maps")
-        > set("camilla.vendor.cost", "25")
+        > set("camilla.vendor.item", "Some Old Maps")
+        > set("camilla.vendor.cost", 50)
         >> Camilla.VendorPurchase
 
     : I forget, but there was something else!
@@ -150,24 +156,31 @@ language english
         (Vendor) Ah! Well, thank you, and do come again!
 
         (Camilla, very happy) I will, thanks a bunch!
+        > hideGold()
         > fadeIn()
         <happy>
         -                     And then I just went home.
         +                     Pretty cool story, huh?
+        // TODO list the items she bought
 
 
 [Camilla.VendorPurchase]
     * Do you want to buy it?
     : Yes!
-        if hasGold("camilla.vendor.cost")
+        if canAffordItem()
+            > purchaseItem()
             (Camilla, very happy) I'll take it!
-            > removeGold("camilla.vendor.cost")
-            > giveItem("sword")
             >> Camilla.VendorMain
         else
-            (Vendor) I'm afraid that's not enough coins.
+            if isEqual("camilla.vendor.gold", 0)
+                * Camilla reaches into her pockets, realizing she's out of gold.
+                (Camilla, sad) Oh... Whoops, I'm out of coins!
+                (Camilla, happy) I'll have to come back!
+            else
+                * Camilla empties her pockets, offering all of her coins to the vendor.
+                (Vendor) I'm afraid that's not enough coins...
 
-            (Camilla, sad) Oh... You're right. Ok.
+                (Camilla, sad) Oh... You're right. Ok.
 
     : No way!
         (Camilla, bored) Nah.

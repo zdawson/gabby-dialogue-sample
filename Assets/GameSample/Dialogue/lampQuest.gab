@@ -16,12 +16,13 @@ language english
     - What the-
     <angry>
     - Did the lightbulb just burn out!?
-    <happy>
+    <annoyed>
     - Ok, no problem, no need to get upset over it Camilla...
     <sad>
-    - I mean, you DID just buy it, but...
+    - I mean, I DID just buy it, but...
     <happy>
-    - No! It's fine!
+    - No!
+    + It's fine!
     - Hey, could you find a lightbulb please? To fix the lamp?
     (Player) I'm on it!
     > setQuestStage(lampQuest, findLightBulb)
@@ -31,6 +32,11 @@ language english
     - You're still looking for a lightbulb, right?
     - They should be in a drawer or something.
 
+// This is shown in place of a normal greeting when the lamp quest is active.
+[Charles.GreetingLampFindLightbulb]
+    - Hmm? You're looking for a lightbulb?
+    - They should be somewhere in the kitchen.
+
 [LightbulbQuest.FoundLightbulb]
     * Aha!
     * After rummaging around a bit, you find a suitable lightbulb for the lamp.
@@ -38,14 +44,11 @@ language english
     > setQuestStage(lamp, foundLightBulb)
 
 [Camilla.FoundLightbulb]
-    <very happy>
-    - You found one!
-    - Perfect!
-    <sad>
-    - Um, hey, could you uh...
-    - Could you change it too?
-    <happy>
-    - To be honest, I had a bad experience once!
+    (Camilla, very happy) You found one!
+    (Camilla, happy)      That's great!
+    (Camilla, sad)        Um, hey, could you uh...
+    -                     Could you change it too?
+    (Camilla, happy)      I kind of had a bad experience once!
     : Yeah, no problem.
     : Alright, fine...
     (Camilla, very happy) You're the best!
@@ -54,6 +57,9 @@ language english
 [Camilla.GreetingLampReplaceLightbulb]
     - Go ahead, change the lightbulb!
     - We can chat later!
+
+[Charles.GreetingLampReplaceLightbulb]
+    - Oh, you found one!
     
 [LightbulbQuest.ReplaceLightBulb]
     * You unscrew the old light bulb.

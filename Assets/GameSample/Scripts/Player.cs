@@ -19,16 +19,30 @@ public class Player : MonoBehaviour
     private float acceleration = 0.5f;
     private Vector2 facing = Vector2.down;
 
+    private bool disableInput = false;
+
     private void Awake()
     {
         acceleration = walkSpeed / accelerateTime;
+    }
+
+    private void OnEnable()
+    {
+        GabbyDialogueSample.SampleDialogueSystem.instance().DialogueStarted += OnDialogueStarted;
+        GabbyDialogueSample.SampleDialogueSystem.instance().DialogueEnded += OnDialogueEnded;
+    }
+
+    private void OnDisable()
+    {
+        GabbyDialogueSample.SampleDialogueSystem.instance().DialogueStarted -= OnDialogueStarted;
+        GabbyDialogueSample.SampleDialogueSystem.instance().DialogueEnded -= OnDialogueEnded;
     }
 
     private void FixedUpdate()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         float deltaTime = Time.fixedDeltaTime;
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 movement = GetMovementVector();
         Vector2 velocity = rigidbody.velocity;
 
         if (movement.sqrMagnitude > STOP_THRESHOLD)
@@ -94,19 +108,22 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // Interactions
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!disableInput)
         {
-            Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-            
-            RaycastHit2D[] hits = Physics2D.RaycastAll(rigidbody.position, facing, 0.75f);
-            foreach (RaycastHit2D hit in hits)
+            // Interactions
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Interactable interactable = hit.transform.GetComponent<Interactable>();
-                if (interactable != null)
+                Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+                
+                RaycastHit2D[] hits = Physics2D.RaycastAll(rigidbody.position, facing, 0.75f);
+                foreach (RaycastHit2D hit in hits)
                 {
-                    interactable.OnInteract();
-                    break;
+                    Interactable interactable = hit.transform.GetComponent<Interactable>();
+                    if (interactable != null)
+                    {
+                        interactable.OnInteract();
+                        break;
+                    }
                 }
             }
         }
@@ -115,7 +132,7 @@ public class Player : MonoBehaviour
         Animator animator = GetComponent<Animator>();
         if (animator)
         {
-            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 movement = GetMovementVector();
             if (movement.y > 0.05f)
             {
                 animator.SetBool("GoToIdle", false);
@@ -145,5 +162,24 @@ public class Player : MonoBehaviour
                 animator.SetBool("GoToIdle", true);
             }
         }
+    }
+
+    private Vector2 GetMovementVector()
+    {
+        if (disableInput)
+        {
+            return Vector2.zero;
+        }
+        return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    }
+
+    private void OnDialogueStarted(GabbyDialogue.Dialogue dialogue)
+    {
+        disableInput = true;
+    }
+
+    private void OnDialogueEnded()
+    {
+        disableInput = false;
     }
 }

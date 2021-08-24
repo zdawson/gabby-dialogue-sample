@@ -70,7 +70,7 @@ namespace GabbyDialogueSample
 
             // Handle dialogue events
             SampleDialogueSystem.instance().DialogueStarted += (dialogue) => gameObject.SetActive(false);
-            SampleDialogueSystem.instance().DialogueEnded += (dialogue) => gameObject.SetActive(true);
+            SampleDialogueSystem.instance().DialogueEnded += () => gameObject.SetActive(true);
         }
 
         private GameObject CreateCharacterButton(string name)

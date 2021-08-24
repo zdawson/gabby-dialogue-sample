@@ -13,10 +13,20 @@ namespace GabbyDialogueSample
 
         public SampleScriptingHandler()
         {
-            // For clarity, C# handlers have the same name as their Gabby action counterparts
+            // For clarity, C# handler action implementations have been named the same name as they appear in the Gabby scripts
+
+            // General actions
+            // ===============
+            this.AddActionHandler(nameof(fadeOut), fadeOut);
+            this.AddActionHandler(nameof(fadeIn), fadeIn);
+            this.AddActionHandler(nameof(fadeOutAndIn), fadeOutAndIn);
+
             this.AddActionHandler(nameof(set), set);
             this.AddConditionalHandler(nameof(isEqual), isEqual);
             this.AddConditionalHandler(nameof(isNot), isNot);
+
+            // Cooking sample actions
+            // ======================
             this.AddConditionalHandler("cookingQuality", (List<ActionParameter> parameters) =>
             {
                 int overallScore = 0;
@@ -54,10 +64,124 @@ namespace GabbyDialogueSample
                 return true;
             });
 
-            this.AddActionHandler(nameof(fadeOut), fadeOut);
-            this.AddActionHandler(nameof(fadeIn), fadeIn);
-            this.AddActionHandler(nameof(fadeOutAndIn), fadeOutAndIn);
+            // Nim sample actions
+            // ==================
+            GameObject gameUI = GameObject.Instantiate(Resources.Load("Prefabs/NimUI", typeof(GameObject))) as GameObject;
+            TMPro.TMP_Text nimText = gameUI.GetComponentInChildren<TMPro.TMP_Text>();
+            gameUI.SetActive(false);
 
+            this.AddActionHandler("nim_showGameUI", (parameters) =>
+            {
+                nimText.text = $"{Convert.ToInt32(scriptData["nim_stoneCount"].value)}";
+                gameUI.SetActive(true);
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            this.AddActionHandler("nim_hideGameUI", (parameters) =>
+            {
+                gameUI.SetActive(false);
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            this.AddActionHandler("nim_doCamillaTurn", (List<ActionParameter> parameters) =>
+            {
+                // Decide how many to draw
+                int stoneCount = Convert.ToInt32(scriptData["nim_stoneCount"].value);
+
+                // Try to draw the right number of stones to ensure a victory.
+                // If we can't, then just draw randomly to make it more interesting.
+                int camillaDrawCount = (stoneCount - 1) % 4;
+                if (camillaDrawCount == 0)
+                {
+                    camillaDrawCount = Math.Min(Random.Range(1, 3), stoneCount);
+                }
+
+                // Need to set nim_camillaDrawCount for the script to reference
+                if (!scriptData.ContainsKey("nim_camillaDrawCount"))
+                {
+                    scriptData["nim_camillaDrawCount"] = new ActionParameter {type = ParameterType.Number, value = camillaDrawCount};
+                }
+                else
+                {
+                    scriptData["nim_camillaDrawCount"].value = camillaDrawCount;
+                }
+
+                // Remove stones from the pile
+                stoneCount -= camillaDrawCount;
+                scriptData["nim_stoneCount"].value = stoneCount;
+
+                // Update the UI
+                nimText.text = $"{stoneCount}";
+
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            this.AddActionHandler("nim_doPlayerTurn", (List<ActionParameter> parameters) =>
+            {
+                // Remove stones from the pile
+                int stoneCount = Convert.ToInt32(scriptData["nim_stoneCount"].value);
+                stoneCount -= Convert.ToInt32(parameters[0].value);
+                scriptData["nim_stoneCount"].value = stoneCount;
+
+                // Update the UI
+                nimText.text = $"{stoneCount}";
+
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            // Vendor scripts
+            // ==============
+            GameObject itemUI = GameObject.Instantiate(Resources.Load("Prefabs/ItemPopupUI", typeof(GameObject))) as GameObject;
+            GameObject goldUI = GameObject.Instantiate(Resources.Load("Prefabs/GoldUI", typeof(GameObject))) as GameObject;
+            goldUI.SetActive(false);
+            itemUI.SetActive(false);
+
+            this.AddConditionalHandler("canAffordItem", (parameters) =>
+            {
+                int gold = Convert.ToInt32(scriptData["camilla.vendor.gold"].value);
+                int cost = Convert.ToInt32(scriptData["camilla.vendor.cost"].value);
+                
+                return gold >= cost;
+            });
+
+            this.AddActionHandler("purchaseItem", (parameters) =>
+            {
+                int gold = Convert.ToInt32(scriptData["camilla.vendor.gold"].value);
+                int cost = Convert.ToInt32(scriptData["camilla.vendor.cost"].value);
+                gold -= cost;
+                scriptData["camilla.vendor.gold"].value = gold;
+
+                string item = Convert.ToString(scriptData["camilla.vendor.item"].value);
+                Debug.Log($"Purchased {item} for {cost} gold.");
+
+                TMPro.TMP_Text uiText = goldUI.GetComponentInChildren<TMPro.TMP_Text>();
+                uiText.text = $"{gold}";
+
+                RectTransform rt = itemUI.GetComponent<RectTransform>();
+                float offset = rt.rect.height;
+                rt.Translate(new Vector3(0.0f, -offset, 0.0f));
+                itemUI.transform.localPosition = new Vector3();
+
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            this.AddActionHandler("showGold", (parameters) =>
+            {
+                int gold = Convert.ToInt32(scriptData["camilla.vendor.gold"].value);
+                TMPro.TMP_Text uiText = goldUI.GetComponentInChildren<TMPro.TMP_Text>();
+                uiText.text = $"{gold}";
+                goldUI.SetActive(true);
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            this.AddActionHandler("hideGold", (parameters) =>
+            {
+                goldUI.SetActive(false);
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            // Test stuff to remove eventually
+            // ===============================
             this.AddActionHandler(nameof(action), action);
             this.AddActionHandler(nameof(actionString), actionString);
             this.AddActionHandler(nameof(actionNumber), actionNumber);
@@ -148,7 +272,7 @@ namespace GabbyDialogueSample
             }
             if (parameterExpected.type != parameterActual.type)
             {
-                Debug.LogError($"Call to `is({key}, {parameterExpected.value.ToString()})` compares values of different types: {parameterExpected.type}, {parameterActual.type}");
+                Debug.LogError($"Call to `isEqual({key}, {parameterExpected.value.ToString()})` compares values of different types: {parameterExpected.type}, {parameterActual.type}");
             }
             switch (parameterExpected.type)
             {

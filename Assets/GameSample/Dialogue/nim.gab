@@ -1,4 +1,6 @@
-// This sample demonstrates a simple dialogue based game.
+// This sample demonstrates a simple dialogue based game, Nim.
+// In Nim, players take turns removing stones from a pile, trying to make the other take the last stone.
+// The overall flow of the game is primarily driven by this dialogue file - see the dialogue comments for more detail.
 gabby 0.2
 language english
 
@@ -9,19 +11,19 @@ language english
 
     (Player) Whoa, a gang? How'd you get out of it?
     
-    (Camilla, sad) Well, ok, _gang_ is a strong word... 
+    (Camilla, sad) Well, ok, <i>gang</i> is a strong word... 
     <happy>
-    - I guess it was more like a group of kids. Also, when I said night, it was more like <i>late evening...</i>
+    - I guess it was more like a group of kids. Also, when I said night, it was more like... late evening?
 
-    : Right...
-    : That's not even remotely similar!
+    : <i>Right...</i>
+    : That's not even remotely the same thing!
 
     <very happy>
     - Anyway!
 
     (Camilla, happy) These kiddos challenged me to a battle.
     (Player) ...
-    (Camilla, happy) Like, you know, a duel.
+    (Camilla, very happy) Like, you know, a duel.
     (Player) ...
     (Camilla, bored) They asked if I wanted to play a game.
     (Player) Got it.
@@ -30,56 +32,165 @@ language english
 
 [Nim.Rules]
     (Camilla, happy) The rules of Nim are simple.
-    - I've got a bunch of stones, yeah?
-    - 21 stones, exactly.
-    - They're all just thrown in a pile, like so.
-    > show(camilla.game.setup)
+    - I've got a bunch of stones, ok?
+    - 21 stones to be exact.
+    > set(nim_stoneCount, 21)
+    > nim_showGameUI()
+    <happy>
+    - They're all just thrown in a big pile, like so.
     - We're going to take turns removing stones from the pile.
     + You can remove 1, 2, or 3 stones at a time.
-    + Whoever removes the last stone loses.
-    - So, your goal is to try to make me take the last stone!
+    - Whoever removes the last stone <b>loses</b>.
+    <very happy>
+    + So, your goal is to try to <b>make me take the last one!</b>
+    <annoyed>
     - I won't make it easy though.
+    <very happy>
     - Alright. It's all set up and you know the rules, so let's play!
     >> Nim.Start
 
+// This is the main entry point for the game.
+// This dialogue block sets up the initial game state, and determines the turn order.
+// Dialogue will then flow between each character, running their respective turn dialogue block.
+// When a turn is taken, we check if the game should end, at which point we jump to the relevant win or lose block.
 [Nim.Start]
+    > set(nim_stoneCount, 21) // In case we skipped the rules, reset the stone count again
+    * You're playing a game of Nim. There are 21 stones to take.
+    (Camilla) I'll flip a coin to see who goes first! 
+    if showRandomly(0.5)
+        * Camilla flips the coin. It lands on heads.
+        (Camilla, very happy) Looks like it's you first, Player!
+        >> Nim.PlayerTurn
+    else
+        * Camilla flips the coin. It lands on tails.
+        (Camilla, very happy) Looks like I'm going first this time!
+        >> Nim.CamillaTurn
+
+// This is the main dialogue for all of Camilla's turns
+[Nim.CamillaTurn]
+    // Randomly choose between each of Camilla's dialogue variants to add variety
+    if showRandomly(0.333)
+        >> Nim.CamillaTurn1
+    else if showRandomly(0.333)
+        >> Nim.CamillaTurn2
+    else
+        >> Nim.CamillaTurn3
+
+[Nim.CamillaTurn1]
+    > nim_doCamillaTurn()
+    if isEqual(nim_camillaDrawCount, 1) // There may be a nicer way of doing this in a future version of Gabby
+        * Camilla takes one stone from the pile.
+    else if isEqual(nim_camillaDrawCount, 2)
+        * Camilla takes two stones from the pile.
+    else
+        * Camilla takes three stones from the pile.
+    (Camilla, very happy) Aha!
+    >> Nim.CamillaTurnEnd
     
+[Nim.CamillaTurn2]
+    > nim_doCamillaTurn()
+    if isEqual(nim_camillaDrawCount, 1)
+        (Camilla, very happy) I'm gonna take one this time!
+    else if isEqual(nim_camillaDrawCount, 2)
+        (Camilla, very happy) I'm gonna take two this time!
+    else
+        (Camilla, very happy) I'm gonna take three this time!
+    >> Nim.CamillaTurnEnd
 
-[Camilla.Turn1]
-    * Camilla takes $n stones from the pile.
+[Nim.CamillaTurn3]
+    > nim_doCamillaTurn()
+    (Camilla, annoyed) Hmm...
+    if isEqual(nim_camillaDrawCount, 1)
+        <very happy>
+        + I'll just take one!
+    else if isEqual(nim_camillaDrawCount, 2)
+        <very happy>
+        + I'll take two!
+    else
+        <very happy>
+        + I'm taking three!
+    >> Nim.CamillaTurnEnd
 
-[Camilla.Turn2]
-    (Camilla, very happy) I'm gonna take $n this time!
+[Nim.CamillaTurnEnd]
+    if isEqual(nim_stoneCount, 1)
+        >> Nim.PlayerLose
+    else
+        >> Nim.PlayerTurn
 
-[Camilla.Turn3]
-    (Camilla, annoyed) Hmm... I'll take $n!
+// This is the main dialogue for the Player's turns
+[Nim.PlayerTurn]
+    // At endgame, show a special turn dialogue with fewer options
+    if isEqual(nim_stoneCount, 3)
+        >> Nim.PlayerTurn3Left
+
+    // Randomly choose between each of the Player's dialogue variants to add variety
+    if showRandomly(0.333)
+        >> Nim.PlayerTurn1
+    else if showRandomly(0.333)
+        >> Nim.PlayerTurn2
+    else
+        >> Nim.PlayerTurn3
     
-[Nim.PlayerMove1]
+[Nim.PlayerTurn1]
     * It's your turn. How many stones will you take?
     : 1
+        > nim_doPlayerTurn(1)
         (Player) I'm taking one stone.
     : 2
+        > nim_doPlayerTurn(2)
         (Player) I'm taking two stones.
     : 3
+        > nim_doPlayerTurn(3)
         (Player) I'm taking three stones.
+    >> Nim.PlayerEndTurn
 
-[Nim.PlayerMove2]
+[Nim.PlayerTurn2]
     * It's your turn.
     : 1
+        > nim_doPlayerTurn(1)
         (Player) I'll take one.
     : 2
+        > nim_doPlayerTurn(2)
         (Player) I'll take two.
     : 3
+        > nim_doPlayerTurn(3)
         (Player) I'll take three.
+    >> Nim.PlayerEndTurn
 
-[Nim.PlayerMove2]
+[Nim.PlayerTurn3]
     * How many stones do you remove?
     : 1
+        > nim_doPlayerTurn(1)
         * You remove one stone from the pile.
+        (Camilla, annoyed) One, huh?
     : 2
+        > nim_doPlayerTurn(2)
         * You remove two stones from the pile.
+        (Camilla, annoyed) Two, huh?
     : 3
+        > nim_doPlayerTurn(3)
         * You remove three stones from the pile.
+        (Camilla, annoyed) Three, huh?
+    >> Nim.PlayerEndTurn
+
+// Note: We don't need a 2 left dialogue because Camilla will never put the player in that situation
+[Nim.PlayerTurn3Left]
+    * How many stones do you remove?
+    : 1
+        > nim_doPlayerTurn(1)
+        * You take one stone.
+        (Camilla, annoyed) Just one? Umm... <i>Okay...</i>
+    : 2
+        > nim_doPlayerTurn(2)
+        * You take two stones.
+        (Camilla, annoyed) Hmm...
+    >> Nim.PlayerEndTurn
+
+[Nim.PlayerEndTurn]
+    if isEqual(nim_stoneCount, 1)
+        >> Nim.PlayerWin
+    else
+        >> Nim.CamillaTurn
 
 [Nim.PlayerWin]
     (Camilla, sad) Wait...
@@ -107,20 +218,6 @@ language english
         : No
             >> Nim.Start
     : No
+        > nim_hideGameUI()
         (Player) No, I think I'm done for now.
         (Camilla) Oh, ok! Well, cya later then!
-
-
-// public int getCompDrawStones() {
-// 		for (int i = 0; i * 4 < 35; i++) {
-// 			if (stoneNum - 3 == 1 + (4 * i)) {
-// 				return 3;
-// 			}
-// 		}
-// 		for (int i = 0; i * 4 < 35; i++) {
-// 			if (stoneNum - 2 == 1 + (4 * i)) {
-// 				return 2;
-// 			}
-// 		}
-// 		return 1;
-// 	}

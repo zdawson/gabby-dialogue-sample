@@ -10,7 +10,7 @@ namespace GabbyDialogueSample
         private static SampleDialogueSystem _instance = null;
 
         public event System.Action<Dialogue> DialogueStarted;
-        public event System.Action<bool> DialogueEnded;
+        public event System.Action DialogueEnded;
         public event System.Action<LineType> DialogueLineShown;
 
         private DialogueUI dialogueUI;
@@ -168,7 +168,7 @@ namespace GabbyDialogueSample
         public void OnDialogueEnd()
         {
             dialogueUI.gameObject.SetActive(false);
-            DialogueEnded?.Invoke(true);
+            DialogueEnded?.Invoke();
         }
 
         public Dialogue GetDialogue(string characterName, string dialogueName)
