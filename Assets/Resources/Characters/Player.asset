@@ -16,4 +16,4 @@ MonoBehaviour:
   displayName: You
   _portraits:
   - name: default
-    portrait: {fileID: 21300000, guid: 89aa70c7072379546a09d60882460f90, type: 3}
+    portrait: {fileID: 21300000, guid: 77fa8dfa9b732814991258cfc1160ee4, type: 3}

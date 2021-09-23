@@ -204,6 +204,7 @@ language english
     (Camilla, very happy) Looks like there's only one stone left!
     - Go on, take it!
     : Take the last stone.
+    > nim_doPlayerTurn(1)
     (Camilla, very happy) Yaa! I win! 
     (Camilla, happy) Good game!
     >> Nim.PlayAgain

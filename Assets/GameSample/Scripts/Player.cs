@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
             {
                 Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
                 
-                RaycastHit2D[] hits = Physics2D.RaycastAll(rigidbody.position, facing, 0.75f);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(rigidbody.position + rigidbody.centerOfMass, facing, 0.75f);
                 foreach (RaycastHit2D hit in hits)
                 {
                     Interactable interactable = hit.transform.GetComponent<Interactable>();

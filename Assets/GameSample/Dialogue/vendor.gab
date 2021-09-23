@@ -159,8 +159,8 @@ language english
         > hideGold()
         > fadeIn()
         <happy>
-        -                     And then I just went home.
-        +                     Pretty cool story, huh?
+        - And then I just went home.
+        + Pretty cool story, huh?
         // TODO list the items she bought
 
 
