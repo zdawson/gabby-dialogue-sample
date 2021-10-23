@@ -23,6 +23,15 @@ language english
 
 [Inspect.Cabinet4]
     * Hmm... Is it rude of me to be snooping?
+    
+[Inspect.Sink]
+    * I can see my reflection in the faucet.
+
+[Inspect.Table]
+    * I think they got this table at IDEA.
+
+[Inspect.Cactus]
+    * It's a happy little cactus!
 
 [Inspect.BackDoor]
     * This goes to their backyard.
@@ -79,6 +88,10 @@ language english
 
 [Inspect.BookshelfEnd]
     * There must be about a hundred others on the shelves!
+
+[Inspect.TV]
+    * That's a big TV!
+    * They've got a bunch of game consoles hooked up to it, too.
 
 [Inspect.Couch]
     * Looks pretty comfy.

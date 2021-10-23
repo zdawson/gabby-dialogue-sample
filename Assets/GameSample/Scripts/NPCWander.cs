@@ -51,17 +51,16 @@ public class NPCWander : MonoBehaviour
 
             // Walk vertically then horizontally to reach target
             Vector2 toTarget = targetWanderPosition - position;
-            Vector2 displacement = toTarget.normalized * walkSpeed * Time.deltaTime;
             if (Mathf.Abs(toTarget.y) > ARRIVE_THRESHOLD)
             {
-                displacement.x = 0.0f;
+                Vector2 displacement = new Vector2(0.0f, toTarget.y).normalized * walkSpeed * Time.deltaTime;
                 rigidbody.position = rigidbody.position + displacement;
 
                 FaceDirection(displacement.normalized);
             }
             else if (Mathf.Abs(toTarget.x) > ARRIVE_THRESHOLD)
             {
-                displacement.y = 0.0f;
+                Vector2 displacement = new Vector2(toTarget.x, 0.0f).normalized * walkSpeed * Time.deltaTime;
                 rigidbody.position = rigidbody.position + displacement;
 
                 FaceDirection(displacement.normalized);
@@ -109,12 +108,21 @@ public class NPCWander : MonoBehaviour
         }
 
         Bounds regionBounds = wanderRegion.bounds;
-        if (Random.value > 0.5f)
+
+        float r = Random.value;
+        if (r > 0.3f)
         {
+            // Wander on both axes
+            return new Vector2(Random.Range(regionBounds.min.x, regionBounds.max.x), Random.Range(regionBounds.min.y, regionBounds.max.y));
+        }
+        else if (r > 0.3f)
+        {
+            // Wander on Y
             return new Vector2(transform.localPosition.x, Random.Range(regionBounds.min.y, regionBounds.max.y));
         }
         else
         {
+            // Wander on X
             return new Vector2(Random.Range(regionBounds.min.x, regionBounds.max.x), transform.localPosition.y);
         }
     }
