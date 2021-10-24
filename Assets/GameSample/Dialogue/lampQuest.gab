@@ -28,15 +28,48 @@ language english
     > setQuestStage(lampQuest, searchForLightbulb)
     > setQuestObjectiveText("Find a lightbulb.")
 
-// This is shown in place of a normal greeting when the lamp quest is active.
-[Camilla.LampQuest_Greeting_SearchForLightbulb]
-    - You're still looking for a lightbulb, right?
-    - They should be in a drawer or something.
+// Show different greetings depending on quest stage
+[Camilla.LampQuest_Main]
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        - You're still looking for a lightbulb, right?
+        - They should be in a drawer or something.
+    else if isQuestStageEqual(lampQuest, giveCamillaLightbulb)
+        (Camilla, very happy) You found one!
+        (Camilla, happy)      That's great!
+        (Camilla, sad)        Um, hey, could you uh...
+        -                     Could you change it too?
+        (Camilla, happy)      I kind of had a bad experience once!
+        : Yeah, no problem.
+        : Alright, fine...
+        (Camilla, very happy) You're the best!
+        > setQuestStage(lampQuest, replaceLightbulb)
+        > setQuestObjectiveText("Change the lightbulb.")
+    else if isQuestStageEqual(lampQuest, replaceLightbulb)
+        - Go ahead, change the lightbulb!
+        <very happy>
+        - We can chat later!
+    else if isQuestStageEqual(lampQuest, returnToCamilla)
+        <very happy>
+        - Yay, it's working again!
+        <happy>
+        - Thanks for taking care of that.
+        - What good's a burnt out lamp, anyway?
+        <annoyed>
+        - So, where was I... I was at the store, picking a lamp...
+        * You get the feeling she'll be talking for a while yet...
+        > setQuestStage(lampQuest, complete)
+        > setQuestObjectiveText("")
 
-// This is shown in place of a normal greeting when the lamp quest is active.
-[Charles.LampQuest_Greeting_SearchForLightbulb]
-    - Hmm? You're looking for a lightbulb?
-    - They should be somewhere in the kitchen.
+[Charles.LampQuest_Main]
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        - Hmm? You're looking for a lightbulb?
+        - They should be somewhere in the kitchen.
+    else if isQuestStageEqual(lampQuest, giveCamillaLightbulb)
+        - Oh, you found one!
+    else if isQuestStageEqual(lampQuest, replaceLightbulb)
+        - Oh, you found one!
+    else if isQuestStageEqual(lampQuest, returnToCamilla)
+        - Thanks for fixing the lamp!
 
 [LampQuest.FoundLightbulb]
     * After rummaging around a bit, you find a suitable lightbulb for the lamp.
@@ -44,26 +77,6 @@ language english
     (Player) I should take this to Camilla...
     > setQuestStage(lampQuest, giveCamillaLightbulb)
     > setQuestObjectiveText("Give the lightbulb to Camilla.")
-
-[Camilla.LampQuest_GiveLightbulb]
-    (Camilla, very happy) You found one!
-    (Camilla, happy)      That's great!
-    (Camilla, sad)        Um, hey, could you uh...
-    -                     Could you change it too?
-    (Camilla, happy)      I kind of had a bad experience once!
-    : Yeah, no problem.
-    : Alright, fine...
-    (Camilla, very happy) You're the best!
-    > setQuestStage(lampQuest, replaceLightbulb)
-    > setQuestObjectiveText("Change the lightbulb.")
-
-[Camilla.LampQuest_Greeting_ReplaceLightbulb]
-    - Go ahead, change the lightbulb!
-    <very happy>
-    - We can chat later!
-
-[Charles.LampQuest_Greeting_ReplaceLightbulb]
-    - Oh, you found one!
     
 [LampQuest.ReplaceLightbulb]
     * You unscrew the old light bulb.
@@ -74,18 +87,3 @@ language english
     (Player) I should talk to Camilla again.
     > setQuestStage(lampQuest, returnToCamilla)
     > setQuestObjectiveText("Talk to Camilla again.")
-
-[Camilla.LampQuest_CompleteLampQuest]
-    <very happy>
-    - Yay, it's working again!
-    <happy>
-    - Thanks for taking care of that.
-    - What good's a burnt out lamp, anyway?
-    <annoyed>
-    - So, where was I... I was at the store, picking a lamp...
-    * You get the feeling she'll be talking for a while yet...
-    > setQuestStage(lampQuest, complete)
-    > setQuestObjectiveText("")
-
-[Charles.LampQuest_CompleteLampQuest]
-    - Thanks for fixing the lamp!

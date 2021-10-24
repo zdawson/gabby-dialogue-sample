@@ -5,14 +5,8 @@ language english
 [Charles.Main]
     if isNot(charles.introduced, true)
         >> Charles.Introduction
-    else if isQuestStageEqual(lampQuest, searchForLightbulb)
-        >> Charles.LampQuest_Greeting_SearchForLightbulb
-    else if isQuestStageEqual(lampQuest, giveCamillaLightbulb)
-        >> Charles.LampQuest_Greeting_ReplaceLightbulb
-    else if isQuestStageEqual(lampQuest, replaceLightbulb)
-        >> Charles.LampQuest_Greeting_ReplaceLightbulb
-    else if isQuestStageEqual(lampQuest, returnToCamilla)
-        >> Charles.LampQuest_CompleteLampQuest
+    else if isQuestActive(lampQuest)
+        >> Charles.LampQuest_Main
     >> Charles.Greeting
 
 [Charles.Introduction]

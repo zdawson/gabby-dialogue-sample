@@ -249,6 +249,20 @@ namespace GabbyDialogueSample
                 });
             });
 
+            this.AddConditionalHandler("isQuestActive", (parameters) =>
+            {
+                string questName = Convert.ToString(parameters[0].value);
+                ActionParameter parameterQuestStage;
+
+                if (!scriptData.TryGetValue($"quest.{questName}.currentStage", out parameterQuestStage))
+                {
+                    return false;
+                }
+
+                string questStage = Convert.ToString(parameterQuestStage.value);
+                return questStage != "" && questStage != "complete";
+            });
+
             this.AddActionHandler("setQuestObjectiveText", (parameters) =>
             {
                 string objectiveText = Convert.ToString(parameters[0].value);
