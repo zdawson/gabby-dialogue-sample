@@ -5,14 +5,17 @@ public class FadeController : MonoBehaviour
 {
     public static FadeController instance = null;
 
-    [SerializeField]    
-    private UnityEngine.UI.Image overlay = null;
+    [SerializeField]
+    private UnityEngine.UI.Image fadeOverlay = null;
+    [SerializeField]
+    private UnityEngine.UI.Image flashOverlay = null;
+    private UnityEngine.UI.Image activeOverlay = null;
 
     private int fadeDirection = 0;
     private float fadeOpacity = 0.0f;
     private float fadeDuration = 0.0f;
 
-    private bool tmpInput = false;
+    private bool waitForInput = false;
 
     void Awake()
     {
@@ -21,7 +24,8 @@ public class FadeController : MonoBehaviour
 
     void Start()
     {
-        if (overlay == null)
+        activeOverlay = fadeOverlay;
+        if (activeOverlay == null)
         {
             this.enabled = false;
         }
@@ -33,21 +37,25 @@ public class FadeController : MonoBehaviour
         if (fadeDirection != 0)
         {
             fadeOpacity += fadeDirection * (Time.smoothDeltaTime / fadeDuration);
-            if (fadeOpacity >= 1.0f || fadeOpacity <= 0.0f)
+            if (fadeOpacity >= 1.0f && fadeDirection == 1)
+            {
+                fadeDirection = 0;
+            }
+            else if (fadeOpacity <= 0.0f && fadeDirection == -1)
             {
                 fadeDirection = 0;
             }
 
-            Color overlayColor = overlay.color;
+            Color overlayColor = activeOverlay.color;
             overlayColor.a = fadeOpacity;
-            overlay.color = overlayColor;
+            activeOverlay.color = overlayColor;
         }
         
-        if (tmpInput && Input.GetMouseButtonDown(0))
+        if (waitForInput && Input.GetMouseButtonDown(0))
         {
             GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = true;
             GabbyDialogueSample.SampleDialogueSystem.instance().NextLine();
-            tmpInput = false;
+            waitForInput = false;
         }
     }
 
@@ -58,17 +66,17 @@ public class FadeController : MonoBehaviour
 
     IEnumerator _FadeOut(float fadeTime)
     {
+        activeOverlay = fadeOverlay;
         GabbyDialogueSample.SampleDialogueSystem.instance().SetDialogueUIVisible(false);
         GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
 
         // Fade out
-        this.enabled = true;
         fadeDirection = 1;
         fadeDuration = fadeTime;
 
         yield return new WaitForSeconds(fadeTime);
 
-        tmpInput = true;
+        waitForInput = true;
     }
 
     public void FadeIn(float fadeTime = 0.75f)
@@ -78,43 +86,66 @@ public class FadeController : MonoBehaviour
 
     IEnumerator _FadeIn(float fadeTime)
     {
+        activeOverlay = fadeOverlay;
         GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
 
         // Fade in
-        this.enabled = true;
         fadeDirection = -1;
         fadeDuration = fadeTime;
 
         yield return new WaitForSeconds(fadeTime);
 
-        tmpInput = true;
+        waitForInput = true;
     }
 
     public void FadeOutAndIn(float fadeTime = 0.75f, float fadeInDelay = 1.5f)
     {
-        this.enabled = true;
         StartCoroutine(_FadeOutAndIn(fadeTime, fadeInDelay));
     }
 
     IEnumerator _FadeOutAndIn(float fadeTime, float delayTime)
     {
+        activeOverlay = fadeOverlay;
         GabbyDialogueSample.SampleDialogueSystem.instance().SetDialogueUIVisible(false);
         GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
 
         // Fade out
-        this.enabled = true;
         fadeDirection = 1;
         fadeDuration = fadeTime;
 
         yield return new WaitForSeconds(fadeTime + delayTime);
 
         // Fade in
-        this.enabled = true;
         fadeDirection = -1;
         fadeDuration = fadeTime;
 
         yield return new WaitForSeconds(fadeTime);
 
-        tmpInput = true;
+        waitForInput = true;
+    }
+
+    public void Flash()
+    {
+        StartCoroutine(_Flash());
+    }
+
+    IEnumerator _Flash()
+    {
+        activeOverlay = flashOverlay;
+        GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+
+        // Show flash
+        fadeDirection = 1;
+        fadeDuration = 0.05f;
+
+        yield return new WaitForSeconds(0.2f);
+
+        // Slowly hide flash
+        fadeDirection = -1;
+        fadeDuration = 0.5f;
+
+        yield return new WaitForSeconds(0.5f);
+
+        GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = true;
     }
 }

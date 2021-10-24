@@ -11,7 +11,7 @@ language english
     <happy>
     - So I just bought it!
     - It seems to work just fine and I like the look of it.
-    > setLampLit(false)
+    > setQuestStage(lampQuest, lightBurntOut)
     <annoyed>
     - What the-
     <angry>
@@ -25,25 +25,27 @@ language english
     + It's fine!
     - Hey, could you find a lightbulb please? To fix the lamp?
     (Player) I'm on it!
-    > setQuestStage(lampQuest, findLightBulb)
+    > setQuestStage(lampQuest, searchForLightbulb)
+    > setQuestObjectiveText("Find a lightbulb.")
 
 // This is shown in place of a normal greeting when the lamp quest is active.
-[Camilla.GreetingLampFindLightbulb]
+[Camilla.LampQuest_Greeting_SearchForLightbulb]
     - You're still looking for a lightbulb, right?
     - They should be in a drawer or something.
 
 // This is shown in place of a normal greeting when the lamp quest is active.
-[Charles.GreetingLampFindLightbulb]
+[Charles.LampQuest_Greeting_SearchForLightbulb]
     - Hmm? You're looking for a lightbulb?
     - They should be somewhere in the kitchen.
 
-[LightbulbQuest.FoundLightbulb]
-    * Aha!
+[LampQuest.FoundLightbulb]
     * After rummaging around a bit, you find a suitable lightbulb for the lamp.
+    (Player) Aha!
     (Player) I should take this to Camilla...
-    > setQuestStage(lamp, foundLightBulb)
+    > setQuestStage(lampQuest, giveCamillaLightbulb)
+    > setQuestObjectiveText("Give the lightbulb to Camilla.")
 
-[Camilla.FoundLightbulb]
+[Camilla.LampQuest_GiveLightbulb]
     (Camilla, very happy) You found one!
     (Camilla, happy)      That's great!
     (Camilla, sad)        Um, hey, could you uh...
@@ -52,16 +54,18 @@ language english
     : Yeah, no problem.
     : Alright, fine...
     (Camilla, very happy) You're the best!
-    > setQuestStage(lamp, replaceLightBulb)
+    > setQuestStage(lampQuest, replaceLightbulb)
+    > setQuestObjectiveText("Change the lightbulb.")
 
-[Camilla.GreetingLampReplaceLightbulb]
+[Camilla.LampQuest_Greeting_ReplaceLightbulb]
     - Go ahead, change the lightbulb!
+    <very happy>
     - We can chat later!
 
-[Charles.GreetingLampReplaceLightbulb]
+[Charles.LampQuest_Greeting_ReplaceLightbulb]
     - Oh, you found one!
     
-[LightbulbQuest.ReplaceLightBulb]
+[LampQuest.ReplaceLightbulb]
     * You unscrew the old light bulb.
     * Yep, that's burnt out alright...
     * Tossing the old bulb into the trash, you screw in the new one.
@@ -69,15 +73,19 @@ language english
     + It's nice and bright!
     (Player) I should talk to Camilla again.
     > setQuestStage(lampQuest, returnToCamilla)
+    > setQuestObjectiveText("Talk to Camilla again.")
 
-[Camilla.CompleteLampQuest]
+[Camilla.LampQuest_CompleteLampQuest]
     <very happy>
     - Yay, it's working again!
     <happy>
     - Thanks for taking care of that.
     - What good's a burnt out lamp, anyway?
+    <annoyed>
     - So, where was I... I was at the store, picking a lamp...
     * You get the feeling she'll be talking for a while yet...
     > setQuestStage(lampQuest, complete)
+    > setQuestObjectiveText("")
 
-// TODO a bunch of alternate inspection text for this quest
+[Charles.LampQuest_CompleteLampQuest]
+    - Thanks for fixing the lamp!

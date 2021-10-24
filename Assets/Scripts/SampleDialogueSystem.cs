@@ -43,13 +43,25 @@ namespace GabbyDialogueSample
             dialogueEngine.NextLine();
         }
 
+        private static bool s_isQuitting = false;
         public static SampleDialogueSystem instance()
         {
-            if (!_instance)
+            if (!_instance && !s_isQuitting)
             {
                 _instance = new GameObject("_SampleDialogueSystem").AddComponent<SampleDialogueSystem>();
             }
             return _instance;
+        }
+
+        private void OnDestroy()
+        {
+            _instance = null;
+            s_isQuitting = true;
+        }
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()

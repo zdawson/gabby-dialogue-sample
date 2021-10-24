@@ -11,20 +11,45 @@ language english
     * There are grease stains on the floor in front of it though... Seems like something big spilled!
 
 [Inspect.Cabinet1]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * I don't see any lightbulbs here, just kitchen gadgets...
+        end
+
     * It's filled with kitchen gadgets.
     * Is that a strawberry huller? Huh.
 
 [Inspect.Cabinet2]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * Just cutlery, nothing else.
+        end
+
     * Looks like a bunch of cutlery in this drawer.
     * Pretty new looking, too!
 
 [Inspect.Cabinet3]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * No lightbulbs here!
+        end
+        
     * There are pots and pans of all shapes and sizes in here.
 
 [Inspect.Cabinet4]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * I feel like I've looked everywhere!
+        end
+
     * Hmm... Is it rude of me to be snooping?
     
 [Inspect.Sink]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * You take a look under the sink.
+        >> LampQuest.FoundLightbulb
+
     * I can see my reflection in the faucet.
 
 [Inspect.Table]
@@ -42,10 +67,21 @@ language english
     * Maybe later...
 
 [Inspect.Stairs]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * Camilla would have told me if they were downstairs, right?
+        * I'd better stay up here.
+        end
+
     * These are the stairs to go down to the basement.
     * I think it would be best if I stayed up here!
 
 [Inspect.Bookshelf]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * Hmm... No lightbulbs here.
+        end
+
     if isEqual(bookshelf.bookIndex, 1)
         > set(bookshelf.bookIndex, 2)
         >> Inspect.Bookshelf2
@@ -101,6 +137,19 @@ language english
     * I guess those kids are Charles and Camilla?
 
 [Inspect.Lamp]
+    // Special dialogue for lamp quest
+    if isQuestStageEqual(lampQuest, searchForLightbulb)
+        * I guess it was its time.
+        end
+    else if isQuestStageEqual(lampQuest, giveCamillaLightbulb)
+        * I should talk to Camilla.
+        end
+    else if isQuestStageEqual(lampQuest, replaceLightbulb)
+        >> LampQuest.ReplaceLightbulb
+        end
+    else if isQuestStageEqual(lampQuest, returnToCamilla)
+        * It's shining bright again!
+        end
     * Looks like a pretty reliable lamp!
 
 [Inspect.Window]

@@ -20,8 +20,11 @@ namespace GabbyDialogueSample.GameSample
 
         private void OnDisable()
         {
-            GabbyDialogueSample.SampleDialogueSystem.instance().DialogueStarted -= OnDialogueStarted;
-            GabbyDialogueSample.SampleDialogueSystem.instance().DialogueEnded -= OnDialogueEnded;
+            if (GabbyDialogueSample.SampleDialogueSystem.instance() != null)
+            {
+                GabbyDialogueSample.SampleDialogueSystem.instance().DialogueStarted -= OnDialogueStarted;
+                GabbyDialogueSample.SampleDialogueSystem.instance().DialogueEnded -= OnDialogueEnded;   
+            }
         }
 
         public void OnInteract()

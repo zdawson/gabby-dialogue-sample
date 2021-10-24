@@ -18,6 +18,14 @@ language english
 [Camilla.Main]
     if isNot(camilla.introduced, true)
         >> Camilla.Introduction
+    else if isQuestStageEqual(lampQuest, searchForLightbulb)
+        >> Camilla.LampQuest_Greeting_SearchForLightbulb
+    else if isQuestStageEqual(lampQuest, giveCamillaLightbulb)
+        >> Camilla.LampQuest_GiveLightbulb
+    else if isQuestStageEqual(lampQuest, replaceLightbulb)
+        >> Camilla.LampQuest_Greeting_ReplaceLightbulb
+    else if isQuestStageEqual(lampQuest, returnToCamilla)
+        >> Camilla.LampQuest_CompleteLampQuest
     else if showRandomly(0.02) // Rare greeting, 1 in 50
         >> Camilla.Greeting4
     else

@@ -180,6 +180,87 @@ namespace GabbyDialogueSample
                 return new ActionResult {handled = true, autoAdvance = true};
             });
 
+            // Lamp quest actions
+            // ==================
+            GameObject questUI = GameObject.Instantiate(Resources.Load("Prefabs/QuestUI", typeof(GameObject))) as GameObject;
+            questUI.SetActive(false);
+
+            GameObject lampOn = GameObject.Find("LampOn") as GameObject;
+            GameObject lampOff = GameObject.Find("LampOff") as GameObject;
+            lampOff.SetActive(false);
+
+            this.AddActionHandler("setQuestStage", (parameters) =>
+            {
+                string questName = Convert.ToString(parameters[0].value);
+                string questStage = Convert.ToString(parameters[1].value);
+
+                if (questName != "lampQuest")
+                {
+                    return new ActionResult {handled = false};
+                }
+
+                switch (questStage)
+                {
+                    case "lightBurntOut":
+                    {
+                        if (lampOn == null || lampOff == null || FadeController.instance == null)
+                        {
+                            Debug.LogError("Missing gameobjects for lightBurntOut quest stage.");
+                            return new ActionResult {handled = false};
+                        }
+
+                        // Update the scene
+                        lampOn.SetActive(false);
+                        lampOff.SetActive(true);
+                        FadeController.instance.Flash();
+
+                        break;
+                    }
+                    case "returnToCamilla":
+                    {
+                        if (lampOn == null || lampOff == null)
+                        {
+                            Debug.LogError("Missing gameobjects for replaceLightbulb quest stage.");
+                            return new ActionResult {handled = false};
+                        }
+
+                        // Update the scene
+                        lampOn.SetActive(true);
+                        lampOff.SetActive(false);
+
+                        break;
+                    }
+                }
+
+                string key = Convert.ToString($"quest.{questName}.currentStage");
+                scriptData[key] = parameters[1];
+                
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
+            this.AddConditionalHandler("isQuestStageEqual", (parameters) =>
+            {
+                string questName = Convert.ToString(parameters[0].value);
+
+                return isEqual(new List<ActionParameter>()
+                {
+                    new ActionParameter(){type = ParameterType.String, value = $"quest.{questName}.currentStage"},
+                    parameters[1]
+                });
+            });
+
+            this.AddActionHandler("setQuestObjectiveText", (parameters) =>
+            {
+                string objectiveText = Convert.ToString(parameters[0].value);
+
+                TMPro.TMP_Text uiText = questUI.GetComponentInChildren<TMPro.TMP_Text>();
+                uiText.text = objectiveText;
+
+                questUI.SetActive(objectiveText.Length > 0);
+
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
+
             // Test stuff to remove eventually
             // ===============================
             this.AddActionHandler(nameof(action), action);
