@@ -30,20 +30,48 @@ public class DialogueUI : MonoBehaviour
     [SerializeField]
     private UnityEngine.UI.Button backButton = null;
 
+    private Vector2 mouseDownPos;
+
     private void Awake()
     {
-        clickHandler.onClick.AddListener(() => OnForward());
+        clickHandler.onClick.AddListener(() => {
+            if (GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue)
+            {
+                OnForward();
+            }
+        });
         backButton.onClick.AddListener(() => OnBack());
         quitButton.onClick.AddListener(() => OnQuit());
     }
 
     private void Update()
     {
+        if (!GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue)
+        {
+            return;
+        }
+
+        // Allow clicking anywhere to advance dialogue, but only if the mouse isn't dragged past a certain threshold
+        // The click handler UI panel will catch most clicks, but this allows for clicking the text to advance while not messing up scrolling
+        if (Input.GetMouseButtonDown(0))
+        {
+            mouseDownPos = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Vector2 mouseUpPos = Input.mousePosition;
+            if ((mouseUpPos - mouseDownPos).sqrMagnitude < 10)
+            {
+                OnForward();
+                return;
+            }
+        }
+
         // Handle input
-        if (GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue
-        && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
         {
             OnForward();
+            return;
         }
     }
 

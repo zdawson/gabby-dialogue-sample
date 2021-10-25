@@ -55,7 +55,7 @@ namespace GabbyDialogueSample
                 textMesh.maxVisibleCharacters = textMesh.textInfo.characterCount;
                 timeSinceLastReveal = 0.0f;
                 this.enabled = false;
-                Invoke(nameof(AllowSkip), float.Epsilon); // Allow skipping dialogue in the next frame
+                Invoke(nameof(AllowSkip), 0.15f); // Allow skipping dialogue after a short delay
             }
         }
 

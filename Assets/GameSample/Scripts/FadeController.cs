@@ -28,7 +28,12 @@ public class FadeController : MonoBehaviour
         if (activeOverlay == null)
         {
             this.enabled = false;
+            return;
         }
+
+        // Start from black
+        fadeOpacity = 1.0f;
+        SetOverlayOpacity(fadeOverlay, fadeOpacity);
     }
 
     void Update()
@@ -46,9 +51,7 @@ public class FadeController : MonoBehaviour
                 fadeDirection = 0;
             }
 
-            Color overlayColor = activeOverlay.color;
-            overlayColor.a = fadeOpacity;
-            activeOverlay.color = overlayColor;
+            SetOverlayOpacity(activeOverlay, fadeOpacity);
         }
         
         if (waitForInput && Input.GetMouseButtonDown(0))
@@ -59,16 +62,20 @@ public class FadeController : MonoBehaviour
         }
     }
 
-    public void FadeOut(float fadeTime = 0.75f)
+    public void FadeOut(float fadeTime = 0.75f, bool shouldContinueAfterInput = true)
     {
-        StartCoroutine(_FadeOut(fadeTime));
+        StartCoroutine(_FadeOut(fadeTime, shouldContinueAfterInput));
     }
 
-    IEnumerator _FadeOut(float fadeTime)
+    IEnumerator _FadeOut(float fadeTime, bool shouldContinueAfterInput)
     {
         activeOverlay = fadeOverlay;
-        GabbyDialogueSample.SampleDialogueSystem.instance().SetDialogueUIVisible(false);
-        GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+
+        if (shouldContinueAfterInput)
+        {
+            GabbyDialogueSample.SampleDialogueSystem.instance().SetDialogueUIVisible(false);
+            GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+        }
 
         // Fade out
         fadeDirection = 1;
@@ -76,18 +83,25 @@ public class FadeController : MonoBehaviour
 
         yield return new WaitForSeconds(fadeTime);
 
-        waitForInput = true;
+        if (shouldContinueAfterInput)
+        {
+            waitForInput = true;
+        }
     }
 
-    public void FadeIn(float fadeTime = 0.75f)
+    public void FadeIn(float fadeTime = 0.75f, bool shouldContinueAfterInput = true)
     {
-        StartCoroutine(_FadeIn(fadeTime));
+        StartCoroutine(_FadeIn(fadeTime, shouldContinueAfterInput));
     }
 
-    IEnumerator _FadeIn(float fadeTime)
+    IEnumerator _FadeIn(float fadeTime, bool shouldContinueAfterInput)
     {
         activeOverlay = fadeOverlay;
-        GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+
+        if (shouldContinueAfterInput)
+        {
+            GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+        }
 
         // Fade in
         fadeDirection = -1;
@@ -95,19 +109,26 @@ public class FadeController : MonoBehaviour
 
         yield return new WaitForSeconds(fadeTime);
 
-        waitForInput = true;
+        if (shouldContinueAfterInput)
+        {
+            waitForInput = true;
+        }
     }
 
-    public void FadeOutAndIn(float fadeTime = 0.75f, float fadeInDelay = 1.5f)
+    public void FadeOutAndIn(float fadeTime = 0.75f, float fadeInDelay = 1.5f, bool shouldContinueAfterInput = true)
     {
-        StartCoroutine(_FadeOutAndIn(fadeTime, fadeInDelay));
+        StartCoroutine(_FadeOutAndIn(fadeTime, fadeInDelay, shouldContinueAfterInput));
     }
 
-    IEnumerator _FadeOutAndIn(float fadeTime, float delayTime)
+    IEnumerator _FadeOutAndIn(float fadeTime, float delayTime, bool shouldContinueAfterInput)
     {
         activeOverlay = fadeOverlay;
-        GabbyDialogueSample.SampleDialogueSystem.instance().SetDialogueUIVisible(false);
-        GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+
+        if (shouldContinueAfterInput)
+        {
+            GabbyDialogueSample.SampleDialogueSystem.instance().SetDialogueUIVisible(false);
+            GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+        }
 
         // Fade out
         fadeDirection = 1;
@@ -121,7 +142,10 @@ public class FadeController : MonoBehaviour
 
         yield return new WaitForSeconds(fadeTime);
 
-        waitForInput = true;
+        if (shouldContinueAfterInput)
+        {
+            waitForInput = true;
+        }
     }
 
     public void Flash()
@@ -147,5 +171,12 @@ public class FadeController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         GabbyDialogueSample.SampleDialogueSystem.instance().AllowAdvancingDialogue = true;
+    }
+
+    private void SetOverlayOpacity(UnityEngine.UI.Image overlay, float opacity)
+    {
+        Color overlayColor = overlay.color;
+        overlayColor.a = opacity;
+        overlay.color = overlayColor;
     }
 }

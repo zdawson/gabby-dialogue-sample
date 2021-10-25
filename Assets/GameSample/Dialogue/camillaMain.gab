@@ -18,6 +18,8 @@ language english
 [Camilla.Main]
     if isNot(camilla.introduced, true)
         >> Camilla.Introduction
+    else if isEqual(camilla.angry, true)
+        >> Camilla.AngryGreeting
     else if isQuestActive(lampQuest)
         >> Camilla.LampQuest_Main
     else if showRandomly(0.02) // Rare greeting, 1 in 50
@@ -89,7 +91,7 @@ language english
 [Camilla.SelectSample]
     - Wanna hear a story, or ask me something? Or just chat?
     <very happy>
-    + I'm up for anything!
+    - I'm up for anything!
     : Let's chat!
         (Player) Ok, let's chat!
         > fadeOut()
@@ -170,9 +172,14 @@ language english
         (Camilla, sad) Oh, ok...
         <happy>
         - No problem.
-        - I mean, that's kinda weird though, right? Because you're the one who walked over here and started talking to me.
+        <sad>
+        - I mean, that's kinda weird though, right?
+        <annoyed>
+        - Because you're the one who walked over here and started talking to me.
         <annoyed>
         - Don't you think that's kinda rude?
+
         * You slowly back away, sensing that this will go on for a while.
+
         <angry>
         - Oh, fine! Go already!~

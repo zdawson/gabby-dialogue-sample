@@ -406,12 +406,18 @@ namespace GabbyDialogueSample
 
         private ActionResult fadeOut(List<ActionParameter> parameters)
         {
-            // TODO do something with inputs
             if (FadeController.instance == null)
             {
                 return new ActionResult {handled = false};
             }
-            FadeController.instance.FadeOut();
+
+            float fadeTime = 0.75f;
+            if (parameters.Count > 0)
+            {
+                fadeTime = Convert.ToSingle(parameters[0].value);
+            }
+            
+            FadeController.instance.FadeOut(fadeTime);
 
             return new ActionResult {handled = true, autoAdvance = false};
         }
@@ -423,7 +429,14 @@ namespace GabbyDialogueSample
             {
                 return new ActionResult {handled = false};
             }
-            FadeController.instance.FadeIn();
+
+            float fadeTime = 0.75f;
+            if (parameters.Count > 0)
+            {
+                fadeTime = Convert.ToSingle(parameters[0].value);
+            }
+            
+            FadeController.instance.FadeIn(fadeTime);
 
             return new ActionResult {handled = true, autoAdvance = true};
         }
@@ -435,7 +448,21 @@ namespace GabbyDialogueSample
             {
                 return new ActionResult {handled = false};
             }
-            FadeController.instance.FadeOutAndIn();
+
+            float fadeTime = 0.75f;
+            float delayTime = 1.5f;
+
+            if (parameters.Count == 1)
+            {
+                fadeTime = Convert.ToSingle(parameters[0].value);
+            }
+            else if (parameters.Count == 2)
+            {
+                fadeTime = Convert.ToSingle(parameters[0].value);
+                delayTime = Convert.ToSingle(parameters[1].value);
+            }
+
+            FadeController.instance.FadeOutAndIn(fadeTime, delayTime);
 
             return new ActionResult {handled = true, autoAdvance = false};
         }

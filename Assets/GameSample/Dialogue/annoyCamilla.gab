@@ -6,10 +6,11 @@ language english
 
 [Camilla.CharlesComplaints]
     <angry>
-    - ...and, like, he's always bugging me about my sample stories being too long winded, and not making any sense.
+    - ...and, like, he's always bugging me about my sample stories being too long winded, and telling me that they don't make any sense.
     - And he accuses me of being poorly written, like, how is that even my fault!?
-    - Plus, like, I'm waaay cooler than he is.
     <annoyed>
+    - Plus, like, I'm waaay cooler than he is.
+    <sad>
     - Right? Like, aren't I way cooler?
 
     : Yeah, you're cooler!

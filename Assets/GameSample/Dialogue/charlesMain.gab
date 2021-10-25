@@ -2,25 +2,26 @@
 gabby 0.2
 language english
 
+// This is shown at the start of the game
+[Charles.GameStart]
+    - Good day! I'm <b>Charles</b>, the test character.
+
+    (Camilla, angry) <b>*Ahem*</b>, <i>the</i> test character?! There's two of us, I exist too Charles!~
+
+    (Charles, very happy) Ah, yes yes, have you met my friend Camilla?
+    (Charles, bored)      <size=25>She's a little short tempered.</size>
+    (Charles, happy)      In this sample, you can walk around and explore.
+    (Charles, very happy) Most objects are interactive, and of course you can talk to Camilla and me!
+    (Charles, happy)      I can provide you with more information about the sample, and Camilla will demonstrate various examples!
+
+    > set(charles.introduced, true)
+
 [Charles.Main]
     if isNot(charles.introduced, true)
         >> Charles.Introduction
     else if isQuestActive(lampQuest)
         >> Charles.LampQuest_Main
     >> Charles.Greeting
-
-[Charles.Introduction]
-    - Good day! I'm <b>Charles</b>, the test character.
-
-    (Camilla, angry) <b>*Ahem*</b>, <i>the</i> test character?! There's two of us, I exist too Charles!~
-
-    (Charles, very happy) Ah, yes yes, have you met my friend Camilla?
-    (Charles, bored)      <size=20>She's a little short tempered.</size>
-    (Charles, happy)      In this sample, you can walk around and explore.
-    -                     Most objects are interactive, and of course you can talk to Camilla and me!
-    (Charles, happy)      I can provide you with more information about the sample, and Camilla will demonstrate various examples!
-
-    > set(charles.introduced, true)
 
 [Charles.Greeting]
     (Charles, very happy) Hello again!
@@ -65,7 +66,7 @@ language english
     : Nah, I'm good!
         (Player)  Nah, I'm good!
         (Charles) Ok!
-        +         Well, if there's ever anything you want to talk about, don't be shy!
+        -         Well, if there's ever anything you want to talk about, don't be shy!
 
 // This is split from the parent dialogue to help keep things easy to read
 [Charles.CamillaSamples]

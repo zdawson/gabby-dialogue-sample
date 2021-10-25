@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     private float drag = 0.3f;
 
     private float acceleration = 0.5f;
-    private Vector2 facing = Vector2.down;
+    private Vector2 facing = Vector2.up;
 
     private bool disableInput = false;
 
