@@ -122,7 +122,7 @@ language english
         - Yeah, so we're about to roll evasion right?
         - But the rogue we were with was real good, they had an idea to leap out and deactivate the trap before it could harm us!
         - They had to roll a perfect 20 though!
-        if showRandomly(0.5) // Don't worry, it's not actually a 1 in 20 chance to succeed!
+        if showRandomly(0.5) // It's not actually a 1 in 20 chance to succeed
             // Success
             <very happy>
             - And they did it!

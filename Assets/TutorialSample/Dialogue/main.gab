@@ -1,0 +1,14 @@
+gabby 0.2
+language english
+
+// This is the main entry point for the entire sample
+// From here, the player can navigate to the tutorials or to the game sample
+[Gabby.Main]
+    (Gabby) Hey!
+    - I'm Gabby.
+    * TODO: more dialogue
+    (Gabby) So, do you want to play the game, or view the tutorial for writing with Gabby?
+    : Play the Game sample.
+        > startGameSample()
+    : Go to the Tutorial.
+        >> Gabby.TutorialIntroduction

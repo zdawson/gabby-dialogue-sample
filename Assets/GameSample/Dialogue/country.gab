@@ -5,31 +5,33 @@ gabby 0.2
 language english
 
 [Camilla.Country]
-    - ...and really, it was one of the most beautiful places I've ever seen!
-    - To think, if it weren't for that shipwreck I wouldn't have ever found it...
-    - Oh, and also that swordfight with the pirates.
-    - But that stuff's boring!
+    (Camilla, happy)   ...and really, it was one of the most beautiful places I've ever seen!
+    (Camilla, sad)     To think, if it weren't for that shipwreck I wouldn't have ever found it...
+    (Camilla, annoyed) Oh, and also that swordfight with the pirates.
+    (Camilla, happy)   But that stuff's boring!
 
     (Player) Wait, I want to hear about the pi-
 
-    <very happy>
-    (Camilla) Boring!
-    + What's interesting about the story is that while I was there, I found this beautiful city.
-    - It looked ancient! The roads were paved with large, smooth cobblestone, and the buildings were engraved with runes and inlaid with gold.
-    - And everyone spoke an ancient language. And they taught it to me!
-    - So, here begins your lesson in speaking <color=#fcd303>Gabarian</color>!
+    (Camilla, very happy) Boring!
+    <happy>
+    +                     What's interesting about the story is that while I was there, I found this beautiful city.
+    (Camilla, happy)      It looked ancient! The roads were paved with large, smooth cobblestone, and the buildings were engraved with runes and inlaid with gold.
+    -                     And everyone spoke an ancient language. And they taught it to me!
+    (Camilla, very happy) So, here begins your lesson in speaking <color=#fcd303>Gabarian</color>!
 
-    * This sample demonstrates basic localization.
-    * Use the buttons shown to switch between languages.
+    * This sample demonstrates localization.
+    * The language will be set to Gabarian for the duration of the next dialogue, and then it will be repeated in English.
 
-    - So, Gabarian is pretty simple.
+    - So, Gabarian is pretty simple...
     > setLanguage("gabarian")
-    >> Camilla.LocalizedDialogue
+    >> Camilla.LocalizedDialogueExample
 
-[Camilla.LocalizedDialogue]
+// The Gabarian version of this dialogue sets the language back to English and links here
+[Camilla.LocalizedDialogueExample]
     - I just said, "This is how you say hello!"
-    - Isn't that neat?
-    - It only took me a few weeks to become fluent!
+    - "Isn't that neat?"
+    <very happy>
+    - "It only took me a few weeks to become fluent!"
     >> Camilla.CountryEnd
 
 [Camilla.CountryEnd]

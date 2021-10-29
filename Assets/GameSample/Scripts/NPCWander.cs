@@ -82,11 +82,14 @@ public class NPCWander : MonoBehaviour
                 FaceDirection(toPlayer.normalized);
             }
 
-            timeUntilWander -= Time.deltaTime;
-            if (timeUntilWander <= 0)
+            if (wanderRegion != null)
             {
-                targetWanderPosition = GetRandomPosition();
-                isWalking = true;
+                timeUntilWander -= Time.deltaTime;
+                if (timeUntilWander <= 0)
+                {
+                    targetWanderPosition = GetRandomPosition();
+                    isWalking = true;
+                }
             }
         }
     }

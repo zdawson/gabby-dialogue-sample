@@ -44,7 +44,7 @@ namespace GabbyDialogueSample
                 if (textMesh.maxVisibleCharacters > textMesh.textInfo.characterCount)
                 {
                     this.enabled = false;
-                    AllowSkip();
+                    Invoke(nameof(AllowSkip), 0.1f); // Allow skipping dialogue after a short delay
                     return;
                 }
             }
@@ -55,7 +55,7 @@ namespace GabbyDialogueSample
                 textMesh.maxVisibleCharacters = textMesh.textInfo.characterCount;
                 timeSinceLastReveal = 0.0f;
                 this.enabled = false;
-                Invoke(nameof(AllowSkip), 0.15f); // Allow skipping dialogue after a short delay
+                Invoke(nameof(AllowSkip), 0.2f); // Allow skipping dialogue after a short delay
             }
         }
 

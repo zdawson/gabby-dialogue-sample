@@ -6,20 +6,21 @@ language english
 [Charles.GameStart]
     - Good day! I'm <b>Charles</b>, the test character.
 
-    (Camilla, angry) <b>*Ahem*</b>, <i>the</i> test character?! There's two of us, I exist too Charles!~
+    (Camilla, angry) Umm, <i>the</i> test character?! There's two of us, I exist too Charles!~
 
-    (Charles, very happy) Ah, yes yes, have you met my friend Camilla?
+    (Charles, very happy) Ah, yes yes, have you met <b>Camilla</b>?
     (Charles, bored)      <size=25>She's a little short tempered.</size>
     (Charles, happy)      In this sample, you can walk around and explore.
     (Charles, very happy) Most objects are interactive, and of course you can talk to Camilla and me!
-    (Charles, happy)      I can provide you with more information about the sample, and Camilla will demonstrate various examples!
+    (Charles, happy)      If you talk to me, I will provide you with more information about this sample.
 
-    > set(charles.introduced, true)
+    (Camilla, happy)      And if you talk to me, you can see a bunch of example dialogues in action!
+    
+    (Charles, very happy) Yep, that about covers it!
+    (Charles, happy)      Feel free to look around now, and remember to take a look at the dialogue scripts to learn how things work!
 
 [Charles.Main]
-    if isNot(charles.introduced, true)
-        >> Charles.Introduction
-    else if isQuestActive(lampQuest)
+    if isQuestActive(lampQuest)
         >> Charles.LampQuest_Main
     >> Charles.Greeting
 
@@ -43,7 +44,7 @@ language english
         >> Charles.CamillaSamples
     : What is there to do here?
         (Player) What else is there to do here?
-        (Charles, very happy) There's plenty to do!
+        (Charles, very happy) Ah, there's plenty to do!
         (Charles, happy)      You could play a game of Nim with Camilla, just ask her about <b>a fun game</b>.
         -                     Or you could talk to her about <b>her lamp</b>, and maybe something interesting will happen!
         -                     Aside from that, look around and see what you can find.
@@ -52,114 +53,367 @@ language english
     : How can I learn to write Gabby scripts?
         (Player) How can I learn to write Gabby scripts?
         (Charles, very happy) That's easy!
-        (Charles, happy)      Start by exploring the sample, and get an idea of the things you can do.
-        -                     Then start browsing the dialogue scripts to "peek behind the curtains" a little.
+        (Charles, happy)      Start by exploring the sample to get an idea of the things you can do.
+        -                     Then read the dialogue scripts to "peek behind the curtains" a little.
         -                     Don't worry if it's overwhelming at first - there's a lot to the samples, but as you break things down, they're very simple!
         <very happy>
+        -                     The hardest part of writing Gabby scripts is, well, the writing!
         -                     When you're done reading through the sample dialogue, talk to Gabby and Kay. They're great at teaching the language more directly.
         -                     And finally, the best way to learn is by doing.
         <very happy>
-        -                     Don't be afraid to start hacking away at the samples to change the dialogue, or to start a fresh project!
+        -                     So don't be afraid to start hacking away at the samples to change the dialogue, or to start a fresh project!
         <bored>
         +                     Just don't make me say anything embarrassing...
+        <very happy>
+        -                     I hope that helps, and I look forward to seeing what you do with Gabby!
 
+    : What can I do with Gabby?
+        (Player) What can I do with Gabby?
+        (Charles, very happy) Ah!
+        <happy>
+        +                     Well, maybe you want to add dialogue to a game you're making?
+        (Charles, happy)      Or maybe make a visual novel?
+        <very happy>
+        -                     Gabby can help you do that!
+        -                     The basic idea is that Gabby simplifies writing dialogue, and makes it easy to integrate into a game.
+        <very happy>
+        -                     That way, when you're writing dialogue, you can focus on what's important - the writing!
+        -                     Of course, a lot of the time you need a little more than just dialogue.
+        -                     Games often trigger events during dialogue sequences, or maybe they alter the dialogue based on things the player has done.
+        <very happy>
+        -                     Gabby makes this easy too, with features like <b>actions</b>, <b>jumps</b>, and <b>conditionals</b>!
+        -                     I encourage you to talk to Gabby and Kay to learn more.
+        <very happy>
+        -                     And don't forget to take a look at the sample scripts!
+
+    : How do I leave?
+        (Player) How do I leave?
+        (Charles) Ah, want to go see Gabby and Kay?
+        <very happy>
+        -         Just head out through the door when you're finished playing the sample!
+        
     : Nah, I'm good!
         (Player)  Nah, I'm good!
         (Charles) Ok!
         -         Well, if there's ever anything you want to talk about, don't be shy!
 
-// This is split from the parent dialogue to help keep things easy to read
 [Charles.CamillaSamples]
-    (Charles) Ah! You want to know what to talk to Camilla about, hmm?
-    - Well, each conversation topic she offers is actually a little sample.
-    - These samples are intended to show off a specific feature or a certain way of using Gabby.
-    <very happy>
-    - Hopefully this will make it easier to learn to use the language in different ways!
+    (Charles, happy)      Ah! You want to know what to talk to Camilla about, hmm?
+    -                     Well, each conversation topic she offers is actually a little sample.
+    -                     These samples are intended to show off a specific feature, or a certain way of using Gabby.
+    (Charles, very happy) They're mostly inspired by different game use cases, too!
+    -                     Hopefully this will make it easier to learn to use the language in different ways!
 
-    - So, how about I go over what each sample intends to demonstrate, and then you can go talk to Camilla?
+    (Charles, happy)      Now, would you like me to go over everything, or ask about something more specific?
+
+    : Let's go over everything!
+        (Player) Let's go over everything!
+
+        (Charles, happy) Alright, I'll talk briefly about each of Camilla's samples, and then you can go talk to her!
+        >> Charles.AllCamillaSamples
+    : I've got some specific questions.
+        (Player) I've got some specific questions.
+
+        (Charles, happy) Alright, then ask away!
+        >> Charles.CamillaSamplesLoop
     : Sure!
-        (Charles, very happy) Great!
+        (Player) Sure!
 
-        // Dungeon
-        (Charles, happy) To begin with, you can talk to her about <b>one of her many dungeon delving stories</b>.
-        - This is a sample that demonstrates randomly changing dialogue.
-        - In other words, every time you choose this conversation, the resulting dialogue will be slightly different.
-        - Take a look at the script file to see how, but the particular mechanism it uses is <b>if</b> statements with an action called <b>showRandomly</b>.
-        - That action is implemented in C#. Feel free to grab it and use it in your own game!
-        
-        // Country
-        - You can also talk to her about <b>a far away country</b>.
-        + You know... The one <b>that you're not really sure actually exists</b>.
-        - I'm still not sure myself!
+        (Charles, very happy) Ah!
+        <sad>
+        + Er...
+        <bored>
+        - It was a multiple choice question!
+        (Charles, happy) Shall I go over everything, then?
+        : Yes
+            (Player) Let's go over everything!
+
+            (Charles, very happy) Alright, everything it is!
+            >> Charles.AllCamillaSamples
+        : No
+            (Player) I've got some specific questions.
+
+            (Charles, happy) Alright, then ask away!
+            >> Charles.CamillaSamplesLoop
+        : Sure!
+            (Player) Sure!
+
+            (Charles, annoyed) Ok... 
+            (Charles, happy)   I'll go over everything, then!
+            >> Charles.AllCamillaSamples
+
+    : On second thought, I'm going to look around some more.
+        (Player) On second thought, I'm going to look around some more.
+        (Charles, sad) Ah- 
+        <happy>
+        + Not a problem, I hope you enjoy!
+
+[Charles.CamillaSamplesLoop]
+    (Charles) What sample do you want to learn about?
+    : The dungeon sample.
+        (Player) The dungeon sample.
+        (Charles, very happy) Ah, one of her many dungeon delving stories?
+
+        // TODO use dialogue insertion here
+
+        (Charles, happy) The dungeon sample demonstrates randomly changing dialogue.
+        <very happy>
+        - In other words, every time you choose this conversation, the resulting dialogue will be slightly different!
+        <happy>
+        - It's easiest to understand by looking at the script. But basically, it makes use of <b>conditionals</b>!
+        - There's an action called <b>showRandomly</b> that just generates a random number.
+        - That's used along with an if statement to choose one of a few available paths.
+        - Some paths are more common than others, so that "risky" options are less likely to succeed than "safe" ones.
+        <very happy>
+        - Maybe in your game, these rolls could be tied to the player's attributes?
+        - Oh, and if you feel like it, you can take a look at the C# implementation for that action, or even use it in your game!
+
+    : The faraway country sample.
+        (Player) The faraway country sample.
+        (Charles, bored) Ah, the faraway country story...
+        <sad>
+        - You know, I'm not sure if it really exists...
 
         (Camilla, annoyed) It EXISTS, Charles...
 
-        (Charles, happy) Ah! See, it does exist!
-        - Well anyway, that starts a sample that demonstrates localization.
-        - It's quite basic, but should give you an idea of one way you could approach it for your game!
+        (Charles, happy) Ah! Ok, I suppose it does exist!
         
-        // Sword
-        - Another topic to bring up is that <b>sword she found in the forest</b>.
-        - This one's very simple, it's really just meant to show how actions can be integrated in your dialogue scripts.
-        - You can also use the example actions as a starting point for similar actions in your own game:
-        + Giving and taking away items, or displaying images as popups.
+        (Charles, very happy) This sample demonstrates localization using the <b>language</b> keyword!
+        <happy>
+        - It's quite basic, but should give you an idea of how localization works in Gabby.
+        - Gabby and Kay have more to say on this topic in the tutorial!
 
-        // Recipe
-        - Then there's that <b>strange recipe she learned during her travels</b>.
+    : The sword sample.
+        (Player) The sword sample.
+        (Charles, happy) Ah, her story about that sword she found in the forest!
+
+        (Charles, happy) This one's very simple, it's really just meant to show how actions can be integrated in your dialogue scripts.
+        - It's especially geared towards some of the things you might want to do in a visual novel.
         <very happy>
-        - You get to cook in this one!
-        - This sample shows how you can write branching dialogue with player choices.
-        - There are a few different endings depending on how well you cook!
+        - Showing images, managing items, that sort of thing!
+        - Of course, compared to a real visual novel, the way these actions are implemented is quite oversimplified.
+        <very happy>
+        - But it should give you an idea of how to work with similar concepts!
 
-        // Game
-        - Next up is <b>a fun game</b> that someone taught her.
-        - It's called Nim if I remember correctly! It's pretty interesting.
-        - This sample demonstrates a very simple game that's controlled through conversation options.
-        - See if you can figure out the trick to it!
+    : The cooking sample.
+        (Player) The cooking sample.
+        (Charles, very happy) Ah, the recipe she learned while travelling abroad!
+        
+        (Charles, happy) The cooking sample lets the player make various choices, causing branches in the story.
+        <very happy>
+        - In other words, it's sort of a choose-your-own adventure!    
+        - It even has multiple endings, depending on how well you two can cook together!
+        - It works by using <b>actions</b> to set whether each step of the cooking process was successful.
+        - Then the ending is chosen based on which steps succeeded or failed.
+        <very happy>
+        - You should take a look at the script, and add lots of branching dialogue to your game!
 
-        // Lamp
-        - You can also talk to her about <b>that lamp in the corner</b>.
-        - Sound boring? Maybe! But it's far from it!
+    : The game sample.
+        (Player) The game sample.
+        (Charles, very happy) Oh yes, her game!
+
+        (Charles, happy) It's called Nim if I remember correctly! It's pretty interesting.
+        - This sample demonstrates a very simple game that's controlled through dialogue options.
+        - The flow of the game is controlled entirely from Gabby, with some of the logic being handled in C# through <b>actions</b>.
+        - Camilla can be hard to beat - see if you can figure out the trick to it!
+
+    : The lamp sample.
+        (Player) The lamp sample.
+        (Charles, very happy) Ah, her story about that lamp in the corner!
+        
+        (Charles, happy) Sounds boring? Well actually, it's far from it!
         + Well, in my opinion anyway.
+        <very happy>
         - This sample demonstrates a small quest!
         - You'll have to fulfil a number of quest objectives to get through it.
+        - It uses a few custom actions to help drive the underlying logic.
+        <very happy>
+        - Quest stages are updated right from the Gabby scripts as the player explores and fulfils the objectives!
+        - Take a look at the script to see how!
 
+    : The vendor sample.
+        (Player) The vendor sample.
+        (Charles, very happy) Ah, her story about the shady street vendor!
+        <happy>
+        - Truthfully, the vendor doesn't sound so shady to me.
+        
+        (Charles, happy) This sample demonstrates a basic shop driven through dialogue.
+        <very happy>
+        - It's a nice way to show off <b>actions</b>, <b>options</b>, and <b>jumps</b>!
+        - You'll be given a certain amount of gold to spend, and you can make purchases through the dialogue options presented.
+        <very happy>
+        - Maybe you could use a similar system in a visual novel?
 
-        * Charles takes a breath, cleaning his glasses.
-        - Sorry, this is a lot to get through! Almost done...
-
-        // Vendor
-        - The last topic is about a time when <b>she came across a shady street vendor</b>.
-        - Truthfully, the vendor doesn't sound so shady!
-        - This sample demonstrates a basic shop driven by dialogue.
-        - It's a nice way to show off actions, options, and jumps!
-
-        // Charles
-        (Charles, very happy) And that's it!
-        <bored>
-        - Just don't talk to her about me, though.
-        <annoyed>
-        - That sample shows how dialogue choices could affect a character's disposition towards you, altering future conversations.
+    : How annoying she thinks you are!
+        (Player) How annoying she thinks you are!
+        (Charles, sad) Oh...
+        (Charles, happy) Well, she means it in jest!
+        
+        (Charles, happy) That sample shows how dialogue choices could affect a character's disposition towards you, altering future conversations.
         <sad>
-        - But she gets mad easily, so-
+        - But she gets mad easily.
+        <annoyed>
+        - In fact, it seems she's always getting upset over things, and holding grudges over-
         (Camilla, angry) Charles! Shut it!
         (Charles, very happy) Sorry!
         <happy>
-        + To be fair, I had that one coming...
+        + Ahah, I suppose I was asking for it that time. 
+        - In any case, you can refer to this sample to see how you could approach a similar system for your game.
+        - Perhaps you want friendship to increase the more you help certain characters, unlocking new dialogue options?
 
+    // Loop through again
+    (Charles, happy) Do you want to ask about another sample?
+    : Yes
+        >> Charles.CamillaSamplesLoop
+    : No
+        (Charles, happy) Ok! Well, enjoy exploring the sample!
+        - Go ahead and talk to Camilla now, and remember to peek at the dialogue scripts from time to time!
 
-        (Charles, happy) Oh! And if you're ever <b>unsure</b> what to pick, you can get a random topic by choosing this option!
-        <very happy>
-        - Camilla will happily talk to her heart's content!
+[Charles.AllCamillaSamples]
+    // TODO use dialogue insertion here
+    // Dungeon
+    (Charles, happy) To begin with, you can talk to her about <b>one of her many dungeon delving stories</b>.
 
-        * Charles smiles and sighs.
-        <very happy>
-        - Well that's all I have for you for now!
-        - That took a lot out of me.
+    (Charles, happy) The dungeon sample demonstrates randomly changing dialogue.
+    <very happy>
+    - In other words, every time you choose this conversation, the resulting dialogue will be slightly different!
+    <happy>
+    - It's easiest to understand by looking at the script. But basically, it makes use of <b>conditionals</b>!
+    - There's an action called <b>showRandomly</b> that just generates a random number.
+    - That's used along with an if statement to choose one of a few available paths.
+    - Some paths are more common than others, so that "risky" options are less likely to succeed than "safe" ones.
+    <very happy>
+    - Maybe in your game, these rolls could be tied to the player's attributes?
+    - Oh, and if you feel like it, you can take a look at the C# implementation for that action, or even use it in your game!
 
-    : No thanks.
-        (Charles, sad) Ah- 
-        <happy>
-        + Not a problem! I understand not wanting to hear a long winded explanation!
+    // Country
+    (Charles, happy) You can also talk to her about <b>a far away country</b>.
+    <bored>
+    - You know... The one <b>that you're not really sure actually exists</b>.
+    <sad>
+    - I'm still not sure myself...
+
+    (Camilla, annoyed) It EXISTS, Charles...
+
+    (Charles, happy) Ah! Ok, I suppose it does exist!
     
-    - Go ahead and talk to Camilla now, and remember to peek at the dialogue scripts from time to time!
+    (Charles, very happy) This sample demonstrates localization using the <b>language</b> keyword!
+    <happy>
+    - It's quite basic, but should give you an idea of how localization works in Gabby.
+    - Gabby and Kay have more to say on this topic in the tutorial!
+
+    * Keep talking?
+    : Yes
+    : No
+        >> Charles.EndSampleExplanation
+
+    // Sword
+    (Charles, happy) Another topic to bring up is that <b>sword she found in the forest</b>.
+
+    (Charles, happy) This one's very simple, it's really just meant to show how actions can be integrated in your dialogue scripts.
+    - It's especially geared towards some of the things you might want to do in a visual novel.
+    <very happy>
+    - Showing images, managing items, that sort of thing!
+    - Of course, compared to a real visual novel, the way these actions are implemented is quite oversimplified.
+    <very happy>
+    - But it should give you an idea of how to work with similar concepts!
+
+    // Cooking
+    (Charles, happy) Then there's that <b>strange recipe she learned during her travels</b>.
+    <very happy>
+    - You get to cook in this one!
+        
+    (Charles, happy) The cooking sample lets the player make various choices, causing branches in the story.
+    <very happy>
+    - In other words, it's sort of a choose-your-own adventure!    
+    - It even has multiple endings, depending on how well you two can cook together!
+    - It works by using <b>actions</b> to set whether each step of the cooking process was successful.
+    - Then the ending is chosen based on which steps succeeded or failed.
+    <very happy>
+    - You should take a look at the script, and add lots of branching dialogue to your game!
+
+    * Keep talking?
+    : Yes
+    : No
+        >> Charles.EndSampleExplanation
+
+    // Game
+    (Charles, happy) Next up is <b>a fun game</b> that someone taught her.
+
+    (Charles, happy) It's called Nim if I remember correctly! It's pretty interesting.
+    - This sample demonstrates a very simple game that's controlled through dialogue options.
+    - The flow of the game is controlled entirely from Gabby, with some of the logic being handled in C# through <b>actions</b>.
+    - Camilla can be hard to beat - see if you can figure out the trick to it!
+
+    // Lamp
+    (Charles, happy) You can also talk to her about <b>that lamp in the corner</b>.
+            
+    (Charles, happy) Sounds boring? Well actually, it's far from it!
+    + Well, in my opinion anyway.
+    <very happy>
+    - This sample demonstrates a small quest!
+    - You'll have to fulfil a number of quest objectives to get through it.
+    - It uses a few custom actions to help drive the underlying logic.
+    <very happy>
+    - Quest stages are updated right from the Gabby scripts as the player explores and fulfils the objectives!
+    - Take a look at the script to see how!
+
+    * Keep talking?
+    : Yes
+    : No
+        >> Charles.EndSampleExplanation
+
+    * Charles takes a breath, cleaning his glasses.
+    - Sorry, this is a lot to get through! Almost done...
+
+    // Vendor
+    (Charles, happy) The last topic is about a time when <b>she came across a shady street vendor</b>.
+    <very happy>
+    - Truthfully, the vendor doesn't sound so shady to me!
+        
+    (Charles, happy) This sample demonstrates a basic shop driven through dialogue.
+    - It's a nice way to show off <b>actions</b>, <b>options</b>, and <b>jumps</b>!
+    - You'll be given a certain amount of gold to spend, and you can make purchases through the dialogue options presented.
+    <very happy>
+    - Maybe you could use a similar system in a visual novel?
+
+    // Charles
+    (Charles, very happy) And that's it!
+    <annoyed>
+    - Except... well...
+    <bored>
+    - Just don't talk to her about me being annoying.
+    (Charles, happy) Of course, she means it in jest!
+
+    (Charles, happy) That sample shows how dialogue choices could affect a character's disposition towards you, altering future conversations.
+    <sad>
+    - But she gets mad easily.
+    <annoyed>
+    - In fact, it seems she's always getting upset over things, and holding grudges over-
+    (Camilla, angry) Charles! Shut it!
+    (Charles, very happy) Sorry!
+    <happy>
+    + Ahah, I suppose I was asking for it that time. 
+    - In any case, you can refer to this sample to see how you could approach a similar system for your game.
+    - Perhaps you want friendship to increase the more you help certain characters, unlocking new dialogue options?
+
+    (Charles, happy) Oh! And if you're ever <b>unsure</b> what to pick, you can get a random topic by choosing this option!
+    <very happy>
+    - Camilla will happily talk to her heart's content!
+
+    * Charles smiles and sighs.
+    <very happy>
+    - Well that's all I have for you for now!
+    - That took a lot out of me.
+    - Go ahead and talk to Camilla now, and explore the sample to your heart's content!
+    <very happy>
+    - And don't forget to peek at the dialogue scripts from time to time!
+
+[Charles.EndSampleExplanation]
+    (Player) That was helpful, thanks!
+    - I'm going to look around a bit.
+
+    (Charles, very happy) Ah!
+    + I'm always happy to help!
+    <happy>
+    - Come back again anytime if you want to talk some more.

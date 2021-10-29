@@ -59,6 +59,10 @@ language english
         * You get the feeling she'll be talking for a while yet...
         > setQuestStage(lampQuest, complete)
         > setQuestObjectiveText("")
+        > fadeOutAndIn()
+        <very happy>
+        - And yeah, that's the story of the lamp!
+        - See you around!
 
 [Charles.LampQuest_Main]
     if isQuestStageEqual(lampQuest, searchForLightbulb)
@@ -83,7 +87,7 @@ language english
     * Yep, that's burnt out alright...
     * Tossing the old bulb into the trash, you screw in the new one.
     * With the flick of the switch, the lamp comes on.
+    > setQuestStage(lampQuest, returnToCamilla)
     + It's nice and bright!
     (Player) I should talk to Camilla again.
-    > setQuestStage(lampQuest, returnToCamilla)
     > setQuestObjectiveText("Talk to Camilla again.")

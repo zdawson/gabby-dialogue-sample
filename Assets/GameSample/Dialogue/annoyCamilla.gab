@@ -1,6 +1,6 @@
 // This sample shows a situation where a dialogue response impacts a character's disposition towards the player.
 // A similar system could be used to unlock options through positive interactions, skill checks, etc.
-// TODO it would be useful to add gated options to this
+// TODO it would be useful to add gated options to this via tags
 gabby 0.2
 language english
 

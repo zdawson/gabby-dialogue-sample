@@ -4,22 +4,36 @@ language english
 
 [Camilla.Cooking]
     * Camilla has been talking for hours. Or at least, it feels like it.
-    * You don't know how it happened, but at some point you ended up in a kitchen, and you're cooking some recipe she mentioned.
+    * You don't know how it happened, but at some point you ended up in the kitchen, and you're cooking some recipe she mentioned.
+    > fadeOut()
+    <annoyed>
     - Right, so... 
+    <happy>
     - Are you any good at chopping, or do you like to read?
     : Chopping
-        - Aww, that's what I like doing too!
-        - But ok, I'll read, you chop!
-        - So... Chopping... 
-        - You need to find an onion, carrots, celery, a bell pepper... Wait, what color pepper?
+        (Player) I'll chop!
+
+        (Camilla, sad)        Aww, that's what I like doing too!
+        (Camilla, very happy) But ok, I'll read, you chop!
+        (Camilla, annoyed)    So... Chopping... 
+        (Camilla, happy)      You need to find an onion, carrots, celery, a bell pepper... Wait, what color pepper?
+
         : Let's use red!
+            (Player) Let's use red!
         : Let's use green!
-        - Okay! So find one of those...
-        - Then we also need garlic, tomatoes, parsley, chicken...
-        - And calamari?!
-        - And mussels too!~ Wow! This has everything in it!
+            (Player) Let's use green!
+
+        (Camilla, very happy) Okay!
+        <happy>
+        +                     So find one of those...
+
+        (Camilla, happy)      Then we also need garlic, tomatoes, parsley, chicken...
+        (Camilla, annoyed)    And calamari?!
+        (Camilla, very happy) And mussels too!~ Wow! This has everything in it!
+
         : I'll cut the vegetables first, and put them in bowls.
-            (Player) I'll cut the vegetables first and put them in little bowls, and you can use them when you need them
+            (Player) I'll cut the vegetables first and put them in little bowls, and you can use them when you need them.
+
             (Camilla, very happy) Ok! That sounds like a good idea!
 
             * You start chopping away, putting the veggies into small glass bowls.
@@ -29,32 +43,39 @@ language english
             <happy>
             - Cool, I think I get it...
             - Oh! And you're all done! Ok, start on the meat next while I fry the veggies.
+
             > set(camilla.cookingStep1Success, true)
 
         : I'll cut the meat first and you can fry it right away!
             (Player) I'll cut the meat first and you can fry it right away!
+
             (Camilla, very happy) Ok! That sounds like a good idea!
 
             * You cut up the chicken and octopus, and start cleaning the shrimp.
             + Camilla fries everything up as it becomes available, throwing each ingredient in the pan.
             * She looks through the recipe as the meat sizzles.
 
-            <sad>
-            - Hmm...
-            - We were actually supposed to start with the veggies, so the meat doesn't overcook...
-            - And we have to like, <i>suer</i> the <i>mirepoix</i>?
+            (Camilla, sad)     Hmm...
+            (Camilla, annoyed) We were actually supposed to start with the veggies, so the meat doesn't overcook...
+            -                  And we have to like, <i>suer</i> the <i>mirepoix</i>?
+            <angry>
             + What does that even mean?
 
             * You get the feeling that you could have done better on this step.
+
             > set(camilla.cookingStep1Success, false)
+
     : Reading
-        - Good idea, you read! I'll start chopping stuff right away!
+        (Player) I'll read!
+
+        (Camilla, very happy) Good idea, you read! I'll start chopping stuff right away!
+        <happy>
         - So... What do I need?
 
         (Player) You need an onion, carrots, celery, a bell pepper, garlic, tomatoes, and parsley...
         + Along with calamari, chicken, and some other seafood...
 
-        (Camilla, bored) Dude. That was way too much to remember.
+        (Camilla, annoyed) Dude. That was way too much to remember.
         (Camilla, happy) Where do we start?
 
         * What do you do first?
@@ -87,18 +108,24 @@ language english
             * You toss in the veggies with the meat, letting it all cook a while.
             * You get the feeling that you could have done better on this step.
             > set(camilla.cookingStep1Success, false)
+
     * It takes some time, but soon everything's looking pretty good, and you're finally ready to move onto the next step.
     >> Camilla.CookingStep2
 
+
 [Camilla.CookingStep2]
+    <annoyed>
     - Ok, let me take a look at the recipe...
+    <very happy>
     - So, we add some spices, salt... Then wine!
 
     * She grabs several spice bottles and the two of you add ingredients one by one.
     * It simmers, the fragrance of the spices wafting through the room.
 
+    <happy>
     - Alright, so next...
     * Camilla looks at the recipe quickly.
+    <very happy>
     - We have to add the chicken, broth, and rice!
     <sad>
     - ...
@@ -108,8 +135,11 @@ language english
     : Use uncooked rice
         > set(camilla.cookingStep2Success, true)
         (Player) I think we should use uncooked rice.
-        (Camilla, annoyed) For real? Won't it be all crunchy and hard?
-        (Player) No, it will soften in the broth and absorb it.
+
+        (Camilla, annoyed)    For real? Won't it be all crunchy and hard?
+
+        (Player)              No, it will soften in the broth and absorb it.
+
         (Camilla, very happy) Oh! Ok, let's try it and see!
 
         * You boil the broth and rice together.
@@ -118,6 +148,9 @@ language english
     : Quickly cook some rice
         > set(camilla.cookingStep2Success, false)
         (Player) I'll cook some rice now! We'll add it as soon as it's ready.
+
+        * You cook some rice and wait for it to be ready.
+        * Finally, it's done, and you can continue cooking.
 
     (Camilla, very happy) Alright, so we can finally add the rest in!
     <happy>
@@ -131,19 +164,19 @@ language english
         <very happy>
         - This is gonna be great!~
     else
-        <happy>
+        <sad>
         - This still looks pretty good, right?
 
     * You wait for everything to cook.
     * It takes a little while, but finally everything is done.
 
-    <very happy>
-    - Alright! All that's left is to serve it and eat!
+    (Camilla, very happy) Alright! All that's left is to serve it and eat!
 
     : I'm starving!
+        (Player) I'm starving!
     : Let's dig in!
+        (Player) Let's dig in!
 
-    (Camilla) I can't wait to see how it tastes!
     * You each serve yourself a plate, taking a bit of everything.
     
     if cookingQuality(2)
@@ -155,62 +188,74 @@ language english
     
 [Camilla.CookingBestEnding]
     (Camilla, very happy) Wow! It smells and looks so good!
-    - I can't wait to taste it!
+    (Camilla, happy)      I can't wait to taste it!
     * She takes a bite, an even bigger smile spreading across her face.
-    - It's SO GOOD!~
+    (Camilla, very happy) It's SO GOOD!~
 
     * You take a bite too.
     * The flavours are incredible!
     + There's just the right amount of seasoning and so many different spices and textures.
     (Player) Wow, it really is good!
 
-    (Camilla) I can't believe we made something so delicious!
-    <very happy>
-    - Thanks for your help today!~
+    (Camilla, very happy) I can't believe we made something so delicious!
+    (Camilla, happy)      Thanks for your help today!~
+
     * You both quickly clean your plates.
     * It was a truly delicious meal!
 
+    > fadeIn()
+
     (Camilla, very happy) Let's hang out again soon!
-    end
+
 
 [Camilla.CookingAverageEnding]
     (Camilla, very happy) I can't wait to dig in!
+
     * She takes a bite.
     * She seems slightly disappointed, but overall happy with the meal.
-    - Mm, it's good!
-    - It's not as good as the last time I had it but it's still pretty good.
+
+    (Camilla, happy) Mm, it's good!
+    -                It's not as good as the last time I had it but it's still pretty good.
+
     if cookingStep1Failed()
-        <sad>
-        - I think we overcooked the meat a little bit.
-        - Maybe we should have started with the vegetables?
+        (Camilla, sad) I think we overcooked the meat a little bit.
+        -              Maybe we should have started with the vegetables?
+        
         * You take a bite too.
         * She's right. It doesn't taste bad, but the meat is a little tough from overcooking.
+
     else if cookingStep2Failed()
-        <sad>
-        - The rice is pretty mushy.
-        - Maybe we shouldn't have cooked it first after all?
+        (Camilla, sad) The rice is pretty mushy.
+        -              Maybe we shouldn't have cooked it first after all?
+
         * You take a bite too.
         * She's right. It doesn't taste bad, but the rice is overcooked.
-    <happy>
-    - But despite that, it turned out pretty tasty, don't ya think?
-    (Player) Yeah, it's still good!
+
+    (Camilla, happy)      But despite that, it turned out pretty tasty, don't ya think?
+
+    (Player)              Yeah, it's still good!
+
     (Camilla, very happy) Thanks for your help today!~
 
     * You both eat your fill.
     * It was pretty good!
 
+    > fadeIn()
+
     (Camilla, happy) See you around!
-    end
+
 
 [Camilla.CookingBadEnding]
-    (Camilla, bored) It looks different than last time I had it...
+    (Camilla, sad) It looks different than last time I had it...
+
     * She takes a bite.
     * She seems disappointed. She chews it slowly, pondering the flavour and texture.
 
     (Camilla, sad) Well, we tried...
-    <happy>
-    - But you know, it's not that bad!
+    (Camilla, happy) But you know, it's not that bad!
+
     * She takes another bite.
+
     - Yeah, I could eat this!
     - The meat is kinda chewy, and the rice is really soggy... But it's still tasty!
 
@@ -218,11 +263,15 @@ language english
     * She's right. It doesn't taste bad, but the meat is too tough and the rice is too mushy.
 
     (Player) Well, it's not so bad, and we can just try it again!
+
     (Camilla, happy) Yeah, we'll try it again!
+
+    <very happy>
     - Thanks for your help today!
 
     * You both eat up.
     * It was good, but you're sure you can do better.
 
+    > fadeIn()
+
     (Camilla, happy) Let's cook this again sometime. But for now, I'll see you around!
-    end

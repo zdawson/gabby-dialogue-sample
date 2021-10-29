@@ -1618,9 +1618,11 @@ GameObject:
   m_Component:
   - component: {fileID: 737472701}
   - component: {fileID: 737472702}
+  - component: {fileID: 737472703}
   - component: {fileID: 737472700}
   - component: {fileID: 737472698}
   - component: {fileID: 737472699}
+  - component: {fileID: 737472704}
   m_Layer: 0
   m_Name: Charles
   m_TagString: Untagged
@@ -1753,6 +1755,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acd9ca760e13534aac623a9fed3e31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &737472703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737472697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1c178110a00e8408a78281af5f88fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRegion: {fileID: 0}
+  waitTime: 4
+  waitTimeVariance: 2
+  walkSpeed: 2
+--- !u!95 &737472704
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737472697}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 365b9ee83e5e1674b9b48ae1e7b7dde9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &774438124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4864,7 +4901,6 @@ MonoBehaviour:
   - {fileID: 5060667957618186567, guid: 572b7ed1defa35347b0b8367f89def09, type: 3}
   - {fileID: 5060667957618186567, guid: 04156a9aedeb04c42a98b90cbe37bf51, type: 3}
   - {fileID: 5060667957618186567, guid: 4fd61affe9108a34bb46a8c7b500f883, type: 3}
-  - {fileID: 5060667957618186567, guid: 3a731efd5bfa021498529a6c3d75d93f, type: 3}
   - {fileID: 5060667957618186567, guid: 2937662d8f25d59418e12c109628b0a0, type: 3}
 --- !u!4 &2009185149
 Transform:

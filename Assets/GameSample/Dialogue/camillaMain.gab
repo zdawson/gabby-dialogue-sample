@@ -3,18 +3,6 @@
 gabby 0.2
 language english
 
-[Camilla.TestFades] // TODO remove
-    - Testing fades
-    > fadeOut()
-    * ...
-    > fadeIn()
-    - Fade out then in immediate
-    > fadeOut()
-    > fadeIn()
-    - Testing combined
-    > fadeOutAndIn()
-    - Done
-
 [Camilla.Main]
     if isNot(camilla.introduced, true)
         >> Camilla.Introduction

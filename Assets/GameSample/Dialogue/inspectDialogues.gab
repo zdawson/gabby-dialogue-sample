@@ -53,7 +53,7 @@ language english
     * I can see my reflection in the faucet.
 
 [Inspect.Table]
-    * I think they got this table at IDEA.
+    * I think they got this table at UKEA.
 
 [Inspect.Cactus]
     * It's a happy little cactus!
@@ -65,6 +65,13 @@ language english
 [Inspect.FrontDoor]
     * I could leave if I wanted.
     * Maybe later...
+    * Do you want to quit?
+    : Yes
+        (Charles, very happy) Thanks for stopping by!
+        (Camilla, very happy) See you again soon!
+        > fadeOut()
+        > exitGameSample()
+    : No
 
 [Inspect.Stairs]
     // Special dialogue for lamp quest
