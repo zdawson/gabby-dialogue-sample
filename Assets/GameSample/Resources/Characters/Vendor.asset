@@ -16,4 +16,4 @@ MonoBehaviour:
   displayName: Some Kinda Shady Street Vendor
   _portraits:
   - name: default
-    portrait: {fileID: 21300000, guid: 4a8e78d1ac1b80049a9a80314c6d6912, type: 3}
+    portrait: {fileID: 21300000, guid: c7973fa81f3676448a6e5286869b682c, type: 3}

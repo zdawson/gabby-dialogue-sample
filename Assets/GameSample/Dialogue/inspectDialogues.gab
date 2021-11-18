@@ -70,7 +70,7 @@ language english
         (Charles, very happy) Thanks for stopping by!
         (Camilla, very happy) See you again soon!
         > fadeOut()
-        > exitGameSample()
+        > loadScene("Main")
     : No
 
 [Inspect.Stairs]

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using GabbyDialogue;
+
+using Object = UnityEngine.Object;
 
 namespace GabbyDialogueSample
 {
@@ -9,9 +12,9 @@ namespace GabbyDialogueSample
     {
         private static SampleDialogueSystem _instance = null;
 
-        public event System.Action<Dialogue> DialogueStarted;
-        public event System.Action DialogueEnded;
-        public event System.Action<LineType> DialogueLineShown;
+        public event Action<Dialogue> DialogueStarted;
+        public event Action DialogueEnded;
+        public event Action<LineType> DialogueLineShown;
 
         private DialogueUI dialogueUI;
         private DialogueOptionsUI dialogueOptionsUI;
@@ -70,10 +73,12 @@ namespace GabbyDialogueSample
             dialogueUI = (Instantiate(Resources.Load("UI/DialogueUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueUI>();
             dialogueUI.gameObject.name = "_SampleDialogueUI";
             dialogueUI.gameObject.SetActive(false);
+            DontDestroyOnLoad(dialogueUI);
 
             dialogueOptionsUI = (Instantiate(Resources.Load("UI/DialogueOptionsUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueOptionsUI>();
             dialogueOptionsUI.gameObject.name = "_SampleDialogueOptionsUI";
             dialogueOptionsUI.gameObject.SetActive(false);
+            DontDestroyOnLoad(dialogueOptionsUI);
 
             // Handle UI events
             dialogueUI.OnForward += () => dialogueEngine.NextLine();

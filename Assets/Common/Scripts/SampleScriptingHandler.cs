@@ -2,6 +2,7 @@ using GabbyDialogue;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
 
@@ -17,13 +18,19 @@ namespace GabbyDialogueSample
 
             // General actions
             // ===============
+            this.AddActionHandler(nameof(set), set);
+            this.AddConditionalHandler(nameof(isEqual), isEqual);
+            this.AddConditionalHandler(nameof(isNot), isNot);
+
             this.AddActionHandler(nameof(fadeOut), fadeOut);
             this.AddActionHandler(nameof(fadeIn), fadeIn);
             this.AddActionHandler(nameof(fadeOutAndIn), fadeOutAndIn);
 
-            this.AddActionHandler(nameof(set), set);
-            this.AddConditionalHandler(nameof(isEqual), isEqual);
-            this.AddConditionalHandler(nameof(isNot), isNot);
+            this.AddActionHandler("loadScene", (List<ActionParameter> parameters) => {
+                string sceneName = Convert.ToString(parameters[0].value);
+                SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+                return new ActionResult {handled = true, autoAdvance = true};
+            });
 
             // Cooking sample actions
             // ======================

@@ -1,6 +1,5 @@
 using GabbyDialogue;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GabbyDialogueSample.GameSample
