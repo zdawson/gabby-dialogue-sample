@@ -34,6 +34,8 @@ public class NPCWander : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
+        GabbyDialogueSample.SampleDialogueSystem.instance().DialogueStarted += OnDialogueStarted;
+        GabbyDialogueSample.SampleDialogueSystem.instance().DialogueEnded += OnDialogueEnded;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -169,6 +171,16 @@ public class NPCWander : MonoBehaviour
             string animation = isWalking ? "Walk" : "Idle";
             animator.Play($"{animation}{animationDirection}");
         }
+    }
+
+    private void OnDialogueStarted(GabbyDialogue.Dialogue dialogue)
+    {
+        this.enabled = false;
+    }
+
+    private void OnDialogueEnded()
+    {
+        this.enabled = true;
     }
 
 }

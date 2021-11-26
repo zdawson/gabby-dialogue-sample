@@ -4,12 +4,16 @@ language english
 
 // This is shown at the start of the game
 [Charles.GameStart]
-    - Good day! I'm <b>Charles</b>, the test character.
+    - Hello there!
+    - I'm <b>Charles</b>.
+    - I'm the sample character!
 
-    (Camilla, angry) Umm, <i>the</i> test character?! There's two of us, I exist too Charles!~
+    (Camilla, angry) Umm, excuse me?
+    + <i>The</i> sample character?!
+    - There's two of us, I exist too Charles!~
 
-    (Charles, very happy) Ah, yes yes, have you met <b>Camilla</b>?
-    (Charles, bored)      <size=25>She's a little short tempered.</size>
+    (Charles, very happy) Oh! Forgive me, this is my friend <b>Camilla</b>!
+    (Charles, bored)      She's a little short tempered.
     (Charles, happy)      In this sample, you can walk around and explore.
     (Charles, very happy) Most objects are interactive, and of course you can talk to Camilla and me!
     (Charles, happy)      If you talk to me, I will provide you with more information about this sample.

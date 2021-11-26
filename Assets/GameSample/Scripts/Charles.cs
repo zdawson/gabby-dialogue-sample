@@ -6,7 +6,6 @@ namespace GabbyDialogueSample.GameSample
 {
     public class Charles : MonoBehaviour, Interactable
     {
-
         private void Start()
         {
             // At the start of the game, show Charles' introduction dialogue

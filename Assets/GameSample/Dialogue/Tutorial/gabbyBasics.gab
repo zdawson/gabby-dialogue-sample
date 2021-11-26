@@ -30,7 +30,7 @@ language english
         (Player) I think I've learned enough about the basics now!
         (Gabby)  That's great!
         +        Let's talk about something else!
-        >> Gabby.TutorialMain
+        >> Gabby.TutorialMainLoop
 
 [Gabby.WhatIsGabby]
     (Gabby) Gabby is a way to write dialogue for games.

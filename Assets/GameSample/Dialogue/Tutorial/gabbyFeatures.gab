@@ -251,7 +251,7 @@ language english
     : Back
         (Player) That's all I wanted to know.
         (Kay) Alright, feel free to ask again if you have more questions, K?
-        >> Gabby.TutorialMainEntry
+        >> Gabby.TutorialMainLoop
     >> Gabby.LanguageLoop
 
 [Gabby.Comments]

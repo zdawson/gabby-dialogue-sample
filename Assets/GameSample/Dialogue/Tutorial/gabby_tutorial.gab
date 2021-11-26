@@ -9,19 +9,41 @@ language english
 // TODO tagging implicit dialogue with <> shouldn't retain the tag past that line, it should be a temporary state
 //      Tagging explicit dialogue in () should continue to retain those tags for all implicit dialogue that follows
 
+[Gabby.TutorialStart]
+    * That's a big TV!
+    * They've got a bunch of game consoles hooked up to it, too.
+    
+    * <i>Do you want to play the tutorial?</i>
+    : Yes
+    : No
+        end
+
+    (Gabby) Hey, I'm Gabby!
+    <very happy>
+    + And this is Kay.
+
+    (Kay) Hey!
+
+    (Gabby, very happy) Welcome to our tutorial!
+
+    (Kay) We hope it will help you get started with using Gabby!
+
+    (Gabby, very happy) Yeah!
+
+    >> Gabby.TutorialIntroduction
+
 [Gabby.TutorialIntroduction] // TODO it would be useful to have OnDialogue handlers, ex On(Gabby,TutorialIntroduction)
     - Ok, so when it comes to Gabby, there's a lot to talk about!
     + But you'll find that it's all pretty straightforward, I think!
     - The tutorial is broken down into multiple interactive sections.
-    - I'll be getting help from our friend, Kay!
-    (Kay, happy) Hello! It's my pleasure.
-    (Gabby) We'll also show you Gabby snippets along the way, but your best bet is to open up the dialogue files yourself.
-    - Go find 'em! Get the syntax highlighting extension too if you haven't already!
-    * ...
-    - Ok, if you're ready to go, let's <b>jump</b> right in to the tutorial!
-    >> Gabby.TutorialMainEntry
+    
+    (Kay) We'll also show you Gabby snippets along the way, but the best way to learn is by looking at the sample scripts and trying your hand at writing something yourself!
+    (Kay, very happy) Anyone can do it! Let your creative side show!
 
-[Gabby.TutorialMain]
+    (Gabby) Ok, if you're ready to go, let's <b>jump</b> right in to the tutorial!
+    >> Gabby.TutorialMainLoop
+
+[Gabby.TutorialMainLoop]
     (Gabby) Tell me what you want to learn about!
     : The basics.
         (Player) Let's start with the basics.
@@ -37,26 +59,20 @@ language english
         >> Gabby.MakingGames
     : Is Gabby Really Game-Ready?
         (Player) Is Gabby really ready to be used in production for real games?
-        (Gabby, upset)  H-HEY! Are you implying something bad?
+        (Gabby, annoyed)  H-HEY! Are you implying something bad?
         (Gabby)         But, that's fair. Let's talk about what we thought about when writing Gabby, and you can decide for yourself.
         -               And of course, if we missed something, let us know, because we really want Gabby to be something anyone can rely on.
         >> Gabby.IndustryReady
     : I'm done!
         (Player) Alright, I think I'm done!
-        (Gabby)  Thanks for sticking around!
+        (Gabby)  Thanks for checking out the tutorial!
         <shy>
         -        I know I tend to talk too much.
-        -        I'll send you back to the main menu!
-        >> Gabby.ExitTutorial
-
-[Gabby.ExitTutorial]
-    - Do you want to go to the game sample, or quit?
-
-
+        <very happy>
+        -        Good luck with your writing!
+        end
 
 [Gabby.IndustryReady]
-    
-
     : Can Gabby be localized?
         (Player) Can dialogue written in Gabby be localized?
         (Kay)   Localization was a huge consideration when making Gabby.
@@ -128,9 +144,7 @@ language english
         -     Or maybe you tag your entire dialogue, and your game knows to progress audio lines in sync with text lines.
         -     Anyway, I think the tools are all there, just figure out what workflow works best for you!
 
-    
-
     : Back
-        >> Gabby.TutorialMainEntry
+        >> Gabby.TutorialMainLoop
     >> Gabby.IndustryReady
         

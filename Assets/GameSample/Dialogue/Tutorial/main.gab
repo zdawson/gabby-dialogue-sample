@@ -1,0 +1,21 @@
+gabby 0.2
+language english
+
+// This is the main entry point for the entire sample
+// From here, the player can navigate to the tutorials or to the game sample
+
+
+[Gabby.ExitGameSample]
+    (Gabby) Hey, welcome back!
+    - Hope you enjoyed the game!
+    - Are you ready for the tutorial?
+    : Yes
+    : No
+
+// Shown when escape is pressed
+// TODO use dialogue tag to bind?
+[Main.ExitGamePrompt]
+    * Do you want to quit?
+    : Keep playing
+    : Exit sample
+    : Exit game
