@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2482053638491000884}
+  - component: {fileID: 7427840807322862014}
   - component: {fileID: 2482053638491000885}
   - component: {fileID: 2482053638491000882}
   - component: {fileID: 2482053638491000883}
@@ -39,6 +40,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &7427840807322862014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2482053638491000880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203d4b3d1823bad4185861a7480ec361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiFields:
+  - elementName: ObjectiveText
+    UIElement: {fileID: 5922647524074461551}
 --- !u!223 &2482053638491000885
 Canvas:
   m_ObjectHideFlags: 0
@@ -56,7 +72,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0

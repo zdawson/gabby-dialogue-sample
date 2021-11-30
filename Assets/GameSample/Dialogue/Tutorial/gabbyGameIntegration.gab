@@ -1,13 +1,36 @@
+// This contains the tutorial dialogue for the "Using Gabby in a Game" section.
 gabby 0.2
 language english
 
 [Gabby.MakingGames]
     : How do I use Gabby in my games?
-    : What game engines support Gabby?
-        (Kay) Right now, we only maintain a Unity plugin.
-        - The Gabby language specification is open source, as is the Unity reference implementation.
+        (Player) How do I use Gabby in my games?
+
+        (Kay, very happy) Well, if you use Unity, then you can use our plugin and it'll pretty much work out of the box!
+        (Kay, happy)      If you want to use a different engine, or even your own, then you can check out the spec! It's on GitHub!
         
-    : How does the Unity plugin work?
+        (Gabby) And if you want to see what you can do with Gabby, check out the scripts for the sample!
+
+        (Kay, very happy) They're also on GitHub!
+        >> Gabby.MakingGames
+    : What game engines support Gabby?
+        (Player) What game engines support Gabby?
+
+        (Kay, happy)      Right now, we only officially maintain a Unity plugin.
+        -                 We have plans for a lot more.
+        (Kay, very happy) But the Gabby language specification is open source, and so is the Unity reference implementation!
+        (Kay, happy)      So if the community wants broader game engine support, they have everything they need to make it happen!
+        >> Gabby.MakingGames
+    : What tools do I use to write Gabby?
+        (Player) What tools do I use to write Gabby?
+        >> Gabby.Tools
+    : Let's talk more about Unity!
+        (Player) Let's talk more about Unity!
+        >> Gabby.Unity
+    : Go back.
+        (Player) That's all I wanted to know.
+        (Gabby)  Ok! We can talk more about other stuff!
+        >> Gabby.TutorialMainLoop
 
 [Gabby.Unity]
     : How do I import my dialogue scripts?  
@@ -22,52 +45,65 @@ language english
     : Can I use TextMeshPro?
         (Player) Can I use TextMeshPro?
         >> Gabby.TextMeshPro
+    : Go back.
+        (Player) Hmm...
+        >> Gabby.MakingGames
     
 [Gabby.ImportingDialogue]
     (Kay) Importing is automatic!
-    - We use a scriptable asset importer to parse .gab files in the editor.
-    - This means that as soon as you bring your scripts into the project, they're parsed and validated!
-    - And it means they're stored in a format that the game can use directly at runtime.
-    + In other words, there's no runtime parsing required!
+    -     We use a scriptable asset importer to parse <b>.gab</b> files in the editor.
+    <very happy>
+    -     This means that as soon as you bring your scripts into the project, they're parsed and validated!
+    <happy>
+    -     And it means they're stored in a format that the game can use directly at runtime.
+    <very happy>
+    +     In other words, there's no runtime parsing required!
 
     (Gabby) You can work with the Gabby scripts like any other Unity asset.
-    - How you load them and reference them is up to you!
-    - For the sample, we just assign them in the inspector. Simplicity is best!
+    -       How you load them and reference them is up to you!
+    -       For the sample, we just assign them in the inspector. Simplicity is best!
 
     >> Gabby.Unity
 
 [Gabby.CreateCharacter]
     (Kay) We recommend looking at the sample to see how we did it.
-    + You can also grab the sample code for yourself to use as a starting point!
-    - Characters are scriptable objects, and they're defined in the game code instead of the dialogue engine project.
-    - We kept it separate because it's really more a game feature, and implementations will vary a lot between games.
+    <very happy>
+    +     You can also grab the sample code for yourself to use as a starting point!
+    <happy>
+    -     The sample uses scriptable objects to define characters and their portraits.
+    -     We put the implementation in the sample instead of the engine project because portraits are really more of a game feature, and the implementation could vary a lot between games.
     
     (Gabby) But at the same time, they'll share some similarities... So... Sample!
     
     (Kay) The sample implementation lets you set a separate internal name and display name, as well as define portraits by tag.
-    - This is all we needed for the sample, but your game might need more data - build on the sample implementation however you want!
+    <very happy>
+    -     This is all we needed for the sample, but your game might need more data - build on the sample implementation however you want!
 
     >> Gabby.Unity
 
 [Gabby.StylingText]
-    (Gabby) Ooh, you wanna write something <color=#bada55ff><i><b>stylish?</b></i></color> // chartreuse
+    (Gabby) Ooh, you wanna write something <i><b>stylish?</b></i> // chartreuse
+    <very happy>
     -       Unity supports text styling in their UI components, and it works with Gabby too!
 
     (Kay)   You can extend it however you want as well, with custom markup tags.
     +       It's not so much a Gabby thing as it is a game thing, though.
     -       If you want to learn more about it, check out Unity's documentation - it will be clearer and more up to date.
 
-    (Gabby) Another option is to use tags!
-    -       You could make a tag called "yelling", if you want a special style for that.
-    -       Then when the game is about to display it, it can change the text style to match!
+    (Gabby, very happy) Another option is to use tags!
+    (Gabby, happy)      You could make a tag called "yelling", if you want a special style for that.
+    (Gabby, very happy) Then when the game is about to display it, it can change the text style to match!
     
     : Wait, so that's it? There's nothing built into Gabby?
         (Player) Wait, so that's it? There's nothing built into Gabby?
+
         (Kay) Well, yeah, that's it. Styling is a very in depth thing, and everyone has different preferences for markup.
         -     But, at the same time, it <i>is</i> a part of your dialogue data, so it should be written in your Gabby scripts.
         -     It's kind of two separate concepts though.
         -     Here's how I think of it: your Gabby scripts should <i>use</i> styles, but your game or game engine should <i>define</i> them.
+        <very happy>
         -     That way, a writer can focus on the "when to apply a style", instead of "what should this text look like".
+        <happy>
         -     Sure, saying "it's up to you how you implement it" isn't the most helpful, but trust me, it works out for the better.
 
         (Gabby) But anyway...
@@ -75,46 +111,44 @@ language english
     : Got it!
         (Player) Got it!
 
-    (Gabby) Go on now, and write some stylish text!
+    (Gabby) Now you can go on and write some stylish text!
 
     >> Gabby.Unity
 
 [Gabby.TextMeshPro]
     (Kay) Yep! You can use any UI components or libraries you want, including TextMeshPro.
-    - We keep the concept of the dialogue system separate from the dialogue UI.
-    + The system just feeds lines to it!
+    -     We keep the concept of the dialogue system separate from the dialogue UI.
+    <very happy>
+    +     The system just feeds lines to it!
 
     (Gabby) You can use the sample implementation as a starting point!
 
     >> Gabby.Unity
 
 [Gabby.Tools]
-    (Player) What tools and workflows does Gabby provide?
+    (Kay, very happy) You can use just about any text editor you want!
+    (Kay, happy)      The only important thing is that it saves in plain text. Formatted or rich text won't work.
+    -                 Anyway, we use Visual Studio Code. We even wrote a Gabby plugin for it!
+    (Kay, very happy) It adds syntax highlighting to make it easier to write Gabby scripts!
+    
+    (Gabby, very happy) It's really good, you should use it!
+    (Gabby, happy)      And you should also get a spellchecker, there's a few extensions available for vscode!
 
-    (Kay)   For now, we wrote a vscode plugin. It adds syntax highlighting to make it easier to write Gabby scripts.
-    (Gabby) It's really good!
-    -       You should also get a spellchecker for it, there's a few available!
-    (Kay)   We've thought about the main workflow we want to offer quite a lot when making Gabby.
+    (Kay)   We tried to think a lot about the main workflow we want to offer with Gabby.
     -       Ultimately, it comes down to centering everything around the dialogue, and the writer of that dialogue.
     -       We want the hardest part of writing dialogue to be the creative process behind putting words down.
-    -       In other words, the language stays out of your way.
-    -       We looked a lot at what's available already, too, and there's a lot of different approaches to solving dialogue.
-    -       Many people like to use a visual tool, like a flow chart, where each node is a dialogue line and they connect to other nodes.
-    -       This wasn't the workflow we wanted.
-    (Gabby) Yeah. For me, I want to write text in a text editor. I'm a writer, and I want to write, that's it.
-    -       I don't usually use vscode, but it's familiar enough that it works fine.
-    -       I do miss being able to set fonts and text sizes and see them in the editor, though.
-    (Kay)   We sometimes like to think of Gabby as a data format. Sort of like JSON.
-    -       It's just a nicely defined way to write dialogue.
-    -       To that end, there could be any number of tools to do it, all standalone, maybe some even sold as a product.
-    -       If you want a flowchart, you could make a tool that works with these scripts behind the scenes, but presents a flowchart instead of text.
-    -       Maybe someday we'll have time to make one ourselves!
+    <very happy>
+    -       In other words, the language stays out of your way!
 
-[Gabby.Mods]
-    (Player) What about modding?
+    (Gabby) We looked a lot at what's available already, too, and there's a lot of different approaches to solving dialogue...
+    -       A lot of dialogue systems use a visual tool, like a flow chart, where each node is a dialogue line and they connect to other nodes...
+    <disappointed>
+    -       It gets so confusing!
+    <angry>
+    -       Me, I want to just write text in a text editor. I'm a writer, and I wanna write, that's it!
 
-    (Kay)   Easy peasy!
-    -       Think about it. Compared to JSON, or some binary data, Gabby is way easier.
-    -       Or if you had something like lists of strings. There's no flow to it! Modders could replace lines, but not create new scenarios. Not really.
-    -       With Gabby, depending on your game, you can pretty much just drop in scripts or add to existing ones.
-    -       If you wanna make it even better, use tags to situationally select dialogues in a generic way.
+    (Kay, very happy) But everyone's different! Some people would much rather write dialogue that way, and that's fine!
+    (Kay, happy)      We hope to someday make a visualizer for Gabby scripts, too, so you can get a bird's eye view of the whole project.
+    (Kay, very happy) Or maybe one of you will beat us to it!
+
+    >> Gabby.MakingGames

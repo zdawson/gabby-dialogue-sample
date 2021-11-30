@@ -2,7 +2,7 @@
 gabby 0.2
 language english
 
-// This is shown at the start of the game
+// This is shown at the very start of the game
 [Charles.GameStart]
     - Hello there!
     - I'm <b>Charles</b>.
@@ -12,7 +12,7 @@ language english
     + <i>The</i> sample character?!
     - There's two of us, I exist too Charles!~
 
-    (Charles, very happy) Oh! Forgive me, this is my friend <b>Camilla</b>!
+    (Charles, very happy) Oh! Forgive me, this is my sister <b>Camilla</b>!
     (Charles, bored)      She's a little short tempered.
     (Charles, happy)      In this sample, you can walk around and explore.
     (Charles, very happy) Most objects are interactive, and of course you can talk to Camilla and me!
@@ -51,6 +51,7 @@ language english
         (Charles, very happy) Ah, there's plenty to do!
         (Charles, happy)      You could play a game of Nim with Camilla, just ask her about <b>a fun game</b>.
         -                     Or you could talk to her about <b>her lamp</b>, and maybe something interesting will happen!
+        -                     There's also a tutorial you can play over on the TV!
         -                     Aside from that, look around and see what you can find.
         (Charles, very happy) And don't forget to look at the Gabby scripts behind the scenes that make all this work - that's the whole point after all, isn't it?
 
@@ -89,12 +90,6 @@ language english
         -                     I encourage you to talk to Gabby and Kay to learn more.
         <very happy>
         -                     And don't forget to take a look at the sample scripts!
-
-    : How do I leave?
-        (Player) How do I leave?
-        (Charles) Ah, want to go see Gabby and Kay?
-        <very happy>
-        -         Just head out through the door when you're finished playing the sample!
         
     : Nah, I'm good!
         (Player)  Nah, I'm good!
@@ -186,18 +181,6 @@ language english
         <happy>
         - It's quite basic, but should give you an idea of how localization works in Gabby.
         - Gabby and Kay have more to say on this topic in the tutorial!
-
-    : The sword sample.
-        (Player) The sword sample.
-        (Charles, happy) Ah, her story about that sword she found in the forest!
-
-        (Charles, happy) This one's very simple, it's really just meant to show how actions can be integrated in your dialogue scripts.
-        - It's especially geared towards some of the things you might want to do in a visual novel.
-        <very happy>
-        - Showing images, managing items, that sort of thing!
-        - Of course, compared to a real visual novel, the way these actions are implemented is quite oversimplified.
-        <very happy>
-        - But it should give you an idea of how to work with similar concepts!
 
     : The cooking sample.
         (Player) The cooking sample.
@@ -310,17 +293,6 @@ language english
     : Yes
     : No
         >> Charles.EndSampleExplanation
-
-    // Sword
-    (Charles, happy) Another topic to bring up is that <b>sword she found in the forest</b>.
-
-    (Charles, happy) This one's very simple, it's really just meant to show how actions can be integrated in your dialogue scripts.
-    - It's especially geared towards some of the things you might want to do in a visual novel.
-    <very happy>
-    - Showing images, managing items, that sort of thing!
-    - Of course, compared to a real visual novel, the way these actions are implemented is quite oversimplified.
-    <very happy>
-    - But it should give you an idea of how to work with similar concepts!
 
     // Cooking
     (Charles, happy) Then there's that <b>strange recipe she learned during her travels</b>.

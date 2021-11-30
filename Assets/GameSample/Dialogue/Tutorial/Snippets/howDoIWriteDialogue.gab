@@ -1,0 +1,11 @@
+gabby 0.2
+language english
+
+[TutorialSnippet.HowDoIWriteDialogue]
+    (Gabby) This is a really short dialogue!
+    - There's only two lines!
+
+[Gabby.HowDoIWriteMoreDialogue]
+    (Gabby) And this is a totally separate dialogue!
+    - This one belongs to the character "Gabby".
+    + That's me!

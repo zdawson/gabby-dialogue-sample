@@ -31,3 +31,5 @@ MonoBehaviour:
     portrait: {fileID: 21300000, guid: d5f025354475a404f814361d929854d2, type: 3}
   - name: very happy
     portrait: {fileID: 21300000, guid: f1dcd991401301d469f19fd3d6b793c5, type: 3}
+  - name: angry
+    portrait: {fileID: 21300000, guid: 92115e40b232dda48b9c3a3bb9e9dc10, type: 3}

@@ -1,269 +1,258 @@
+// This contains the tutorial dialogue for the features section.
 gabby 0.2
 language english
 
-[Gabby.LanguageEntry]
-    (Kay) The best place to learn about Gabby's features is the documentation, but we can give you an overview here regardless!
-    -  We'll keep this section to-the-point. What feature would you like to learn about?
-    >> Gabby.LanguageLoop
+[Gabby.Features]
+    (Kay, very happy) The best place to learn about Gabby's features is the documentation, but we can give you an overview here regardless!
+    (Kay, happy)      We'll keep this section short and to-the-point.
+    >> Gabby.FeaturesMain
 
 [Gabby.FeaturesMain]
-    : Comments
-        >> Gabby.Comments
+    (Kay) What feature would you like to learn about?
 
-    : Metadata and Comments: Information About Your Script
-        (Player) Tell me about metadata.
-
-        (Kay) Not much to say about this one.
-        > show("dialogueMetadataExample")
-        -     At the top of your file, put the gabby version and the language the script is written for.
-        -     The version is there to help your dialogue engine know what features are supported. 
-        -     As Gabby updates, this will become important.
-        -     The language is there for localization.
-        -     Put anything you want there, there's no restriction on format. Your game will be what reads it.
-        -     Everything in a script has to be the same language - break other languages into their own files.
-
-        (Player) Ok. And what are comments?
-
-        (Kay) They're just a way to write a note to yourself or other contributors in the project!
-        -     You write them with two forward slashes, "\/\/", and then your comment.
-        -     Could be something like: "\/\/ This is shown if you forgot to pick up the key at the start of the game".
-
-        (Gabby) Or, "\/\/ TODO: come back and finish this". I use this a lot, because I like to write what interests me the most and come back to boring stuff.
-        -       The comment lets me find it again!
-
-        (Kay) Well, that's that! What's next?
-
-    : Dialogue Lines: Using "(Character)" and "-" to Write Lines of Dialogue
-        (Player) Tell me about dialogue lines, and how to write them.
-
-        (Kay) It's designed to be as simple as possible. And of course, easy to read.
-        -     There's a few ways to do it depending on what exactly you want.
-        -     We'll put the fancy ones into their own sections.
-        -     Ok, getting to the point! Write dialogue like this:
-        > show("dialogueLineExample1")
-        +     The character name in parentheses, and the text to display following it.
-        -     Kinda looks like a script, right? That's the goal anyway.
-        -     You're not gonna want to write the character name over and over, though.
-        -     So, after your character is written once, just use a dash -, like this:
-        > show("dialogueLineExample2")
-        -     This looks better, but there's also a really good reason to do it.
-        -     A lot of games have bugs where the wrong character speaks, because of a copy / paste error that's hard to spot.
-        -     The dash makes it obvious that a change in character didn't happen, so this type of error should just go away if you get used to using it.
-        -     So to recap, you write dialogue with the character name in parentheses, "(Character) ...", or let them monologue a while with dash "- ...".
-        -     Nice and simple, right?
-
-    : Continued Dialogue: Using "+" to Extend a Line
-        (Player) What does it mean when I start a line with "+"?
-
-        (Kay) This one's really quick.
-        > show("dialogueContinueExample")
-        -     When you start a line with "+", it will extend displayed dialogue when the player advances.
-        +     Like this.
-        -     So, it doesn't clear the text basically, that's all there is to it.
-        +     You can do it a bunch, too.
-        +     There's not really a limit, but maybe you'll have to scroll eventually.
-        -     Hope you find it useful!
-
-    : Narrated Dialogue: Using "*" to Describe a Scene
-        (Player) How can I write narration, like for examining an object?
-
-        (Kay) This is another quick one!
-        > show("dialogueNarrationExample1")
-        -     See? Easy. Just start your line with "*".
-        -     When you start a line with "*", it means it's not spoken by a character. It's narrated.
-        > show("dialogueNarrationExample2")
-        *     Kay looks at the new example, reading through it in her head.
-        +     She looks really closely, making sure she didn't miss something.
-        -     Oh! Did you catch that? We just used "+" to extend a narrated line of dialogue.
-        -     And on top of that, we're back to using "-" to write my lines of dialogue.
-        +     The point is, "*" lines don't change the current speaker.
-        -     That's what makes "*" so useful. We could've just gone with "(Narrator) ...", and sometimes maybe we still want to, but in this case it's way easier to use "*".
-
-        (Gabby) And I like easy!
-
-        (Kay)   Me too. Anyway, there you have it: narrated dialogue!
-
-    : Choices: Using ":" To Make Branching Dialogue
-        (Player) How do I write branching dialogues with player choices?
-
-        (Kay) You use <b>Options!</b>
-        > show("dialogueOptionsExample1")
-        - When you start a line with ":", it becomes an option.
-        - This is something the player gets to make a selection from. You're asking the player to make a choice.
-        - Usually you have multiple choices presented at a time, so you'll have multiple consecutive option lines.
-        + They'll get grouped together and shown in one menu.
-
-        - So, the player then makes a selection, then the dialogue engine continues on.
-
-        (Gabby) But it just continues like normal, nothing actually branched!
-
-        (Kay) Yup. You've gotta put lines in your options if you want them to matter. Check this out.
-        > show("dialogueOptionsExample2")
-        - This is a proper options block, like you'll probably be writing for your game.
-        - The indentation is incredibly important here, it's how the language knows those lines are inside the option, not after it.
-        - Indent your option's contents past the ":", and you're all set. It's more readable too.
-        - And of course, you can nest them, as you see here.
-        + So after the first selection is made, the player gets another choice to make depending on that first choice.
-        > show("dialogueOptionsExample3")
-        - Look at this example.
-        + This shows two separate options close together. If it weren't for that line of dialogue between them, they'd be one big option.
-        > show("dialogueOptionsExample4")
-        - One last example...
-        - This is using jumps, which we haven't gone over yet.
-        - I just didn't want you to think things would have to get cluttered.
-        - By the way, we call the lines inside options "dialogue blocks".
-        - Anyway, you'll find that options are pretty simple, I think.
-        (Jay) Test 
-        - Test this is clear
-
-    : Jumps: Using ">>" to Link Dialogue
+    : Let's talk dialogue!
+        (Player) Let's talk dialogue!
+        (Kay, very happy) Ok!
+        >> Gabby.AboutDialogue
+    : How do I let the player make choices?
+        (Player) How do I let the player make choices?
+        (Kay, very happy) Ah, choices?
+        + A key part of any game!
+        >> Gabby.AboutChoices
+    : What are jumps?
         (Player) What are jumps?
-        (Narrator) What are jumps?
-
-        (Kay) You can probably guess!
-        +     ...we're not gonna let them guess?
-        -     Ok, well, they jump you over to another dialogue.
-        -     Think of it like ending the current dialogue and starting a new one.
-        > show("dialogueJumpExample")
-        -     They look like this.
-        -     This maps to a dialogue, in this case [Example.Bored], just like when you're writing the dialogue definition.
-        -     The dialogue you're jumping to can be in the same script or a different one. Just has to be loaded!
-
-        (Gabby) The only thing to keep in mind is that when you jump, you're leaving your current dialogue.
-        -       When the dialogue you jump to ends, the whole dialogue ends.
-        +       It doesn't come back to continue the dialogue you jumped out of.
-        -       You can always jump back to it, though!
-
-        (Kay) So now you know how to use jumps!
-
-    : Actions: Using ">" to Trigger Game Events
+        >> Gabby.AboutJumps
+    : What are actions?
         (Player) What are actions?
-
-        (Kay) Actions trigger events in your game.
-        -     If you program, it's a bit like a function call. But it's simplified, and a bit more restricted.
-
-        (Gabby) And if you don't program, don't worry about it, it's pretty simple!
-        > show("dialogueActionExample1")
-        -       You'll have events like this, which you trigger with actions.
-
-        (Kay) Yup. It's all meaningless to Gabby, though. Gabby the language, I mean.
-        -     Your action name is whatever you want it to be, it can have spaces in it if you want, it's just a label.
-        -     Your parameters are whatever you want as well, hopefully they're what the game expects though.
-        -     If not, it's out of our hands, you'll get an error you need to handle.
-
-        (Gabby) Don't make it sound so serious!
-        > show("dialogueActionExample2")
-        -       Anyway, it's simple, just look at these other examples to get an idea of how you might wanna use them.
-        
-        (Kay) It's simple, but powerful!
-        -     Sure, it's not as powerful as programming, but that's kind of a good thing.
-        -     We don't want to mix code and dialogue. Gabby doesn't want to be a programmer, just a writer.
-
-        (Gabby) Yeah, it's way more fun!
-
-        (Kay) So, keep your code in your game, and run it from Gabby.
-        -     If you're clever you can come up with all sorts of simple and reusable actions to write.
-        -     And if you absolutely need to run some super specific code for a dialogue, just make a super specific action.
-        -     But anyway, that's it for actions!
-
-    : Conditionals: "if", "else if", and "else"
-        (Player) What if I want code to run based on some game state?
-
-        (Kay) Well, one option is to run dialogues by name from different states in your game. The other is conditionals.
-        -     It's best to think of a conditional as an action that tells the dialogue engine <b>true</b> or <b>false</b>.
-        -     <b>True</b> means run the dialogue block inside, <b>false</b> means skip it.
-        > show("dialogueConditionalExample1")
-        -     It looks like this.
-        -     It's a bit like programming again, but it's as simple as "if this conditional is true, run the block".
-        -     Try to write conditionals in a way that's natural to you. I like to think of the question it asks.
-        -     Was this character introduced? Is this character a friend? Does the player have this much gold? That sort of thing.
-        > show("dialogueConditionalExample2")
-        +     And they'd look something like that.
-        -     Next we'll look at a more complex branching situation...
-        > show("dialogueConditionalExample3")
-        -     Here, you see the usage of "if", "else if", and "else", all together.
-        -     It's obvious if you're a programmer, but if not, hopefully it's still straightforward.
-        -     Else if will check another condition, but only if the original condition wasn't met.
-        -     And you can have many else ifs if you want to, there's no limit.
-        -     Else is run if none of the conditions were met.
-        
-        (Gabby) When I first saw this, I was worried I'd basically be learning programming. But with the conditions that Kay writes, it's not at all like that!
-        -       It's really easy for me to add simple checks, like "can the player afford this", or "did the player find that key at the start of the game".
-        -       All the work is on Kay's side, really. It lets me focus on writing.
-
-        (Kay) Hope that was clear!
-
-    : Tags: Using Line Tags and Inline Tags to Add Flair to a Line
-        (Player) Tags... Adding flair to lines? What's that mean?
-
-        (Kay) It's a way of adding data to a line for your game to use.
-        -     Gabby insisted we write that more "spicy".
-
-        (Gabby) Well, it worked didn't it? Data sounds so boring! 
-        -       But tags are awesome! You'll want to use them all the time.
-
-        (Kay) Ok, wanna take this one Gabby?
-
-        (Gabby) Yes! Ok ok, so, tags...
-        > show("dialogueTagsExample1")
-        +       Let's grab an example.
-        -       This is using what we're calling line tags.
-        -       It affects the line that comes after it. 
-        -       So basically, you just write your tags inside those arrows-
-
-        (Kay) Angle brackets.
-
-        (Gabby) Yeah whatever, angle brackets! Write your tags there, and separate with commas...
-        -       Whatever, that's boring, use tags like this!
-        > show("dialogueTagsExample2")
-        -       See? More interesting when you add meaning to them!
-        -       We've made up some tags here that define the traits of the character who's speaking.
-        -       So here, we've got "happy", and "wobble".
-        -       So in our game, we know that these tags mean "show the happy portrait" and "make the text wobble".
-        -       I guess maybe Charles has been drinking?
-        -       Kay, show them another one!
-
-        > show("dialogueTagsExample2")
-        (Kay) Alright, take a look at this.
-        -     Gabby wanted to make a game where you could talk to dozens of nameless NPCs, and they'd just give random greetings and such.
-        -     We wanted to be able to grab dialogues based on some of the game state, and also have some rare ones.
-        -     We decided to use tags for those dialogues to accomplish this. So, we made up "probability", "timeOfDay", and "location".
-        -     Our game uses probability to help randomly choose dialogues. High probability means it's more likely, and vice versa.
-        -     timeOfDay lets us select greetings for morning, afternoon, evening, and night.
-        -     And lastly, location lets us have a bit more control, so if you talk to someone in a bar, or a shop, they can say something in-context.
-
-        (Gabby) "Ayy, gimme another round!" or, "Why is everything here so pricey...?".
-
-        (Kay) Exactly. Pretty neat idea right? Well, I think so anyway.
-        -     Now, remember, none of this is free, you have to write it in your game. The tags just enable you to do it!
-        -     Also, I forgot to implement it for dialogues, so I'll have to do that and then come back update this sample. Oops.
-
-        (Gabby) So those are tags, the last detail to talk about is inline tags.
-        -       They're exactly the same, it's just a different way to write it for dialogue.
-        > show("dialogueTagsExample3")
-        -       Like that!
-        -       The inline tags are written after a character name. This is only for character dialogue, nothing else.
-        -       It's just to make things read a little more nicely. Kay wasn't gonna add it, but I complained a lot and I got my way!
-
-        (Kay) Yup...
-
-        (Gabby) Anyway, have fun using tags! Add personality to your dialogue with 'em!
+        >> Gabby.AboutActions
+    : What are conditionals?
+        (Player) What are conditionals?
+        >> Gabby.AboutConditionals
+    : What are tags used for?
+        (Player) What are tags used for?
+        >> Gabby.AboutTags
     : Back
         (Player) That's all I wanted to know.
-        (Kay) Alright, feel free to ask again if you have more questions, K?
+        (Kay, very happy) Alright! If you have any other questions, feel free to ask!
         >> Gabby.TutorialMainLoop
-    >> Gabby.LanguageLoop
 
-[Gabby.Comments]
-    > show(commentSample)
+[Gabby.AboutDialogue]
+    (Kay, happy)      There's a few ways to write dialogue, and a few different types of dialogue line!
+    (Kay, very happy) Check out this sample!
 
-    (Kay)   Comments are written with two forward slashes, like you see here.
-    -       Use them to keep your scripts clean and easy to read!
+    > showSnippet("Tutorial/AboutDialogue")
 
-    (Gabby) I use them to leave myself notes, or to explain things for Kay to understand.
-    +       Especially when there's a lot of conditionals or actions!
-    -       I also use them to remind myself to revisit something, with comments like <b>\/\/ TODO: finish this!</b>
-    -       I end up doing that a lot, because I like to write what interests me the most and come back to the boring stuff later on.
-    -       I can just search for "TODO", and the comment makes it easy to find again!
+    (Kay, happy)      There are four kinds of dialogue shown here.
+    -                 You can start a line with the character name in parentheses to define who's talking explicitly.
+    -                 Or, if the same character is talking for multiple lines in a row, you can just use <b>-</b>!
+    (Kay, very happy) This helps reduce repetition, and makes it easier to read!
+
+    (Gabby) It doesn't just look better, though! There's another really good reason to use it!
+    -       A lot of games have bugs where the wrong character speaks a line, because of a copy / paste error that's hard to spot.
+    -       When your scripts are too cluttered with boilerplate, these things happen easily!
+    -       The dash makes it obvious that a change in character didn't happen, so this type of error should just go away if you get used to using it.
+    
+    (Kay) So, to recap, you write dialogue with the character name in parentheses, or let them monologue for a few lines with a dash!
+    <very happy>
+    -     Nice and simple, right?
+
+    (Gabby) Anyway!
+    +       Now for fancy dialogue!
+    -       See those lines that start with <b>+</b>? That lets you continue dialogue without clearing the current line!
+    -       And when you start a line with <b>*</b>, you can do narration!
+    *       Gabby pauses for a moment to let the information sink in.
+    -       Easy, huh?
+
+    > hideSnippet()
+
+    <very happy>
+    -       Anyway, that's all there is to dialogue!
+
+    >> Gabby.FeaturesMain
+
+[Gabby.AboutChoices]
+    (Kay, happy)      Making choices is really straightforward in Gabby!
+    (Kay, very happy) Here's an example!
+
+    > showSnippet("Tutorial/AboutChoices")
+
+    (Kay, happy)      See those lines starting with <b>:</b> ?
+    (Kay, very happy) Those are choices!
+    (Kay, happy)      Each consecutive line becomes a choice the player can make, and they're presented all at once.
+    -                 Just make sure you keep your indentation even, otherwise they might not get parsed into the same choice.
+
+    (Gabby) So! The first choice the player can make is between "Great, I love making choices!", "Ah... But I'm so indecisive!", and "Choices? About what?".
+    -       The lines that follow are the dialogue lines that will be shown after the choice is made.
+    -       And then, when that inner block ends, it'll return flow to the outer block!
+    <very happy>
+    -       Here, let's try it! Make a choice!
+
+    : Great, I love making choices!
+        (Player) Great, I love making choices!
+        (Gabby)  Good, because you just did!
+    : Ah... But I'm so indecisive!
+        (Player) Ah... But I'm so indecisive!
+        (Gabby)  Oh... You're one of THOSE people.
+    : Choices? About what?
+        (Player) Choices? About what?
+        (Gabby)  Pretty much nothing interesting!
+
+    (Gabby) Wasn't that fun?
+    <annoyed>
+    -       Not very, I know! But still!
+    <happy>
+    -       At least you get the idea.
+
+    (Gabby, very happy) Oh! And see the other set of choices below?
+    -                   Notice how there's no dialogue in either of them.
+    -                   That'll let the player make a choice, but it has no impact on the game at all.
+
+    : Interesting...
+    : What's the point?
+
+    (Gabby, happy) Huh? I wasn't listening...
+    (Kay, annoyed) Gabby!~
+
+    > hideSnippet()
+
+    (Gabby) Anyway, I think that about covers it!
+
+    >> Gabby.FeaturesMain
+
+[Gabby.AboutJumps]
+    (Kay) Jumps are exactly what they sound like - they let you jump between dialogues!
+    <very happy>
+    -     Here, take a look at this!
+
+    > showSnippet("Tutorial/AboutJumps")
+
+    (Kay, happy) See that line that starts with <b>>></b>?
+    -            That's a jump.
+    -            When the first dialogue plays, it jumps to the second.
+    <very happy>
+    -            Then, if the player picks the first option, it'll jump back to the first dialogue!
+    <happy>
+    -            Just keep in mind, control doesn't return to the original dialogue when the dialogue you jumped to ends.
+    -            It's like telling the dialogue engine "Go do this instead", not "Go do this, then come back".
+
+    > hideSnippet()
+
+    (Gabby, very happy) Pretty cool, huh?
+    (Kay, very happy)   I guess that covers it!
+
+    >> Gabby.FeaturesMain
+
+[Gabby.AboutActions]
+    (Kay) Actions let you trigger events in your game from your dialogue scripts!
+    (Kay, very happy) Here, check it out!
+
+    > showSnippet("Tutorial/AboutActions")
+
+    (Kay, happy) Those lines that start with <b>></b> are actions!
+    -            They tell the dialogue engine to trigger an event with that name.
+    -            So, the actual action is implemented in your game - not in Gabby.
+    <very happy>
+    +            You just trigger them from Gabby!
+    
+    (Gabby) It's a useful way to do more from within your dialogue scripts!
+    -       Especially when you want your choices to have consequences, or for your game to have some sort of progression.
+
+    (Kay) It's basically like a function call, if you're familiar with programming.
+    -     You can pass data into it too! Like in this example, where a song name can be passed into the <b>playMusic</b> action.
+    -     If you're clever, you can come up with all sorts of simple and reusable actions to write.
+
+    > hideSnippet()
+
+    <very happy>
+    -     But anyway, that's it for actions!
+
+    >> Gabby.FeaturesMain
+
+[Gabby.AboutConditionals]
+    (Kay) Conditionals let you write branching dialogue based off the game's state!
+    (Kay, very happy) Take a look at this!
+
+    > showSnippet("Tutorial/AboutConditionals")
+
+    (Kay, happy) See that <b>if</b>? That's a conditional!
+    -            It's running a special action called <b>playerHasNotMet</b>, and passing in the value <b>Gabby</b>.
+    <very happy>
+    -            This is asking the game if the player has met Gabby - pretty self explanatory!
+
+    (Gabby) So if the player hasn't met me before, it'll show the first dialogue block.
+    -       Otherwise, it shows the second block!
+    
+    (Kay) Let's look at a better way of doing the same thing.
+
+    > showSnippet("Tutorial/MoreAboutConditionals")
+
+    (Kay) Here we've swapped out the <b>playerHasNotMet</b> conditional for a more reusable one, <b>isEqual</b>.
+    -     We're telling the game to compare a value this time, <b>gabby.introduced</b>, to the value <b>false</b>.
+
+    (Gabby) So again, if the player hasn't met me, it runs the first dialogue block!
+    <very happy>
+    -       And then as part of that dialogue block, we used an action to actually set that value!
+    
+    (Kay) So we can implement a character's introduction without any specialized game-side code! 
+    <very happy>
+    -     It's all done within Gabby!
+    
+    (Gabby) There's a ton of uses for conditionals. The sample demonstrates some!
+    -       You can check if the player has a certain amount of gold, or a certain item...
+    -       You can check if a certain quest objective has been fulfilled...
+    -       You can see if the player's been to a certain location...
+    <very happy>
+    -       Or you could like, just pick a random number, and play a dialogue based on that!
+
+    (Kay, very happy) Yep, it's a very useful tool!
+
+    > hideSnippet()
+
+    (Gabby, very happy) I think that covers it!
+
+    >> Gabby.FeaturesMain
+
+[Gabby.AboutTags]
+    (Kay) Tags let you, uhh... Tag things!
+    (Kay, annoyed) Just uh, take a look at this sample.
+
+    > showSnippet("Tutorial/AboutTags")
+
+    (Kay, happy) So, see those lines that are surrounded by angle brackets?
+    <very happy>
+    -            Those are tags!
+    <happy>
+    -            When the dialogue engine plays that line, your game can read those tags and do something with 'em.
+    -            We mostly use them for portraits, but you can use them in any number of ways!
+
+    (Gabby) Ooh, and see the comma after the character name on the later lines? 
+    <very happy>
+    -       Those are tags, too!
+    <happy>
+    -       They're called inline tags.
+    -       They can sometimes be easier to read, so we use both depending on the context!
+
+    (Kay) Oh, and you can tag whole dialogues, too! Not just individual lines.
+
+    (Gabby) Yeah! Here, let's look at another example!
+    + Something more than just portraits...
+
+    > showSnippet("Tutorial/MoreAboutTags")
+
+    (Gabby) Alright, take a look at this!
+    -       I wanted to make a game where you could talk to dozens of generic, nameless NPCs, and they'd just give random greetings or whatever!
+    -       The game would choose dialogues based on the character and location, and there would be a lot of different dialogues for it to randomly choose from.
+    <very happy>
+    -       Kay made it so we could use the tags <b>type</b>, <b>location</b>, and <b>probability</b>, and the game would use them to pick a dialogue!
+
+    (Kay, very happy) Yeah! So in this example, if you talk to the guard at the tavern, you'll see one of these two options randomly.
+    
+    (Gabby) And if you talk to the guard at the castle, you get a more fitting greeting for that location!
+    -       Pretty neat, huh? I think so at least!
+
+    > hideSnippet()
+
+    (Kay) Just keep in mind, if you want to do this for your game you'll have to implement it yourself - the tags don't do it for you.
+    (Kay, very happy) Well, that about covers it!
 
     >> Gabby.FeaturesMain

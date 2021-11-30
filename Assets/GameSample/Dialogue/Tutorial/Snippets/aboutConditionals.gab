@@ -1,0 +1,28 @@
+// This is the snippet shown for the [Gabby.AboutConditionals] tutorial section
+gabby 0.2
+language english
+
+[TutorialSnippet.AboutConditionals]
+    if playerHasNotMet("Gabby")
+        (Gabby) Oh, hi!
+        + I'm Gabby!
+        - It's nice to meet you!
+    else
+        (Gabby) Oh, hello again!
+        - It's... Player, right?
+
+
+
+// Example 2
+
+
+
+[TutorialSnippet.MoreAboutConditionals]
+    if isEqual(gabby.introduced, false)
+        (Gabby) Oh, hi!
+        + I'm Gabby!
+        - It's nice to meet you!
+        > set(gabby.introduced, true)
+    else
+        (Gabby) Oh, hello again!
+        - It's... Player, right?

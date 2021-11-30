@@ -1,0 +1,196 @@
+// The tutorial dialogue for the "Why Gabby?" section.
+gabby 0.2
+language english
+
+// This is the main entry point for the section.
+// After selecting one, they lead into each other without interruption (unless the player backs out).
+[Gabby.WhyGabby]
+    : Reason #1: Writing Should be Fun!
+        >> Gabby.WritingShouldBeFun
+    : Reason #2: Writing Isn't Programming
+        >> Gabby.WritingNotProgramming
+    : Reason #3: Avoiding Engine Lock-In
+        >> Gabby.AvoidingLockIn
+    : Reason #4: Easier Collaboration
+        >> Gabby.Collaboration
+    : Reason #5: More Flexible Localization
+        >> Gabby.Localization
+    : Reason #6: Intuitive Modding
+        >> Gabby.Modding
+    : Alright, I think I've heard enough!
+        (Player) Alright, I think I've heard enough!
+        (Gabby, very happy) Ok!
+        >> Gabby.TutorialMainLoop
+
+[Gabby.WritingShouldBeFun]
+    (Gabby, serious)        Reason number ONE!
+    (Gabby, very happy)     Writing should be FUN!
+    (Gabby, happy)          This was the biggest reason for us even making Gabby in the first place.
+    (Gabby, disappointed)   If your tools slow you down, or are frustrating to use, are you supposed to just live with it?
+    (Gabby, angry)          NO!
+    (Gabby, very happy)     Find the tool that works best for you! And if it doesn't exist, make it!
+    (Gabby, happy)          Writing is hard enough to begin with, isn't it?
+    -                       So, we tried to pack Gabby full of fun features that let you run free and just write, uninterrupted and not slowed down by anything.
+    (Gabby, very happy)     So at the end of the day, all you're really doing is writing!
+    (Gabby, annoyed)        Hopefully you like writing...
+
+    : I love it!
+        (Player) I love it!
+        (Gabby, very happy) Me too!
+    : Ehh...
+        (Player) Ehh...
+
+        (Gabby, dots)         ...
+        <disappointed>
+        + Uhh...
+    
+    (Gabby, happy) Let's move on!
+
+    : Reason #2: Writing Isn't Programming
+        >> Gabby.WritingNotProgramming
+    : Go back.
+        >> Gabby.WhyGabby
+
+[Gabby.WritingNotProgramming]
+    (Gabby, serious)        Reason number TWO!
+    (Gabby, very happy)     I wanna write games without coding!
+    (Gabby, disappointed)   Coding is so boring, and complicated...
+    (Gabby, sad)            And if I had to learn to program so I could write games...
+    (Gabby, spooky)         I think I'd never make any games.
+
+    (Kay, sad) Aww...
+
+    (Gabby, very happy) So we specifically made Gabby easy for people who DON'T program.
+
+    (Kay, happy) Yep! It needed to be easy to follow, and easy to write.
+    -            It also had to be flexible, so you can control the flow of the game without any scripts to support it.
+    -            We really didn't want to let Gabby turn into a full fledged scripting language.
+    <very happy>
+    -            It had to stay focused on dialogue! Just dialogue, and the glue that ties it together.
+    
+    (Gabby, very happy) Yeah!
+    (Gabby, happy)      So in the end, if all you want to do is write, you can still do so much with just Gabby!
+    -                   And with so many other easy to use tools around, you can probably make your entire game without touching code!
+    (Gabby, spooky)     Or maybe you're like Kay, and you like programming?
+
+    (Kay, annoyed) Hey, don't say it like it's something weird, tons of people like programming!
+
+    : I love programming!
+        (Player) I love programming!
+
+        (Kay, very happy) See? I knew it!
+        +                 Programming is awesome!
+        (Kay, happy)      And hopefully you'll find Gabby to be another useful tool for making games!
+    : I don't want to code!
+        (Player) I don't want to code!
+        (Gabby) Me neither!
+        (Kay, happy) That's fine! We hope you'll still find Gabby really easy to use!
+
+    (Gabby) So, what's next...
+
+    : Reason #3: Avoiding Engine Lock-In
+        >> Gabby.AvoidingLockIn
+    : Go back.
+        >> Gabby.WhyGabby
+
+[Gabby.AvoidingLockIn]
+    (Gabby, serious)    Reason number THREE!
+    (Gabby, annoyed)    Avoiding engine lock-in...
+    +                   Umm... Kay?
+
+    (Kay, very happy)   I'll go over this one!
+    (Kay, happy)        The last thing you want when you're investing a lot of time in a project is to feel like you're stuck with a certain tool or piece of software.
+    -                   If you're planning to be spending years on something, or even just months, the work you do should be able to exist outside those tools.
+    -                   What if you decide to target new consoles, or mobile? And the engine you're using doesn't support it?
+    (Kay, sad)          Or what if you decide you don't like using Gabby, and want to write your game some other way?
+    -                   There could be a ton of reasons to switch game engines or tools. 
+    (Kay, sad)          The worst thing would be if your data was completely tied to the tool, right? Then you'd have to leave everything behind.
+    -                   And a LOT of tools work like that.
+    (Kay, happy)        But thankfully, Gabby is just text. It exists on it's own, outside of the game engine or any other software.
+    (Kay, very happy)   So you'll never lose your work, and you can easily switch tools if you want to.
+
+    (Gabby, sad)        But people will want to use Gabby, right?
+
+    (Kay, very happy)   Of course they will!
+    (Kay, happy)        Especially since they'll know their work is safe!
+
+    : Reason #4: Easier Collaboration
+        >> Gabby.Collaboration
+    : Go back.
+        >> Gabby.WhyGabby
+
+
+[Gabby.Collaboration]
+    (Gabby, serious)    Reason number FOUR!
+    (Gabby, very happy) Easier collaboration!
+    (Gabby, happy)      If you're making games as part of a team, there's a lot more to think about than when you're working alone.
+    -                   Sharing work and keeping things up to date is crucial!
+    -                   And it needs to be easy for your teammates to review your work, too, so they can edit it or contribute to it directly!
+
+    (Kay, happy)        Yep! Especially when it comes to source control.
+    (Kay, very happy)   Files need to be readable, reviewable, and mergeable!
+    (Kay, happy)        Because Gabby is just text, and formatted for readability, this comes naturally.
+    -                   When you look at a diff, you can understand exactly what the change is, and you can understand the flow of dialogue just from the Gabby script.
+    (Kay, very happy)   This makes merge conflicts really easy to fix, too!
+    (Kay, annoyed)      Especially compared to unformatted json blobs, with dialogue blocks in some arbitrary order you can't control...
+    *                   Kay shudders.
+
+    (Gabby, happy)      Also, you don't even have to be working in the same file.
+    -                   Breaking your game dialogue into many smaller scripts makes it a lot easier to organize, and easier to collaborate too!
+
+    : Reason #5: More Flexible Localization
+        >> Gabby.Localization
+    : Go back.
+        >> Gabby.WhyGabby
+
+[Gabby.Localization]
+    (Gabby, serious)    Reason number FIVE!
+    (Gabby, very happy) More flexible localization!
+    (Gabby, happy)      Don't you want to share your games with the whole entire world? I know I do!
+    -                   Translating your game into other languages is soooo important for that!
+
+    (Kay, happy)        Absolutely!
+    -                   Of course, it's never a simple task, but we took some steps to make it a bit easier with Gabby.
+    -                   Every Gabby file is written in a single language.
+    -                   You create separate localized versions of the files, and the engine will select them based on the player's language settings in game.
+    (Kay, very happy)   This gives you so much more flexibility with your translations than you'd normally have!
+    (Kay, happy)        It means you can adjust the flow of the dialogue to fit the translation.
+    -                   Very often, things like jokes just don't translate well, but with the constraints of typical localization approaches, they end up translated line for line.
+    -                   With Gabby, you can change up the flow of the dialogue there without the game being affected. At all.
+
+    (Gabby, very happy) Add or remove lines, throw in some new choices, maybe even some easter eggs! It's all possible, and easy!
+
+    (Kay, very happy)   Yeah!
+
+    : Reason #6: Intuitive Modding
+        >> Gabby.Modding
+    : Go back.
+        >> Gabby.WhyGabby
+
+[Gabby.Modding]
+    (Gabby, serious)    Reason number SIX!
+    (Gabby, very happy) Intuitive modding!
+    (Gabby)             How cool would it be for your players to be able to build on your game?
+    -                   Maybe they want to make new content, or change existing lines?
+    (Gabby, very happy) It's so easy with Gabby!
+
+    (Kay, very happy)   Yeah! It's one of the big advantages of controlling dialogue flow from within Gabby.
+    (Kay, happy)        If you want to make it even easier on modders, you can use dialogue tags to further decouple your dialogues from your code!
+    -                   You know, tags like "greeting", "day", or "night". Keywords that the game can use to choose a dialogue, instead of just picking a hardcoded one.
+    -                   Or take another approach, expose that information through your conditional handlers and let the dialogue script decide what to show!
+
+    (Gabby, happy)      And remember how Gabby makes collaboration easier? That all helps with modding, too!
+
+    (Kay, very happy)   Yeah!
+    (Kay, happy)        Mod conflicts are easier to resolve, and a lot easier to avoid altogether!
+    +                   Especially compared to a format like json...
+
+    (Gabby, annoyed)    Anyway...
+    (Gabby, very happy) That's it! There's our six reasons!
+    (Gabby, happy)      I'm sure we could think of more, too!
+    
+    (Kay)               But at the end of the day, Gabby was a tool we wanted to use, so we wanted to put it out there so you could use it too.
+
+    (Gabby, very happy) And if you do, we want to see what you do with it! Please tell us all about your games!
+
+    >> Gabby.WhyGabby

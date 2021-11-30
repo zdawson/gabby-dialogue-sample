@@ -1,0 +1,38 @@
+gabby 0.2
+language english
+
+// 1
+
+// The game references these dialogues by tag
+
+<type: introduction>
+[GenericNPC.Introduction1]
+    (GenericNPC) Oh, hello there!
+    - It's nice to meet you.
+
+<type: introduction>
+[GenericNPC.Introduction2]
+    (GenericNPC) It's a pleasure to make your acquaintance.
+
+<type: greeting>
+[GenericNPC.Greeting1]
+    (GenericNPC) Good day to you!
+
+<type: greeting>
+[GenericNPC.Greeting2]
+    (GenericNPC) Stay out of trouble.
+
+// 2
+
+// The game references this dialogue, which then handles the rest of the Guard's dialogue logic
+[Guard.MainDialogue]
+    if hasNotMetPlayer()
+        (Guard) Ah, an outsider!
+    else if isPlayerWanted()
+        (Guard) Stop right there!
+    else if isPlayerReputationLow()
+        (Guard) I've got my eye on you.
+    else if isPlayerReputationHigh()
+        (Guard) Ah, hello there! What brings you to me today, Hero?
+    else
+        (Guard) Good day to you, traveller.

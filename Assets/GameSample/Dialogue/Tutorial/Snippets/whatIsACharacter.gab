@@ -1,0 +1,66 @@
+gabby 0.2
+language english
+
+// 1
+
+[GuardCommon.Greeting]
+    (GuardCommon) Ah, well if it isn't the Hero! What brings you here?
+
+[GuardCaptain.GetQuest]
+    (Captain) Ah, just the person I was looking for!
+    -         I have a job for you, if you're interested...
+    : A quest? Heck yeah!
+        (Player)  A quest? Heck yeah!
+
+        (Captain) Good! Here, I'll write the details in your journal...
+        > giveQuest(guardCaptainQuest)
+
+    : I'm busy.
+        (Player)  I'm busy.
+        
+        (Captain) Ah, well come see me at your earliest convenience!
+    
+// 2
+
+[Inspect.Garbage]
+    * Hmm... It hasn't been emptied in a while.
+    * Well, one man's trash is another man's treasure!
+    * ...
+    * On closer inspection, this really is just trash.
+
+[Inspect.Cupboard]
+    * Wow, it's full of chocolate!
+    * So much chocolate...
+    * Would anyone notice if I took some?
+
+// 3
+
+[Garbage.Inspect]
+    * Hmm... It hasn't been emptied in a while.
+    * Well, one man's trash is another man's treasure!
+    * ...
+    * On closer inspection, this really is just trash.
+
+[Cupboard.Inspect]
+    * Wow, it's full of chocolate!
+    * So much chocolate...
+    * Would anyone notice if I took some?
+
+// 4
+
+[Phone.Interact]
+    * You pick up your dusty old phone.
+    : Call Mom
+        >> Phone.CallMom
+    : Do nothing
+
+[Phone.CallMom]
+    * You wait a moment while the call connects.
+    * ...
+    (Mom) Player! I told you to text me! Why are you calling?
+
+[Phone.SpecialEventDay7]
+    * The phone rings, and you rush to answer it.
+    * Even before she starts to speak, you know it's Valentina.
+    (Valentina) Player... There's something I have to tell you.
+    (Player)    I know, Valentina. I've always known.

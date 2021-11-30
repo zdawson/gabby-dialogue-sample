@@ -1,0 +1,9 @@
+gabby 0.2
+language english
+
+[TutorialSnippet.PortraitExample]
+    (Gabby, disappointed) See Kay?
+    <happy>
+    - You can totally use portraits!
+
+    (Kay, happy) I know you can!

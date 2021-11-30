@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3362402988229077040}
+  - component: {fileID: 3739224971502004179}
   - component: {fileID: 3362402988229077041}
   - component: {fileID: 3362402988229077046}
   - component: {fileID: 3362402988229077047}
@@ -39,6 +40,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &3739224971502004179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362402988229077044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203d4b3d1823bad4185861a7480ec361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiFields:
+  - elementName: StoneCountText
+    UIElement: {fileID: 6839518242737792241}
 --- !u!223 &3362402988229077041
 Canvas:
   m_ObjectHideFlags: 0
@@ -56,7 +72,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0

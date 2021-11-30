@@ -1,0 +1,17 @@
+// This is the snippet shown for the [Gabby.AboutDialogue] tutorial section
+gabby 0.2
+language english
+
+[TutorialSnippet.AboutDialogue]
+    (Gabby) This is a line of dialogue!
+    -       And if the same character is speaking multiple lines, you can just use a dash!
+    -       It makes it a lot easier to tell who's talking, doesn't it?
+    -       And it means you don't have to write the character name out every time!
+    +       Over and over...
+    +       And over...
+
+    *       Gabby seems to space out.
+
+    (Kay)   Gabby, you alright there?
+
+    (Gabby) Ah! Sorry, flashbacks...

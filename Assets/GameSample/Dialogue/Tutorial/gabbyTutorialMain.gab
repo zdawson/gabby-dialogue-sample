@@ -1,0 +1,77 @@
+// This is the main tutorial dialogue file. Each section is split into a separate file.
+gabby 0.2
+language english
+
+[Gabby.TutorialStart]
+    * That's a big TV!
+    * They've got a bunch of game consoles hooked up to it, too.
+    
+    * <i>Do you want to play the tutorial?</i>
+    : Yes
+    : No
+        end
+
+    * You set up the game, and are greeted by a cheery yellow bubble.
+
+    (Gabby) Hey, I'm Gabby!
+    <very happy>
+    + And this is Kay.
+
+    (Kay) Hey!
+
+    (Gabby, very happy) Welcome to our tutorial!
+
+    (Kay, very happy) We hope it will help you get started with using Gabby!
+
+    (Gabby, very happy) Yeah!
+
+    >> Gabby.TutorialIntroduction
+
+[Gabby.TutorialIntroduction]
+    - Ok, so when it comes to Gabby, there's a lot to talk about!
+    + But you'll find that it's all pretty straightforward, I think!
+    - The tutorial is broken down into multiple interactive sections.
+    
+    (Kay) We'll also show you Gabby snippets along the way, but the best way to learn is by looking at the sample scripts and trying your hand at writing something yourself!
+    (Kay, very happy) Anyone can do it! Let your creative side show!
+
+    (Gabby) Ok, if you're ready to go, let's <b>jump</b> right in to the tutorial!
+    >> Gabby.TutorialMainLoop
+
+[Gabby.TutorialMainLoop]
+    (Gabby) Tell me what you want to learn about!
+    : The basics.
+        (Player) Let's start with the basics.
+        (Gabby)  Starting from the top, huh? Ok!
+        >> Gabby.Basics
+    : Gabby features.
+        (Player) I want to learn more about the different features of Gabby.
+        (Gabby)  Alright, let's talk features!
+        >> Gabby.Features
+    : Using Gabby in a game.
+        (Player) I want to use Gabby to make games - how do I do that?
+        (Gabby)  Hey, me too! Let's talk about making games!
+        >> Gabby.MakingGames
+    : Why Gabby?
+        (Player)              So... Why Gabby?
+
+        (Gabby, annoyed)      Ahem... Why Gabby? Really?
+        (Gabby, angry)        I'm floating right here!
+
+        (Kay, very happy)     Now now Gabby, it's an important question to ask!
+        (Kay, happy)          Choosing a technology for such a central part of your game is a big and sometimes scary decision!
+        (Kay, very happy)     It's our job to make sure that it's an informed one!
+
+        (Gabby, disappointed) True...
+        (Gabby, happy)        Alright then! Let's talk about why you might want to use Gabby!
+
+        >> Gabby.WhyGabby
+    : I'm done!
+        (Player)            Alright, I think I'm done!
+
+        (Gabby)             Ok! Thanks for checking out the tutorial!
+        (Gabby, very happy) Good luck with your writing!
+        
+        (Kay, very happy)   And remember to have fun, K?
+        end
+        

@@ -1,0 +1,24 @@
+// This is the snippet shown for the [Gabby.AboutChoices] tutorial section
+gabby 0.2
+language english
+
+[TutorialSnippet.AboutChoices]
+    (Gabby) It's time to make some choices!
+
+    : Great, I love making choices!
+        (Player) Great, I love making choices!
+        (Gabby)  Good, because you just did!
+    : Ah... But I'm so indecisive!
+        (Player) Ah... But I'm so indecisive!
+        (Gabby)  Oh... You're one of THOSE people.
+    : Choices? About what?
+        (Player) Choices? About what?
+        (Gabby)  Pretty much nothing interesting!
+
+    (Gabby) Wasn't that fun?
+
+    : Yes!
+    : Not really...
+
+    (Gabby) Hmm? Oh, I wasn't paying attention.
+    (Kay)   Gabby!~

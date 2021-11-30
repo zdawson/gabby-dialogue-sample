@@ -1,0 +1,38 @@
+// This is the snippet shown for the [Gabby.AboutTags] tutorial section
+gabby 0.2
+language english
+
+[TutorialSnippet.AboutTags]
+    <very happy>
+    (Gabby) I'm so happy!~
+
+    (Kay) I can see that!
+    <curious>
+    -     What's up?
+
+    (Gabby, excited) We finally get to talk about tags!
+    <very happy>
+    + Aren't they wonderful?
+
+    (Kay, very happy) They certainly come in handy!
+
+
+
+// Example 2
+
+
+
+<type: greeting, location: castle>
+[Guard.GenericCastleGreeting]
+    (Castle Guard) We're keeping an eye on you, so don't try any funny business.
+
+<type: greeting, location: tavern, probability: 0.8>
+[Guard.GenericTavernGreeting1]
+    (Off Duty Guard) Ehh...
+    <wobble, slow>
+    + Ish been a long day...
+
+<type: greeting, location: tavern, probability: 0.2>
+[Guard.GenericTavernGreeting2]
+    <wobble, slow>
+    (Off Duty Guard) Can't cha see I'm, ehh... Busy?

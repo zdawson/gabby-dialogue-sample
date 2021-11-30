@@ -1,0 +1,17 @@
+// This is the snippet shown for the [Gabby.AboutJumps] tutorial section
+gabby 0.2
+language english
+
+[TutorialSnippet.AboutJumps]
+    (Gabby) Jumps let you link dialogues together!
+    >> TutorialSnippet.MoreAboutJumps
+
+[TutorialSnippet.MoreAboutJumps]
+    (Gabby) When you use a jump, the dialogue engine will seamlessly connect the two dialogues.
+    -       They're especially useful when combined with features like choices and conditionals!
+
+    : Wait, what did you just say?
+        (Player) Wait, what did you just say?
+        >> TutorialSnippet.MoreAboutJumps
+    : Got it!
+        (Player) Got it!

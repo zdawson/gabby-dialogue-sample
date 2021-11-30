@@ -1,0 +1,19 @@
+// This is the snippet shown for the [Gabby.AboutActions] tutorial section
+gabby 0.2
+language english
+
+[TutorialSnippet.AboutActions]
+    (Gabby) This dialogue is so boring, I wish it had more action!
+
+    > playMusic("Gabbys_Mix_Tape")
+
+    (Gabby) Ah! That's more like it!
+
+    > startDiscoBall()
+
+    (Gabby) Now we just need snacks!
+
+    > orderSnacks()
+
+    (Kay) Hey! Cut it out with all the actions! you know I have to program these, right?
+    (Gabby) Yeah, but aren't they fun?

@@ -1,6 +1,9 @@
+// This contains the tutorial dialogue for the "basics" section.
 gabby 0.2
 language english
 
+// This is the main entry point for the section.
+// After selecting one, they lead into each other without interruption (unless the player backs out).
 [Gabby.Basics]
     : What is Gabby?
         (Player) What is Gabby?
@@ -22,35 +25,43 @@ language english
         (Player) How do I give my characters portraits?
         >> Gabby.WhatIsACharacter
 
-    : How do I integrate dialogues into my game?
-        (Player) How do I integrate dialogues into my game?
+    : How do I integrate dialogue into my game?
+        (Player) How do I integrate dialogue into my game?
         >> Gabby.DialogueIntegration
 
     : Enough about the basics!
         (Player) I think I've learned enough about the basics now!
-        (Gabby)  That's great!
-        +        Let's talk about something else!
+
+        (Gabby, very happy) That's great!
+        (Gabby, happy)      Let's talk about something else!
+
         >> Gabby.TutorialMainLoop
 
 [Gabby.WhatIsGabby]
-    (Gabby) Gabby is a way to write dialogue for games.
-    - It's a language that was made for... well, language!
-    - We wanted a way to write dialogue more naturally, that let us focus on the content without distractions.
+    (Gabby, happy)      Gabby is a way to write dialogue for games.
+    (Gabby, very happy) It's a language that was made for... well, language!
+    (Gabby, happy)      We wanted a way to write dialogue more naturally, that let us focus on the content without distractions.
+
     (Kay) And we wanted to be able to use these scripts in our games directly.
-    - There shouldn't need to be code written to support the _flow_ of dialogue, that should come naturally from the script!
-    (Gabby) So we made Gabby!
+    - There shouldn't need to be code written to support the <i>flow</i> of dialogue, that should come naturally from the script!
+
+    (Gabby, very happy) So we made Gabby!
+
     : So, it's a scripting language?
         (Player) So, it's a scripting language?
+        
         (Kay) Not exactly, but kind of!
         - We prefer to think of it as a dialogue language, or something closer to a data format.
     : I think I get it!
         (Player) I think I get it!
         (Gabby) Great!
         (Kay) Just one last detail!
+
     (Kay) We wanted to make sure that Gabby was easy to use, even if you aren't a programmer.
     - We didn't want Gabby to look like code. It should look like dialogue - like a book or a script.
-    (Gabby) Ya! We wanted to make something that's easy to read, and easy to write.
-    - Anyway, I hope that answers your question!
+
+    (Gabby, very happy) Ya! We wanted to make something that's easy to read, and easy to write.
+    (Gabby, happy)      Anyway, I hope that answers your question!
 
     : What do Gabby scripts look like?
         (Player) What do Gabby scripts look like?
@@ -59,10 +70,11 @@ language english
         >> Gabby.Basics
         
 [Gabby.WhatIsAGabbyScript]
-    > show(whatIsAGabbyScript)
 
-    (Gabby) This is a Gabby script!
-    - It's pretty much just a text file that you write your dialogue in!
+    > showSnippet("Tutorial/WhatIsAGabbyScript")
+
+    (Gabby)             This is a Gabby script!
+    (Gabby, very happy) It's pretty much just a text file that you write your dialogue in!
     
     (Kay) You're looking at the Gabby script for this section of dialogue in particular.
 
@@ -71,99 +83,132 @@ language english
     (Kay) We can go into detail about what everything means later on.
     - The gist of what you see here is that every dialogue is written in its own section, and they're organized by character and dialogue name.
 
-    (Gabby) Ya! So this dialogue is called <b>Gabby.WhatIsAGabbyScript</b>, because I'm Gabby, and I'm telling you what a Gabby script is!
+    (Gabby, very happy) Ya! So this dialogue is called <b>Gabby.WhatIsAGabbyScript</b>, because I'm Gabby, and I'm telling you what a Gabby script is!
     
     : How does it work?
         (Player) How does it work?
 
-        (Kay) I can break it down!
-        - At the top, there's some <b>metadata</b> to define the Gabby version and the language used for the entire script.
-        - Then we start a new <b>dialogue definition</b> - <i>Gabby.WhatIsAGabbyScript</i>.
-        - Inside the dialogue, we have an <b>action</b> to tell the game to show a particular image.
-        - Then we have our dialogue! It alternates between Gabby and me.
-        + The character in the parentheses denotes who's speaking.
+        (Kay, very happy) I can break it down!
+        (Kay, happy)      At the top, there's some <b>metadata</b> to define the Gabby version and the language used for the entire script.
+        -                 Then we start a new <b>dialogue definition</b> - <i>Gabby.WhatIsAGabbyScript</i>.
+        -                 Inside the dialogue, we have an <b>action</b> to tell the game to show a particular image.
+        (Kay, very happy) Then we have our dialogue! It alternates between Gabby and me.
+        <happy>
+        +                 The character in the parentheses denotes who's speaking.
 
         (Gabby) Cool, huh?
+
     : Makes sense!
         (Player) Makes sense!
 
-    (Kay) Make sure to take a look at the script files sometime, they're on GitHub!
+    > hideSnippet()
+
+    (Kay, very happy) Make sure to take a look at the script files sometime, they're on GitHub!
     > set(gabbyTutorial.whatIsAGabbyScript_shown, true)
 
     : So, how do I write dialogue?
+        (Player) So, how do I write dialogue?
         >> Gabby.HowDoIWriteDialogue
     : Go back.
         >> Gabby.Basics
 
 [Gabby.HowDoIWriteDialogue]
     
-    if isEqual(gabbyTutorial.whatIsAGabbyScript_shown, false)
+    if isNot(gabbyTutorial.whatIsAGabbyScript_shown, true)
         (Gabby) Maybe we should take a look at a Gabby script first?
         : Alright!
             (Player) Alright!
             >> Gabby.WhatIsAGabbyScript
         : I already know!
             (Player) I already know!
-            (Gabby) Oh, great!
+            (Gabby, very happy) Oh, great!
 
-    > show(howDoIWriteDialogue)
+    > showSnippet("Tutorial/HowDoIWriteDialogue")
+
     (Gabby) You write dialogue by starting a section with a <b>dialogue definition</b>.
     - This tells us the character (or topic) and the dialogue name.
+    <very happy>
     - Then we have our <b>lines of dialogue</b>!
+    <happy>
     - We write the character out first, followed by whatever we want them to say!
+    <very happy>
     - It's that simple!
+
+    > hideSnippet()
 
     (Kay) Yep! And you can put as many dialogues as you want in the same script.
     - You can decide how you want to organize things - we've found that doing it based on the character and the content works pretty well.
     - You can see how we organized the sample on GitHub.
 
     (Gabby) So you'll probably have lots of different dialogues for your game.
+    <very happy>
     + Maybe dialogues like <b>[Guard.Greeting]</b>, <b>[Blacksmith.Shop]</b>, or even <b>[Inspect.Anvil]</b>!
+    <happy>
     - They can be tied to specific characters, a generic "class" of character, or to an arbitrary topic or action.
     - If you're making a visual novel, you'll probably have much longer dialogues separated by chapter!
 
     (Kay) Yeah, to Gabby it's all the same, so do what makes sense for your game.
-    - There are some other details to writing lines of dialogue, like continuing lines or writing narration.
-    - We'll keep things brief for now, but you can read more about them in the docs!
+    <very happy>
+    - We can teach you more about it in the features section of the tutorial!
 
-    : How do I integrate the dialogues into my game?
+    : So, what are characters?
+        (Player) So, what are characters?
+        >> Gabby.WhatIsACharacter
     : Go back.
         >> Gabby.Basics
 
 [Gabby.WhatIsACharacter]
     (Gabby)  You wanna learn about characters?
     -        So like, you're probably thinking, "it's obvious what a character is!"
+    <very happy>
     -        And you're right!
 
-    (Kay)    Gabby...
+    (Kay, annoyed) Gabby...
 
-    (Gabby)  I'm not done! Characters in Gabby are, well...
+    (Gabby, annoyed)  I'm not done! Characters in Gabby are, well...
     
     (Kay)    In Gabby, a character is just a way of identifying who - or what - is speaking.
-    -        So, in the Gabby script, I'm a character named Kay, and that's about all there is to it.
+    <very happy>
+    -        So, in the Gabby script, I'm a character named Kay, and that's about all there is to it!
 
-    (Gabby)  Hey, I was answering this one!
-    +        So like, yeah, that's more or less it...
-    -        But! Your game will have a lot more to its characters, like maybe the name you show the player is different than the name written in your scripts.
-    -        Maybe you have a lot of basic guards and some special guards, and you want to share dialogue between them!
-    -        You could do [GuardCommon.Greeting], and [GuardCaptain.GetQuest], or something!
-    -        And your game can share them!
+    (Gabby, annoyed)  Hey, I was answering this one!
+    <disappointed>
+    +                 So like, yeah, that's more or less it...
+    (Gabby, happy)    But! Your game will have a lot more to its characters, like maybe the name you show the player is different than the name written in your scripts.
+    -                 Maybe you have a lot of basic guards and some special guards, and you want to share dialogue between them!
+
+    > showSnippet("Tutorial/WhatIsACharacter1")
+    -                 You could do <b>[GuardCommon.Greeting]</b>, and <b>[GuardCaptain.GetQuest]</b>, or something!
+    -                 So your guard captains can inherit the basic guard greeting, too!
+    
+    > hideSnippet()
 
     (Kay)    Yep! Again, to Gabby it doesn't mean anything special, so you can organize things how you'd like.
     -        Maybe your "common guard" has a name, but for defining dialogue you don't care.
     -        This way, your game can work with generic greetings, but use the actual name when it matters.
 
     (Gabby)  The main point is it's really flexible, so don't box yourself in.
+    <very happy>
     -        And you can get abstract with it, too!
     -        If I'm making a game where the player can inspect objects and interact with a lot of things, I'd treat those things as a single character.
-    -        I'd have dialogues like [Inspect.Garbage], [Inspect.Cupboard], and so on!
-    -        Or you could do [Garbage.Inspect], [Cupboard.Inspect]...
-    -        And like, for a really interactive object, you might have [Phone.Interact], [Phone.CallMom], [Phone.SpecialEventDay7], that sort of thing!
+
+    > showSnippet("Tutorial/WhatIsACharacter2")
+    -        I'd have dialogues like <b>[Inspect.Garbage]</b>, <b>[Inspect.Cupboard]</b>, and so on!
+
+    > showSnippet("Tutorial/WhatIsACharacter3")
+    <annoyed>
+    -        Or you could do <b>[Garbage.Inspect]</b>, <b>[Cupboard.Inspect]</b>...
+
+    > showSnippet("Tutorial/WhatIsACharacter4")
+    <very happy>
+    -        And like, for a really interactive object, you might have <b>[Phone.Interact]</b>, <b>[Phone.CallMom]</b>, <b>[Phone.SpecialEventDay7]</b>, that sort of thing!
     -        Just saying, don't get too locked into the idea of a "character" meaning a living NPC. It can even be "Narrator", or something.
 
-    (Kay)    Or, "Gabby's Weird Brain".
+    > hideSnippet()
 
-    (Gabby)  HEY!!
+    (Kay, very happy) Or, "Gabby's Weird Brain".
+
+    (Gabby, angry)  HEY!!
 
     : So, how do I give my characters portraits and emotions?
         (Player) So, how do I give my characters portraits and emotions?
@@ -175,22 +220,28 @@ language english
     (Kay) That's up to you!
     - It's <i>technically</i> not a feature of the Gabby language.
 
-    (Gabby) Um, ya it is! Take a look at this!
-    > show(portraitExample)
+    (Gabby, annoyed) Um, ya it is! Just look at this!
+    
+    > showSnippet("Tutorial/PortraitExample")
 
-    (Gabby) See? You just put a comma after the character!
+    (Gabby, disappointed) See?
+    <angry>
+    - You just put a comma after the character!
+    <happy>
     - Or you write it in angle brackets.
 
-    (Kay) Well, yeah. That's why I said <i>technically</i>. Those are tags!
-    - You can use tags for anything. We use them for portraits all over the place.
-    - You could also use them in other ways!
-    - We'll take a closer look at them later.
+    > hideSnippet()
+
+    (Kay, very happy) Well, yeah. That's why I said <i>technically</i>. Those are just <b>tags</b>!
+    (Kay, happy)      You can use tags for anything. We use them for portraits all over the place!
+    -                 But you could also use them in other ways!
+    -                 We can take a closer look at them in another section of the tutorial, if you want.
 
     (Gabby) Anyway, tags are a good way of handling portraits!
-    - Then your game just needs to look up the image to use!
+    -       Then your game just needs to look up the image to use!
 
     (Kay) You can see how we did that in the sample code on GitHub!
-    - Briefly, you define characters along with a set of portraits by name, and the dialogue system does the rest.
+    -     To explain it briefly, you define your characters along with a set of portraits, and the dialogue system looks them up when it sees a tag.
 
     : Let's talk more about integrating dialogues into a game.
         (Player) Let's talk more about integrating dialogues into a game.
@@ -200,19 +251,30 @@ language english
 
 [Gabby.DialogueIntegration]
     (Kay) This is pretty flexible based on your game, but the most straightforward way is to look up dialogues by name from your game scripts.
-    - So when your player walks up to a guard and starts a conversation, your game can tell the dialogue system to run <b>[Guard.Greeting]</b>.
-    - The dialogue engine takes it from there.
-    + If the guard asks the player a question, or if the dialogue splits up into a bunch of mini-dialogues, the engine handles it all the same.
-    - Your script only kicks things off, and the flow of dialogue is handled for you as it's written in the Gabby scripts!
+    -     So when your player walks up to a guard and starts a conversation, your game can tell the dialogue system to run <b>[Guard.Greeting]</b>.
+    <very happy>
+    -     The dialogue engine takes it from there.
+    <happy>
+    +     If the guard asks the player a question, or if the dialogue splits up into a bunch of mini-dialogues, the engine handles it all the same.
+    <very happy>
+    -     Your script only kicks things off, and the flow of dialogue is handled for you as it's written in the Gabby scripts!
 
     : So I have to reference every dialogue by name?
         (Player) So I have to reference every dialogue by name?
 
-        (Kay) Nope! That's the easiest way, but you have other options.
-        - You could use <b>tags</b> to organize your dialogues into groups, and the game can find them more generically that way.
-        - Or you could use a single main dialogue with <b>conditionals</b> and <b>jumps</b> to simplify your game scripts.
-        - We can go into detail on those later!
+        (Kay)    Nope! That's the easiest way, but you have other options.
 
     : Got it!
         (Player) Got it!
-    
+
+        (Kay)    There are some other ways to integrate your dialogue, too!
+
+    > showSnippet("Tutorial/DialogueIntegration1")
+    (Kay) You could use <b>tags</b> to organize your dialogues into groups, and the game can find them more generically that way.
+    > showSnippet("Tutorial/DialogueIntegration2")
+    -     Or you could use a single main dialogue with <b>conditionals</b> and <b>jumps</b> to simplify your game scripts.
+    > hideSnippet()
+    <very happy>
+    -     We can go into detail on those later!
+
+    >> Gabby.Basics

@@ -95,10 +95,6 @@ language english
             > setChatSeen("Camilla.SelectSample.country")
             > fadeIn()
             >> Camilla.Country
-        : A "kinda cool" sword she found in the forest.
-            > setChatSeen("Camilla.SelectSample.sword")
-            > fadeIn()
-            >> Camilla.Sword
         : A strange recipe she learned during her travels.
             > setChatSeen("Camilla.SelectSample.cooking")
             > fadeIn()
@@ -130,10 +126,6 @@ language english
                 > setChatSeen("Camilla.SelectSample.country")
                 > fadeIn()
                 >> Camilla.Country
-            else if showRandomly(0.125)
-                > setChatSeen("Camilla.SelectSample.sword")
-                > fadeIn()
-                >> Camilla.Sword
             else if showRandomly(0.125)
                 > setChatSeen("Camilla.SelectSample.charlesComplaints")
                 > fadeIn()

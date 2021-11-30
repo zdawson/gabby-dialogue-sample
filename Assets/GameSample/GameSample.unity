@@ -1851,7 +1851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wanderRegion: {fileID: 1408410896}
-  waitTime: 16
+  waitTime: 8
   waitTimeVariance: 4
   walkSpeed: 1.5
 --- !u!95 &737472704
@@ -5168,6 +5168,7 @@ MonoBehaviour:
   - {fileID: 5060667957618186567, guid: 193bef035dc52bb428e6369c40507b9c, type: 3}
   - {fileID: 5060667957618186567, guid: 4decb6f8104aa394cba6aa6e04227604, type: 3}
   - {fileID: 5060667957618186567, guid: 7d22990ed1d66d14786cc2700a7d470c, type: 3}
+  - {fileID: 5060667957618186567, guid: ef7afe86e1cf3f3468e5cfa7d8d547a4, type: 3}
 --- !u!4 &2009185149
 Transform:
   m_ObjectHideFlags: 0
