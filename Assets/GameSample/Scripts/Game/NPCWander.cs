@@ -176,11 +176,25 @@ public class NPCWander : MonoBehaviour
     private void OnDialogueStarted(GabbyDialogue.Dialogue dialogue)
     {
         this.enabled = false;
+
+        Animator animator = GetComponent<Animator>();
+        if (animator)
+        {
+            // animator.StopPlayback();
+            animator.enabled = false;
+        }
     }
 
     private void OnDialogueEnded()
     {
         this.enabled = true;
+
+        Animator animator = GetComponent<Animator>();
+        if (animator)
+        {
+            // animator.StartPlayback();
+            animator.enabled = true;
+        }
     }
 
 }
