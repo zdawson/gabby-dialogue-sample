@@ -19,7 +19,7 @@ namespace GabbyDialogueSample
         private void Start()
         {
             SampleDialogueSystem.instance().DialogueLineShown += (LineType lineType) => {
-                if (lineType != LineType.CONTINUED_DIALOGUE)
+                if (lineType != LineType.ContinuedDialogue)
                 {
                     textMesh.maxVisibleCharacters = 0;
                 }

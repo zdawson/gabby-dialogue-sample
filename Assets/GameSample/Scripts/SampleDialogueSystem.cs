@@ -20,15 +20,15 @@ namespace GabbyDialogueSample
         private DialogueOptionsUI dialogueOptionsUI;
 
         private DialogueEngine dialogueEngine;
-        private List<GabbyDialogueAsset> dialogueAssets = new List<GabbyDialogueAsset>(); // TODO rename GabbyDialogueAsset. Maybe DialogueScript?
+        private List<DialogueScript> dialogueAssets = new List<DialogueScript>();
         private Dictionary<string, DialogueCharacter> characters = new Dictionary<string, DialogueCharacter>();
         private string currentCharacter = "";
         [HideInInspector]
         public string currentPortrait = "default";
-               
+
         /// <summary>
         /// Allows advancing to the next line of dialogue when true.
-        /// 
+        ///
         /// Set to false to block the user from moving on to the next line of dialogue.
         /// You may want to do this if another action should happen first, for example skipping the animation of a typewriter effect,
         /// where the first click skips the animation, then the second advances to the next line.
@@ -116,7 +116,7 @@ namespace GabbyDialogueSample
                 currentCharacter = characterName;
                 currentPortrait = "default";
             }
-            
+
             string tagPortrait;
             if (characters.ContainsKey(currentCharacter) && GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
             {
@@ -139,18 +139,18 @@ namespace GabbyDialogueSample
                 dialogueUI.SetCharacter(characterName);
             }
             dialogueUI.SetDialogueText(dialogueText);
-            DialogueLineShown?.Invoke(LineType.DIALOGUE);
+            DialogueLineShown?.Invoke(LineType.Dialogue);
         }
 
-        public void OnContinuedDialogue(string additionalDialogueText, Dictionary<string, string> tags)
+        public void OnContinuedDialogue(string continuedDialogueText, Dictionary<string, string> tags)
         {
             string tagPortrait;
             if (characters.ContainsKey(currentCharacter) && GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
             {
                 currentPortrait = tagPortrait;
             }
-            
-            dialogueUI.SetDialogueText(dialogueUI.GetDialogueText() + "\n" + additionalDialogueText);
+
+            dialogueUI.SetDialogueText(dialogueUI.GetDialogueText() + "\n" + continuedDialogueText);
             if (characters.ContainsKey(currentCharacter))
             {
                 DialogueCharacter character = characters[currentCharacter];
@@ -159,7 +159,7 @@ namespace GabbyDialogueSample
                     dialogueUI.SetCharacterPortrait(character.Portraits[currentPortrait]);
                 }
             }
-            DialogueLineShown?.Invoke(LineType.CONTINUED_DIALOGUE);
+            DialogueLineShown?.Invoke(LineType.ContinuedDialogue);
         }
 
         public Task<int> OnOptionLine(string[] optionsText)
@@ -200,7 +200,7 @@ namespace GabbyDialogueSample
 
         public Dialogue GetDialogue(string characterName, string dialogueName)
         {
-            foreach (GabbyDialogueAsset asset in dialogueAssets)
+            foreach (DialogueScript asset in dialogueAssets)
             {
                 foreach (Dialogue dialogue in asset.dialogues)
                 {
@@ -213,7 +213,7 @@ namespace GabbyDialogueSample
             return null;
         }
 
-        public void AddDialogueAsset(GabbyDialogueAsset asset)
+        public void AddDialogueAsset(DialogueScript asset)
         {
             dialogueAssets.Add(asset);
         }
