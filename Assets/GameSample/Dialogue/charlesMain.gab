@@ -19,7 +19,7 @@ language english
     (Charles, happy)      If you talk to me, I will provide you with more information about this sample.
 
     (Camilla, happy)      And if you talk to me, you can see a bunch of example dialogues in action!
-    
+
     (Charles, very happy) Yep, that about covers it!
     (Charles, happy)      Feel free to look around now, and remember to take a look at the dialogue scripts to learn how things work!
 
@@ -90,7 +90,7 @@ language english
         -                     I encourage you to talk to Gabby and Kay to learn more.
         <very happy>
         -                     And don't forget to take a look at the sample scripts!
-        
+
     : Nah, I'm good!
         (Player)  Nah, I'm good!
         (Charles) Ok!
@@ -137,13 +137,13 @@ language english
         : Sure!
             (Player) Sure!
 
-            (Charles, annoyed) Ok... 
+            (Charles, annoyed) Ok...
             (Charles, happy)   I'll go over everything, then!
             >> Charles.AllCamillaSamples
 
     : On second thought, I'm going to look around some more.
         (Player) On second thought, I'm going to look around some more.
-        (Charles, sad) Ah- 
+        (Charles, sad) Ah-
         <happy>
         + Not a problem, I hope you enjoy!
 
@@ -176,7 +176,7 @@ language english
         (Camilla, annoyed) It EXISTS, Charles...
 
         (Charles, happy) Ah! Ok, I suppose it does exist!
-        
+
         (Charles, very happy) This sample demonstrates localization using the <b>language</b> keyword!
         <happy>
         - It's quite basic, but should give you an idea of how localization works in Gabby.
@@ -185,10 +185,10 @@ language english
     : The cooking sample.
         (Player) The cooking sample.
         (Charles, very happy) Ah, the recipe she learned while travelling abroad!
-        
+
         (Charles, happy) The cooking sample lets the player make various choices, causing branches in the story.
         <very happy>
-        - In other words, it's sort of a choose-your-own adventure!    
+        - In other words, it's sort of a choose-your-own adventure!
         - It even has multiple endings, depending on how well you two can cook together!
         - It works by using <b>actions</b> to set whether each step of the cooking process was successful.
         - Then the ending is chosen based on which steps succeeded or failed.
@@ -207,7 +207,7 @@ language english
     : The lamp sample.
         (Player) The lamp sample.
         (Charles, very happy) Ah, her story about that lamp in the corner!
-        
+
         (Charles, happy) Sounds boring? Well actually, it's far from it!
         + Well, in my opinion anyway.
         <very happy>
@@ -223,7 +223,7 @@ language english
         (Charles, very happy) Ah, her story about the shady street vendor!
         <happy>
         - Truthfully, the vendor doesn't sound so shady to me.
-        
+
         (Charles, happy) This sample demonstrates a basic shop driven through dialogue.
         <very happy>
         - It's a nice way to show off <b>actions</b>, <b>options</b>, and <b>jumps</b>!
@@ -235,7 +235,7 @@ language english
         (Player) How annoying she thinks you are!
         (Charles, sad) Oh...
         (Charles, happy) Well, she means it in jest!
-        
+
         (Charles, happy) That sample shows how dialogue choices could affect a character's disposition towards you, altering future conversations.
         <sad>
         - But she gets mad easily.
@@ -244,7 +244,7 @@ language english
         (Camilla, angry) Charles! Shut it!
         (Charles, very happy) Sorry!
         <happy>
-        + Ahah, I suppose I was asking for it that time. 
+        + Ahah, I suppose I was asking for it that time.
         - In any case, you can refer to this sample to see how you could approach a similar system for your game.
         - Perhaps you want friendship to increase the more you help certain characters, unlocking new dialogue options?
 
@@ -283,7 +283,7 @@ language english
     (Camilla, annoyed) It EXISTS, Charles...
 
     (Charles, happy) Ah! Ok, I suppose it does exist!
-    
+
     (Charles, very happy) This sample demonstrates localization using the <b>language</b> keyword!
     <happy>
     - It's quite basic, but should give you an idea of how localization works in Gabby.
@@ -298,10 +298,10 @@ language english
     (Charles, happy) Then there's that <b>strange recipe she learned during her travels</b>.
     <very happy>
     - You get to cook in this one!
-        
+
     (Charles, happy) The cooking sample lets the player make various choices, causing branches in the story.
     <very happy>
-    - In other words, it's sort of a choose-your-own adventure!    
+    - In other words, it's sort of a choose-your-own adventure!
     - It even has multiple endings, depending on how well you two can cook together!
     - It works by using <b>actions</b> to set whether each step of the cooking process was successful.
     - Then the ending is chosen based on which steps succeeded or failed.
@@ -323,7 +323,7 @@ language english
 
     // Lamp
     (Charles, happy) You can also talk to her about <b>that lamp in the corner</b>.
-            
+
     (Charles, happy) Sounds boring? Well actually, it's far from it!
     + Well, in my opinion anyway.
     <very happy>
@@ -346,7 +346,7 @@ language english
     (Charles, happy) The last topic is about a time when <b>she came across a shady street vendor</b>.
     <very happy>
     - Truthfully, the vendor doesn't sound so shady to me!
-        
+
     (Charles, happy) This sample demonstrates a basic shop driven through dialogue.
     - It's a nice way to show off <b>actions</b>, <b>options</b>, and <b>jumps</b>!
     - You'll be given a certain amount of gold to spend, and you can make purchases through the dialogue options presented.
@@ -369,7 +369,7 @@ language english
     (Camilla, angry) Charles! Shut it!
     (Charles, very happy) Sorry!
     <happy>
-    + Ahah, I suppose I was asking for it that time. 
+    + Ahah, I suppose I was asking for it that time.
     - In any case, you can refer to this sample to see how you could approach a similar system for your game.
     - Perhaps you want friendship to increase the more you help certain characters, unlocking new dialogue options?
 

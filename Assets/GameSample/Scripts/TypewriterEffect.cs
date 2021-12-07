@@ -18,11 +18,13 @@ namespace GabbyDialogueSample
 
         private void Start()
         {
-            SampleDialogueSystem.instance().DialogueLineShown += (LineType lineType) => {
-                if (lineType != LineType.ContinuedDialogue)
-                {
-                    textMesh.maxVisibleCharacters = 0;
-                }
+            GameSampleDialogueSystem.Instance().DialogueLineShown += () =>
+            {
+                textMesh.maxVisibleCharacters = 0;
+                this.enabled = true;
+            };
+            GameSampleDialogueSystem.Instance().DialogueLineContinued += () =>
+            {
                 this.enabled = true;
             };
             textMesh.maxVisibleCharacters = 0;
@@ -30,7 +32,7 @@ namespace GabbyDialogueSample
 
         private void OnEnable()
         {
-            SampleDialogueSystem.instance().AllowAdvancingDialogue = false;
+            GameSampleDialogueSystem.Instance().AllowAdvancingDialogue = false;
         }
 
         private void Update()
@@ -61,7 +63,7 @@ namespace GabbyDialogueSample
 
         private void AllowSkip()
         {
-            SampleDialogueSystem.instance().AllowAdvancingDialogue = true;
+            GameSampleDialogueSystem.Instance().AllowAdvancingDialogue = true;
         }
     }
 }

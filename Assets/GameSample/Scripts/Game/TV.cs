@@ -1,5 +1,4 @@
 using GabbyDialogue;
-using System.Collections;
 using UnityEngine;
 
 namespace GabbyDialogueSample
@@ -23,32 +22,28 @@ namespace GabbyDialogueSample
 
         public void OnInteract()
         {
-            Dialogue dialogue = SampleDialogueSystem.instance().GetDialogue("Gabby", "TutorialStart");
-            if (dialogue != null)
-            {
-                isTVActive = true;
+            isTVActive = true;
+            screenOn.gameObject.SetActive(true);
 
-                screenOn.gameObject.SetActive(true);
+            lightingOverlayOpacity = 0.0f;
+            SetOverlayOpacity(lightingOverlayOpacity);
+            lightingOverlay.gameObject.SetActive(true);
+            lightingOverlay.material.renderQueue = 3001; // This will ensure the overlay renders after all the room sprites
+            screenOn.material.renderQueue = 3002; // This will make the TV render over the overlay
 
-                lightingOverlayOpacity = 0.0f;
-                SetOverlayOpacity(lightingOverlayOpacity);
-                lightingOverlay.gameObject.SetActive(true);
-                lightingOverlay.material.renderQueue = 3001; // This will ensure the overlay renders after all the room sprites
-                screenOn.material.renderQueue = 3002; // This will make the TV render over the overlay
+            GameSampleDialogueSystem.Instance().PlayDialogue("Gabby", "TutorialStart");
 
-                SampleDialogueSystem.instance().PlayDialogue(dialogue);
-
-                SampleDialogueSystem.instance().DialogueLineShown += OnDialogueLineShown;
-                SampleDialogueSystem.instance().DialogueEnded += OnDialogueEnd;
-            }
+            // Deliberately registering for events after the dialogue starts so that the first screen color is yellow (as set in the scene)
+            GameSampleDialogueSystem.Instance().DialogueLineShown += OnDialogueLineShown;
+            GameSampleDialogueSystem.Instance().DialogueEnded += OnDialogueEnd;
         }
 
         private void OnDialogueEnd()
         {
             isTVActive = false;
 
-            SampleDialogueSystem.instance().DialogueEnded -= OnDialogueEnd;
-            SampleDialogueSystem.instance().DialogueLineShown -= OnDialogueLineShown;
+            GameSampleDialogueSystem.Instance().DialogueEnded -= OnDialogueEnd;
+            GameSampleDialogueSystem.Instance().DialogueLineShown -= OnDialogueLineShown;
             screenOn.gameObject.SetActive(false);
 
             lightingOverlayOpacity = 0.0f;
@@ -56,13 +51,13 @@ namespace GabbyDialogueSample
             lightingOverlay.gameObject.SetActive(false);
         }
 
-        private void OnDialogueLineShown(LineType lineType)
+        private void OnDialogueLineShown()
         {
             float s, v;
             Color.RGBToHSV(screenOn.color, out _, out s, out v);
             screenOn.color = Color.HSVToRGB(Random.value, s, v);
         }
-        
+
         private void Update()
         {
             if (!isTVActive)

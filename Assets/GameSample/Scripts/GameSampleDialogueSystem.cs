@@ -1,30 +1,19 @@
-﻿using System;
+using GabbyDialogue;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using GabbyDialogue;
-
-using Object = UnityEngine.Object;
 
 namespace GabbyDialogueSample
 {
-    public class SampleDialogueSystem : MonoBehaviour, IDialogueHandler
+    public class GameSampleDialogueSystem : SimpleDialogueSystem
     {
-        private static SampleDialogueSystem _instance = null;
+        private static GameSampleDialogueSystem _instance = null;
 
-        public event Action<Dialogue> DialogueStarted;
+        public event Action DialogueStarted;
         public event Action DialogueEnded;
-        public event Action<LineType> DialogueLineShown;
-
-        private DialogueUI dialogueUI;
-        private DialogueOptionsUI dialogueOptionsUI;
-
-        private DialogueEngine dialogueEngine;
-        private List<DialogueScript> dialogueAssets = new List<DialogueScript>();
-        private Dictionary<string, DialogueCharacter> characters = new Dictionary<string, DialogueCharacter>();
-        private string currentCharacter = "";
-        [HideInInspector]
-        public string currentPortrait = "default";
+        public event Action DialogueLineShown;
+        public event Action DialogueLineContinued;
 
         /// <summary>
         /// Allows advancing to the next line of dialogue when true.
@@ -41,72 +30,81 @@ namespace GabbyDialogueSample
         }
         private bool _allowAdvancingDialogue = true;
 
-        public void NextLine()
-        {
-            dialogueEngine.NextLine();
-        }
+        private DialogueUI dialogueUI;
+        private DialogueOptionsUI dialogueOptionsUI;
 
-        private static bool s_isQuitting = false;
-        public static SampleDialogueSystem instance()
+        private Dictionary<string, DialogueCharacter> characters = new Dictionary<string, DialogueCharacter>();
+        private string currentCharacter = "";
+        private string currentPortrait = "default";
+
+        private ScriptVariableStorage scriptVariableStorage;
+
+        public static GameSampleDialogueSystem Instance()
         {
-            if (!_instance && !s_isQuitting)
+            if (_instance == null)
             {
-                _instance = new GameObject("_SampleDialogueSystem").AddComponent<SampleDialogueSystem>();
+                _instance = new GameSampleDialogueSystem();
             }
             return _instance;
         }
 
-        private void OnDestroy()
-        {
-            _instance = null;
-            s_isQuitting = true;
-        }
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
-        private void Start()
+        public void Init()
         {
             // Initialize UI
-            dialogueUI = (Instantiate(Resources.Load("UI/DialogueUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueUI>();
+            dialogueUI = (GameObject.Instantiate(Resources.Load("UI/DialogueUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueUI>();
             dialogueUI.gameObject.name = "_SampleDialogueUI";
             dialogueUI.gameObject.SetActive(false);
-            DontDestroyOnLoad(dialogueUI);
+            GameObject.DontDestroyOnLoad(dialogueUI);
 
-            dialogueOptionsUI = (Instantiate(Resources.Load("UI/DialogueOptionsUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueOptionsUI>();
+            dialogueOptionsUI = (GameObject.Instantiate(Resources.Load("UI/DialogueOptionsUI", typeof(GameObject))) as GameObject).GetComponentInChildren<DialogueOptionsUI>();
             dialogueOptionsUI.gameObject.name = "_SampleDialogueOptionsUI";
             dialogueOptionsUI.gameObject.SetActive(false);
-            DontDestroyOnLoad(dialogueOptionsUI);
+            GameObject.DontDestroyOnLoad(dialogueOptionsUI);
 
             // Handle UI events
             dialogueUI.OnForward += () => dialogueEngine.NextLine();
 
-            // Load character definitions
-            Object[] resources = Resources.LoadAll("Characters/");
-            foreach (Object resource in resources)
-            {
-                if (resource is DialogueCharacter)
-                {
-                    DialogueCharacter character = (DialogueCharacter)resource;
-                    characters.Add(character.internalName, character);
-                }
-            }
+            scriptVariableStorage = new ScriptVariableStorage();
 
-            // Create the dialogue engine instance
-            // You can use multiple dialogue engines to run multiple concurrent dialogues, but this sample focuses on using one.
-            dialogueEngine = new DialogueEngine(this, new SampleScriptingHandler());
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_Common(scriptVariableStorage));
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_CookingSample(scriptVariableStorage));
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_LampQuest(scriptVariableStorage));
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_Nim(scriptVariableStorage));
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_Tutorial());
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_VendorSample(scriptVariableStorage));
         }
 
-        public void PlayDialogue(Dialogue dialogue)
+        public override void PlayDialogue(string characterName, string dialogueName)
         {
-            dialogueEngine.StartDialogue(dialogue);
+            base.PlayDialogue(characterName, dialogueName);
             dialogueUI.gameObject.SetActive(true);
-            DialogueStarted?.Invoke(dialogue);
+            DialogueStarted?.Invoke();
         }
 
-        public void OnDialogueLine(string characterName, string dialogueText, Dictionary<string, string> tags)
+        public void AddCharacter(DialogueCharacter character)
+        {
+            characters.Add(character.internalName, character);
+        }
+
+        public void SetDialogueUIVisible(bool visible)
+        {
+            // TODO do this better, support options
+            dialogueUI.gameObject.SetActive(visible);
+        }
+
+        public override void OnDialogueStart(Dialogue dialogue)
+        {
+            currentCharacter = "";
+            currentPortrait = "default";
+        }
+
+        public override void OnDialogueEnd()
+        {
+            dialogueUI.gameObject.SetActive(false);
+            DialogueEnded?.Invoke();
+        }
+
+        public override void OnDialogueLine(string characterName, string dialogueText, Dictionary<string, string> tags)
         {
             // Re-show the dialogue box if hidden
             dialogueUI.gameObject.SetActive(true);
@@ -139,10 +137,10 @@ namespace GabbyDialogueSample
                 dialogueUI.SetCharacter(characterName);
             }
             dialogueUI.SetDialogueText(dialogueText);
-            DialogueLineShown?.Invoke(LineType.Dialogue);
+            DialogueLineShown?.Invoke();
         }
 
-        public void OnContinuedDialogue(string continuedDialogueText, Dictionary<string, string> tags)
+        public override void OnContinuedDialogue(string continuedDialogueText, Dictionary<string, string> tags)
         {
             string tagPortrait;
             if (characters.ContainsKey(currentCharacter) && GetPortraitFromTags(characters[currentCharacter], tags, out tagPortrait))
@@ -159,14 +157,17 @@ namespace GabbyDialogueSample
                     dialogueUI.SetCharacterPortrait(character.Portraits[currentPortrait]);
                 }
             }
-            DialogueLineShown?.Invoke(LineType.ContinuedDialogue);
+            DialogueLineContinued?.Invoke();
         }
 
-        public Task<int> OnOptionLine(string[] optionsText)
+        public override void OnDialogueJump(Dialogue dialogue)
         {
-            string currentCharacter = "Charles";
-            DialogueCharacter character = characters[currentCharacter];
+            currentCharacter = "";
+            currentPortrait = "default";
+        }
 
+        public override Task<int> OnOptionLine(string[] optionsText)
+        {
             dialogueOptionsUI.gameObject.SetActive(true);
 
             TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
@@ -178,44 +179,6 @@ namespace GabbyDialogueSample
             });
 
             return tcs.Task;
-        }
-
-        public void OnDialogueStart(Dialogue dialogue)
-        {
-            currentCharacter = "";
-            currentPortrait = "default";
-        }
-
-        public void OnDialogueJump(Dialogue dialogue)
-        {
-            currentCharacter = "";
-            currentPortrait = "default";
-        }
-
-        public void OnDialogueEnd()
-        {
-            dialogueUI.gameObject.SetActive(false);
-            DialogueEnded?.Invoke();
-        }
-
-        public Dialogue GetDialogue(string characterName, string dialogueName)
-        {
-            foreach (DialogueScript asset in dialogueAssets)
-            {
-                foreach (Dialogue dialogue in asset.dialogues)
-                {
-                    if (dialogue.CharacterName == characterName && dialogue.DialogueName == dialogueName)
-                    {
-                        return dialogue;
-                    }
-                }
-            }
-            return null;
-        }
-
-        public void AddDialogueAsset(DialogueScript asset)
-        {
-            dialogueAssets.Add(asset);
         }
 
         /// <summary>
@@ -241,12 +204,6 @@ namespace GabbyDialogueSample
 
             outPortrait = "";
             return false;
-        }
-
-        public void SetDialogueUIVisible(bool visible)
-        {
-            // TODO do this better, support options
-            dialogueUI.gameObject.SetActive(visible);
         }
     }
 }

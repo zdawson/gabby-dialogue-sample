@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public interface Interactable
+namespace GabbyDialogueSample
 {
-    void OnInteract();
+    public interface Interactable
+    {
+        void OnInteract();
+    }
 }

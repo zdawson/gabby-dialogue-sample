@@ -1,4 +1,3 @@
-using GabbyDialogue;
 using System.Collections;
 using UnityEngine;
 
@@ -14,24 +13,16 @@ namespace GabbyDialogueSample
 
         public void OnInteract()
         {
-            Dialogue dialogue = SampleDialogueSystem.instance().GetDialogue("Charles", "Main");
-            if (dialogue != null)
-            {
-                SampleDialogueSystem.instance().PlayDialogue(dialogue);
-            }
+            GameSampleDialogueSystem.Instance().PlayDialogue("Charles", "Main");
         }
 
         private IEnumerator ShowIntroDialogue()
         {
             yield return new WaitForSeconds(0.25f);
-            
+
             FadeController.instance.FadeIn(3.0f, false);
 
-            Dialogue dialogue = SampleDialogueSystem.instance().GetDialogue("Charles", "GameStart");
-            if (dialogue != null)
-            {
-                SampleDialogueSystem.instance().PlayDialogue(dialogue);
-            }
+            GameSampleDialogueSystem.Instance().PlayDialogue("Charles", "GameStart");
         }
     }
 }
