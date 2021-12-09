@@ -12,7 +12,7 @@ language english
     : What are Gabby scripts?
         (Player) What are Gabby scripts?
         >> Gabby.WhatIsAGabbyScript
-    
+
     : How do I write dialogue?
         (Player) How do I write dialogue?
         >> Gabby.HowDoIWriteDialogue
@@ -49,7 +49,7 @@ language english
 
     : So, it's a scripting language?
         (Player) So, it's a scripting language?
-        
+
         (Kay) Not exactly, but kind of!
         - We prefer to think of it as a dialogue language, or something closer to a data format.
     : I think I get it!
@@ -68,14 +68,14 @@ language english
         >> Gabby.WhatIsAGabbyScript
     : Go back.
         >> Gabby.Basics
-        
+
 [Gabby.WhatIsAGabbyScript]
 
     > showSnippet("Tutorial/WhatIsAGabbyScript")
 
     (Gabby)             This is a Gabby script!
     (Gabby, very happy) It's pretty much just a text file that you write your dialogue in!
-    
+
     (Kay) You're looking at the Gabby script for this section of dialogue in particular.
 
     (Gabby) Neat, huh?
@@ -84,7 +84,7 @@ language english
     - The gist of what you see here is that every dialogue is written in its own section, and they're organized by character and dialogue name.
 
     (Gabby, very happy) Ya! So this dialogue is called <b>Gabby.WhatIsAGabbyScript</b>, because I'm Gabby, and I'm telling you what a Gabby script is!
-    
+
     : How does it work?
         (Player) How does it work?
 
@@ -113,8 +113,8 @@ language english
         >> Gabby.Basics
 
 [Gabby.HowDoIWriteDialogue]
-    
-    if isNot(gabbyTutorial.whatIsAGabbyScript_shown, true)
+
+    if isFalse(gabbyTutorial.whatIsAGabbyScript_shown)
         (Gabby) Maybe we should take a look at a Gabby script first?
         : Alright!
             (Player) Alright!
@@ -166,7 +166,7 @@ language english
     (Kay, annoyed) Gabby...
 
     (Gabby, annoyed)  I'm not done! Characters in Gabby are, well...
-    
+
     (Kay)    In Gabby, a character is just a way of identifying who - or what - is speaking.
     <very happy>
     -        So, in the Gabby script, I'm a character named Kay, and that's about all there is to it!
@@ -180,7 +180,7 @@ language english
     > showSnippet("Tutorial/WhatIsACharacter1")
     -                 You could do <b>[GuardCommon.Greeting]</b>, and <b>[GuardCaptain.GetQuest]</b>, or something!
     -                 So your guard captains can inherit the basic guard greeting, too!
-    
+
     > hideSnippet()
 
     (Kay)    Yep! Again, to Gabby it doesn't mean anything special, so you can organize things how you'd like.
@@ -221,7 +221,7 @@ language english
     - It's <i>technically</i> not a feature of the Gabby language.
 
     (Gabby, annoyed) Um, ya it is! Just look at this!
-    
+
     > showSnippet("Tutorial/PortraitExample")
 
     (Gabby, disappointed) See?

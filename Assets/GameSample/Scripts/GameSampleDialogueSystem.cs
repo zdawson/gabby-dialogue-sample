@@ -69,6 +69,7 @@ namespace GabbyDialogueSample
             scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_Common(scriptVariableStorage));
             scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_CookingSample(scriptVariableStorage));
             scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_LampQuest(scriptVariableStorage));
+            scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_LocalizationSample(this));
             scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_Nim(scriptVariableStorage));
             scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_Tutorial());
             scriptEventHandler.RegisterScriptEventHandler(new ScriptEventHandler_VendorSample(scriptVariableStorage));
@@ -88,7 +89,6 @@ namespace GabbyDialogueSample
 
         public void SetDialogueUIVisible(bool visible)
         {
-            // TODO do this better, support options
             dialogueUI.gameObject.SetActive(visible);
         }
 

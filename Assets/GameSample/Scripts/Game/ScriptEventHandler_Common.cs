@@ -38,6 +38,9 @@ namespace GabbyDialogueSample
             }
         }
 
+        /// <summary>
+        /// Compares the given variable with the expected value. If the variable is not defined, this always returns false.
+        /// </summary>
         [ConditionalHandler]
         private bool isEqual(string key, string expected)
         {
@@ -84,15 +87,39 @@ namespace GabbyDialogueSample
         }
 
         [ConditionalHandler]
-        private bool isNot(string key, string expected)
+        private bool isNotEqual(string key, string expected)
         {
             return !isEqual(key, expected);
+        }
+
+        /// <summary>
+        /// Checks if the given bool is true. If the variable is not defined, it is treated as false.
+        /// </summary>
+        [ConditionalHandler]
+        private bool isTrue(string key)
+        {
+            return storage.GetValue<bool>(key, false);
+        }
+
+        /// <summary>
+        /// Checks if the given bool is false. If the variable is not defined, it is treated as false.
+        /// </summary>
+        [ConditionalHandler]
+        private bool isFalse(string key)
+        {
+            return !storage.GetValue<bool>(key, false);
         }
 
         [ConditionalHandler]
         private bool showRandomly(float probability)
         {
             return Random.value <= Mathf.Clamp01(probability);
+        }
+
+        [ActionHandler(autoAdvance = false)]
+        private void setChatSeen(string chatName)
+        {
+            storage.SetValue($"ChatSeen_{chatName}", true);
         }
 
         [ActionHandler(autoAdvance = false)]

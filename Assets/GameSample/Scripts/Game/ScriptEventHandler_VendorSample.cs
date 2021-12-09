@@ -40,8 +40,9 @@ namespace GabbyDialogueSample
             gold -= cost;
             storage.SetValue("camilla.vendor.gold", gold);
 
+            // Mark item as bought for the ending dialogue
             string item = storage.GetValue<string>("camilla.vendor.item");
-            Debug.Log($"Purchased {item} for {cost} gold.");
+            storage.SetValue($"camilla.bought{item}", true);
 
             uiText.text = $"{gold}";
         }

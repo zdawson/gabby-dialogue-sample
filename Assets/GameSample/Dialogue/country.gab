@@ -22,7 +22,8 @@ language english
     * This sample demonstrates localization.
     * The language will be set to Gabarian for the duration of the next dialogue, and then it will be repeated in English.
 
-    - So, Gabarian is pretty simple...
+    (Camilla, happy) So, Gabarian is pretty simple...
+
     > setLanguage("gabarian")
     >> Camilla.LocalizedDialogueExample
 

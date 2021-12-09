@@ -16,12 +16,12 @@ language english
 
     * She starts to recount her story, her words transporting you into another world.
     > fadeOut()
-    
+
     (Camilla) Wow, this store is really amazing!
     -         You've got so many cool looking artifacts.
 
-    (Vendor) I hope you can find something to your liking!  
-    
+    (Vendor) I hope you can find something to your liking!
+
     > set("camilla.vendor.gold", 250)
     > showGold()
     >> Camilla.VendorMain
@@ -32,16 +32,16 @@ language english
         (Camilla, very happy) Ooh, I wanna buy that cool sword! How much is it?
 
         (Vendor) This sword belonged to The Great King, Wuh... Wen...
-        
+
         (Camilla, annoyed) Ok, yeah, I forget his name. But he was like a king or something... Anyway.
 
         (Vendor) This sword belonged to the king. It's a very rare artifact, and, like, incredibly well forged!
         -        Anyway, yeah, I'm asking for 75 coins.
 
-        > set("camilla.vendor.item", "Fancy Looking Sword")
+        > set("camilla.vendor.item", "Sword")
         > set("camilla.vendor.cost", 75)
         >> Camilla.VendorPurchase
-        // TODO this is a good place to use << when that gets added, with more dialogue following
+        // TODO use dialogue insertion here
 
     : Like, a really old looking amulet, with big gems and stuff.
         (Camilla, very happy) Oh! Look at this amulet!
@@ -54,12 +54,12 @@ language english
         -        It's said that whoever wears it will be blessed with good fortune.
         -        So you'll surely make back the mere 100 coins I'm asking for it very quickly!
 
-        > set("camilla.vendor.item", "Really Old Looking Amulet")
+        > set("camilla.vendor.item", "Amulet")
         > set("camilla.vendor.cost", 100)
         >> Camilla.VendorPurchase
-            
+
     : I think it was actually the Staff of Ra, no joke!
-        (Camilla, very happy) Hey, is that the Staff of Ra? 
+        (Camilla, very happy) Hey, is that the Staff of Ra?
 
         (Vendor) The one and only!
         -        This fine artifact will only run you 250 gold.
@@ -71,7 +71,7 @@ language english
         (Camilla, very happy) Wow!~ I WANT IT!
         (Camilla, sad) But it'll cost me all my gold...
 
-        > set("camilla.vendor.item", "The Staff of Ra?")
+        > set("camilla.vendor.item", "Staff")
         > set("camilla.vendor.cost", 250)
         >> Camilla.VendorPurchase
 
@@ -92,7 +92,7 @@ language english
         (Vendor) Uh, sure!
         +        I suppose...
 
-        > set("camilla.vendor.item", "Dirty Old Coins...")
+        > set("camilla.vendor.item", "Coins")
         > set("camilla.vendor.cost", 25)
         >> Camilla.VendorPurchase
 
@@ -118,7 +118,7 @@ language english
         (Camilla, sad) Lame...
 
         (Camilla, angry)      But seriously! It was so lame! He wouldn't budge on the price at all.
-        (Camilla, sad)        I bet I could've blown up so many things with it... 
+        (Camilla, sad)        I bet I could've blown up so many things with it...
         (Camilla, very happy) Anyway! Back to my story!
 
         (Camilla, sad) What about...
@@ -131,7 +131,7 @@ language english
         -        Who knows what incredible treasure can be found with these!
         -        I'm asking 50 coins for all of them.
 
-        > set("camilla.vendor.item", "Some Old Maps")
+        > set("camilla.vendor.item", "Maps")
         > set("camilla.vendor.cost", 50)
         >> Camilla.VendorPurchase
 
@@ -158,11 +158,10 @@ language english
         (Camilla, very happy) I will, thanks a bunch!
         > hideGold()
         > fadeIn()
-        <happy>
-        - And then I just went home.
-        + Pretty cool story, huh?
-        // TODO list the items she bought
-
+        if isEqual(camilla.vendor.gold, 250)
+            >> Camilla.VendorEndingBoughtNothing
+        else
+            >> Camilla.VendorEnding
 
 [Camilla.VendorPurchase]
     * Do you want to buy it?
@@ -187,3 +186,37 @@ language english
 
     + What about...
     >> Camilla.VendorMain
+
+[Camilla.VendorEnding]
+    (Camilla, very happy) So in the end, I bought some really cool stuff!
+
+    // Note that this list isn't perfect as it won't show doubles of items
+    if isTrue(camilla.boughtStaff)
+        (Camilla, very happy) I got THE Staff of Ra!
+        +                     It doesn't get any cooler than that!
+        (Camilla, happy)      Pretty cool story, huh?
+        end
+    else
+        if isTrue(camilla.boughtSword)
+            (Camilla, very happy) I got a fancy looking sword...
+
+        if isTrue(camilla.boughtAmulet)
+            (Camilla, happy)      I got this really old looking amulet...
+            (Camilla, annoyed)    And it's enchanted or something?
+
+        if isTrue(camilla.boughtMaps)
+            (Camilla, happy)      I got some old maps...
+
+        if isTrue(camilla.boughtCoins)
+            (Camilla, sad)        I got uh, some coins...
+
+    (Camilla, very happy) And that's it!
+    (Camilla, happy)      And then I just went home.
+    +                     Pretty cool story, huh?
+
+[Camilla.VendorEndingBoughtNothing]
+    (Camilla, annoyed)    So in the end, I didn't end up buying anything...
+    (Camilla, angry)      But it was all junk!
+    (Camilla, very happy) And at least I saved money!
+    <happy>
+    +                     Pretty cool story, huh?

@@ -1,16 +1,20 @@
 using GabbyDialogue;
-using UnityEngine;
 
 namespace GabbyDialogueSample
 {
     class ScriptEventHandler_LocalizationSample : AbstractScriptEventHandler
     {
-        private ScriptVariableStorage storage = null;
+        private SimpleDialogueSystem dialogueSystem = null;
 
-
-        public ScriptEventHandler_LocalizationSample(ScriptVariableStorage storage)
+        public ScriptEventHandler_LocalizationSample(SimpleDialogueSystem dialogueSystem)
         {
-            this.storage = storage;
+            this.dialogueSystem = dialogueSystem;
+        }
+
+        [ActionHandler]
+        private void setLanguage(string language)
+        {
+            dialogueSystem.SetLanguage(language);
         }
     }
 }

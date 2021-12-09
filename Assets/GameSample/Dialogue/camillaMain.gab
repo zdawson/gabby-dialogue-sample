@@ -4,9 +4,9 @@ gabby 0.2
 language english
 
 [Camilla.Main]
-    if isNot(camilla.introduced, true)
+    if isFalse(camilla.introduced)
         >> Camilla.Introduction
-    else if isEqual(camilla.angry, true)
+    else if isTrue(camilla.angry)
         >> Camilla.AngryGreeting
     else if isQuestActive(lampQuest)
         >> Camilla.LampQuest_Main
@@ -46,7 +46,7 @@ language english
 
 [Camilla.Greeting4]
     // This is a one off thing, so just use Greeting1 if we've shown it before
-    if isEqual(camilla.hasShownRareGreeting, true)
+    if isTrue(camilla.hasShownRareGreeting)
         >> Camilla.Greeting1
     > set(camilla.hasShownRareGreeting, true)
 

@@ -53,6 +53,5 @@ namespace GabbyDialogueSample
             buttonGO.SetActive(true);
             return buttonGO;
         }
-
     }
 }

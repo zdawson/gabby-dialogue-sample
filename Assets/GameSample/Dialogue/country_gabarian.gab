@@ -3,9 +3,9 @@ gabby 0.2
 language gabarian
 
 [Camilla.LocalizedDialogueExample]
-    - <color=#fcd303>Hist si oway ouyà aysa salwei!</color>
-    - <color=#fcd303>Hatt si novus, varus?</color>
+    - <material="DialogueTextSpecial_LiberationSans">Hist si oway ouyà aysa salwei!</material>
+    - <material="DialogueTextSpecial_LiberationSans">Hatt si novus, varus?</material>
     <very happy>
-    - <color=#fcd303>Ti nola tuli em effu désa ex faci sùn copio sa!</color>
+    - <material="DialogueTextSpecial_LiberationSans">Ti nola tuli em effu désa ex faci sùn copio sa!</material>
     > setLanguage("english")
     >> Camilla.LocalizedDialogueExample // This will show the English version of the same dialogue
