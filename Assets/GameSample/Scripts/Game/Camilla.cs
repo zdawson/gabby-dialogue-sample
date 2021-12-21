@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public class Camilla : MonoBehaviour, Interactable
     {

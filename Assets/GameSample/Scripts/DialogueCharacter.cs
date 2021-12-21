@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     [CreateAssetMenu(menuName = "Gabby Character Definition", order = 2001)]
     public class DialogueCharacter : ScriptableObject

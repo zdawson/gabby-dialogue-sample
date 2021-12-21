@@ -1,6 +1,6 @@
-using GabbyDialogue;
+using PotassiumK.GabbyDialogue;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     class ScriptEventHandler_LocalizationSample : AbstractScriptEventHandler
     {

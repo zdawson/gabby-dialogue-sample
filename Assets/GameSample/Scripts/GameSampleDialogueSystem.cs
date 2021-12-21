@@ -1,10 +1,10 @@
-using GabbyDialogue;
+using PotassiumK.GabbyDialogue;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public class GameSampleDialogueSystem : SimpleDialogueSystem
     {

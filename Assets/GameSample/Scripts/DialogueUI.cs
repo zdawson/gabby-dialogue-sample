@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public class DialogueUI : MonoBehaviour
     {

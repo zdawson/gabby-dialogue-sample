@@ -1,7 +1,8 @@
 # Gabby Dialogue Sample
 ### An interactive sample for the Gabby Dialogue Language made with Unity.
-### **This is version 1.0 of the sample game, using Gabby 0.2.**
 ### [**Play the sample in your browser on itch.io here!**](https://potassium-k.itch.io/gabby)
+
+-----------------
 
 <br>
 
@@ -24,7 +25,7 @@ Working with Gabby is easy:
 ```
 <br>
 
-Read more about Gabby at the [dialogue engine repository](https://github.com/zdawson/gabby-dialogue-engine), grab the [vscode plugin](https://marketplace.visualstudio.com/vscode), or check out the [language spec](https://github.com/zdawson/gabby)!
+Learn how to use [Gabby](https://github.com/zdawson/gabby), check out the [dialogue engine for Unity](https://github.com/zdawson/gabby-dialogue-engine), and grab the [vscode plugin](https://marketplace.visualstudio.com/vscode)!
 
 <br>
 
@@ -56,11 +57,11 @@ Alternatively, clone normally and then run `git submodule update --init --recurs
 
 With LFS installed, either:
 ```
-git clone --recurse-submodules -j8 https://github.com/zdawson/gabby-dialogue-sample GabbySample
+git clone --recurse-submodules -j8 https://github.com/zdawson/gabby-dialogue-sample.git GabbySample
 ```
 or
 ```
-git clone https://github.com/zdawson/gabby-dialogue-sample GabbySample
+git clone https://github.com/zdawson/gabby-dialogue-sample.git GabbySample
 cd GabbySample
 git submodule update --init --recursive
 ```
@@ -106,12 +107,12 @@ Lastly, this project uses TextMeshPro as well as the LiberationSans font include
 
 ## Links
 
-- [gabby-dialogue-spec](https://github.com/zdawson/gabby) - The language specification.
+- [Gabby](https://github.com/zdawson/gabby) - Learn how to write Gabby and check out the language spec.
 
-- [gabby-dialogue-engine](https://github.com/zdawson/gabby-dialogue-engine) - The dialogue engine repo, without any of the sample content. Ideal for use in a game.
+- [Gabby Dialogue Engine](https://github.com/zdawson/gabby-dialogue-engine) - A Gabby Dialogue Engine implementation for Unity. Clone this directly if you don't want the sample as well.
 
-- [gabby-dialogue-sample](https://github.com/zdawson/gabby-dialogue-sample) - This repository, the game sample project.
+- [Gabby Dialogue Sample](https://github.com/zdawson/gabby-dialogue-sample) - This repository. An interactive sample for the Gabby Dialogue Language made with Unity.
 
-- [vscode plugin](https://marketplace.visualstudio.com/vscode) - The plugin for Visual Studio Code.
+- [VSCode Plugin](https://marketplace.visualstudio.com/vscode) - Syntax highlighting for Visual Studio Code.
 
-- [itch.io sample](https://potassium-k.itch.io/gabby) - This sample, hosted on itch.io.
+- [itch.io](https://potassium-k.itch.io/gabby) - This sample, hosted on itch.io.

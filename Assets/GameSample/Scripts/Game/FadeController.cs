@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public class FadeController : MonoBehaviour
     {

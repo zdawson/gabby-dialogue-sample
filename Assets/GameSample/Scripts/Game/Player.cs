@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour

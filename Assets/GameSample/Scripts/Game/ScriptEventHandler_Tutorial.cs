@@ -1,7 +1,7 @@
-using GabbyDialogue;
+using PotassiumK.GabbyDialogue;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     class ScriptEventHandler_Tutorial : AbstractScriptEventHandler
     {

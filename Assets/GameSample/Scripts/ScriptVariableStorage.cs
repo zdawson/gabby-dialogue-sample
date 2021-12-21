@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public class ScriptVariableStorage
     {

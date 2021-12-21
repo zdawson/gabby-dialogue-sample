@@ -1,8 +1,8 @@
-using GabbyDialogue;
+using PotassiumK.GabbyDialogue;
 using TMPro;
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public class TypewriterEffect : MonoBehaviour
     {

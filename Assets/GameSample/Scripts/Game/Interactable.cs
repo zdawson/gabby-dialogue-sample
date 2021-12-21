@@ -1,5 +1,5 @@
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     public interface Interactable
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GabbyDialogueSample
+namespace PotassiumK.GabbyDialogueSample
 {
     /// <summary>
     /// Simple script to let an NPC wander in a rectangular zone
