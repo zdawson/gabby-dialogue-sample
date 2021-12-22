@@ -25,7 +25,7 @@ Working with Gabby is easy:
 ```
 <br>
 
-Learn how to use [Gabby](https://github.com/zdawson/gabby), check out the [dialogue engine for Unity](https://github.com/zdawson/gabby-dialogue-engine), and grab the [vscode plugin](https://marketplace.visualstudio.com/vscode)!
+Learn how to use [Gabby](https://github.com/zdawson/gabby), check out the [dialogue engine for Unity](https://github.com/zdawson/gabby-dialogue-engine), and grab the [vscode plugin](https://marketplace.visualstudio.com/items?itemName=PotassiumK.gabby-lang)!
 
 <br>
 
@@ -113,6 +113,6 @@ Lastly, this project uses TextMeshPro as well as the LiberationSans font include
 
 - [Gabby Dialogue Sample](https://github.com/zdawson/gabby-dialogue-sample) - This repository. An interactive sample for the Gabby Dialogue Language made with Unity.
 
-- [VSCode Plugin](https://marketplace.visualstudio.com/vscode) - Syntax highlighting for Visual Studio Code.
+- [VSCode Plugin](https://marketplace.visualstudio.com/items?itemName=PotassiumK.gabby-lang) - Syntax highlighting for Visual Studio Code.
 
 - [itch.io](https://potassium-k.itch.io/gabby) - This sample, hosted on itch.io.
